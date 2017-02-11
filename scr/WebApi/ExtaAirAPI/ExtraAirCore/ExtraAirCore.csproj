@@ -117,6 +117,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EFModels\Address.cs" />
+    <Compile Include="Models\EFModels\Airport.cs" />
+    <Compile Include="Models\EFModels\Comfort.cs" />
+    <Compile Include="Models\EFModels\CreditCard.cs" />
+    <Compile Include="Models\EFModels\Feedback.cs" />
+    <Compile Include="Models\EFModels\Order.cs" />
+    <Compile Include="Models\EFModels\Passenger.cs" />
+    <Compile Include="Models\EFModels\Plane.cs" />
+    <Compile Include="Models\EFModels\Tour.cs" />
+    <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,7 +144,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
