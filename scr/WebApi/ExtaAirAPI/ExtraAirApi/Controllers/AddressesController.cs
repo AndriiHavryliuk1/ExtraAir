@@ -4,27 +4,28 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ExtraAirApi.Utils.Ninject;
+using ExtraAirCore.Command.Address;
 using ExtraAirCore.Models.EFContex;
 using ExtraAirCore.Models.EFModels;
-using ExtraAirApi.Api.Addresses;
-using ExtraAirCore.API_DTO;
 
-namespace ExtraAirCore.Controllers
+namespace ExtraAirApi.Controllers
 {
+	[RoutePrefix("api/addresses")]
 	public class AddressesController : ApiController
 	{
-		private readonly ExtraAirContext db = new ExtraAirContext();
-
+		private ExtraAirContext db = new ExtraAirContext();
 
 		// GET: api/Addresses
-		[Route("api/Addresses/GetAll")]
+		[Route("")]
 		public object GetAddresses()
 		{
-			return new Address_Impl().GetAddreses();
+			return IoC.Get<IGetAllAddresses>().GetAddresses();
 		}
 
 		// GET: api/Addresses/5
 		[ResponseType(typeof(Address))]
+		[Route("{id}")]
 		public IHttpActionResult GetAddress(int id)
 		{
 			Address address = db.Addresses.Find(id);
@@ -38,6 +39,7 @@ namespace ExtraAirCore.Controllers
 
 		// PUT: api/Addresses/5
 		[ResponseType(typeof(void))]
+		[Route("{id}")]
 		public IHttpActionResult PutAddress(int id, Address address)
 		{
 			if (!ModelState.IsValid)
@@ -73,6 +75,7 @@ namespace ExtraAirCore.Controllers
 
 		// POST: api/Addresses
 		[ResponseType(typeof(Address))]
+		[Route("")]
 		public IHttpActionResult PostAddress(Address address)
 		{
 			if (!ModelState.IsValid)
@@ -80,13 +83,15 @@ namespace ExtraAirCore.Controllers
 				return BadRequest(ModelState);
 			}
 
-			new Address_Impl().AddAddress(new Address_Dto(address));
+			db.Addresses.Add(address);
+			db.SaveChanges();
 
 			return CreatedAtRoute("DefaultApi", new { id = address.AddressId }, address);
 		}
 
 		// DELETE: api/Addresses/5
 		[ResponseType(typeof(Address))]
+		[Route("{id}")]
 		public IHttpActionResult DeleteAddress(int id)
 		{
 			Address address = db.Addresses.Find(id);

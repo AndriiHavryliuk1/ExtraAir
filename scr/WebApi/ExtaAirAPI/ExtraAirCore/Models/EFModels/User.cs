@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExtraAirCore.Models.EFModels
 {
 	[Table("Users")]
-	public abstract class User
+	public class User
 	{
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
 		public int UserId { get; set; }
@@ -29,7 +28,5 @@ namespace ExtraAirCore.Models.EFModels
 
 		public virtual Address Address { get; set; }
 		public virtual UserClaim UserClaim { get; set; }
-
-
 	}
 }

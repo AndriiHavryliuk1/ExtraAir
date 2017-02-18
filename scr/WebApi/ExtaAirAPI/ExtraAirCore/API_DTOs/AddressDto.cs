@@ -1,8 +1,8 @@
 ﻿using ExtraAirCore.Models.EFModels;
 
-namespace ExtraAirCore.API_DTO
+namespace ExtraAirCore.API_DTOs
 {
-	public class Address_Dto
+	public class AddressDto
 	{
 		public int AddressId;
 		public string Country;
@@ -12,9 +12,9 @@ namespace ExtraAirCore.API_DTO
 		public int PostIndex;
 
 
-		public Address_Dto() { }
+		public AddressDto() { }
 
-		public Address_Dto(Address address)
+		public AddressDto(Address address)
 		{
 			AddressId = address.AddressId;
 			Country = address.Country;
