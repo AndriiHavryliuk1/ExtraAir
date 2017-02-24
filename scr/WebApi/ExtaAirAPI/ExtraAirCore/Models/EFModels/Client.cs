@@ -6,7 +6,7 @@ namespace ExtraAirCore.Models.EFModels
 	[Table("Clients")]
 	public class Client : User
 	{
-		protected Client()
+		public Client()
 		{
 			Orders = new List<Order>();
 			Feedbacks = new List<Feedback>();

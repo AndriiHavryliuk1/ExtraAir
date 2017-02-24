@@ -7,13 +7,13 @@ namespace ExtraAirCore.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class withAbstractUser : IMigrationMetadata
+    public sealed partial class Azure : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(withAbstractUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Azure));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702121302586_withAbstractUser"; }
+            get { return "201702242025322_Azure"; }
         }
         
         string IMigrationMetadata.Source

@@ -14,6 +14,7 @@ namespace ExtraAirApi.Utils.Ninject
 			Bind<ISaveAddress>().To<SaveAddress>();
 
 			Bind<IGetUsers>().To<GetClients>();
+			Bind<ISaveUser>().To<SaveUser>();
 		}
 	}
 }

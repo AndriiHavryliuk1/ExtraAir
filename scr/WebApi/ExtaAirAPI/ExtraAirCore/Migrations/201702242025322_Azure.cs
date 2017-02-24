@@ -3,7 +3,7 @@ namespace ExtraAirCore.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class withAbstractUser3 : DbMigration
+    public partial class Azure : DbMigration
     {
         public override void Up()
         {

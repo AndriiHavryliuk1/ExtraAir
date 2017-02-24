@@ -124,6 +124,7 @@
     <Compile Include="Api\Addresses\GetAllAddresses.cs" />
     <Compile Include="Api\Addresses\SaveAddress.cs" />
     <Compile Include="Api\Client\GetClients.cs" />
+    <Compile Include="Api\Client\SaveUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

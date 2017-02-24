@@ -83,8 +83,7 @@ namespace ExtraAirApi.Controllers
 				return BadRequest(ModelState);
 			}
 
-			db.Users.Add(client);
-			db.SaveChanges();
+			IoC.Get<ISaveUser>().Save(client);
 
 			return CreatedAtRoute("DefaultApi", new { id = client.UserId }, client);
 		}

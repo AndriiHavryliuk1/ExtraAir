@@ -138,26 +138,11 @@
     <Compile Include="Command\Address\IGetAllAddresses.cs" />
     <Compile Include="Command\Address\ISaveAddress.cs" />
     <Compile Include="Command\User\IGetUsers.cs" />
+    <Compile Include="Command\User\ISaveUser.cs" />
     <Compile Include="Constants\Path.cs" />
-    <Compile Include="Migrations\201702121238311_secondMigration.cs" />
-    <Compile Include="Migrations\201702121238311_secondMigration.Designer.cs">
-      <DependentUpon>201702121238311_secondMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702121302586_withAbstractUser.cs" />
-    <Compile Include="Migrations\201702121302586_withAbstractUser.Designer.cs">
-      <DependentUpon>201702121302586_withAbstractUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702121416127_withoutAbstractUser.cs" />
-    <Compile Include="Migrations\201702121416127_withoutAbstractUser.Designer.cs">
-      <DependentUpon>201702121416127_withoutAbstractUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702121514504_withAbstractUser2.cs" />
-    <Compile Include="Migrations\201702121514504_withAbstractUser2.Designer.cs">
-      <DependentUpon>201702121514504_withAbstractUser2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702121516200_withAbstractUser3.cs" />
-    <Compile Include="Migrations\201702121516200_withAbstractUser3.Designer.cs">
-      <DependentUpon>201702121516200_withAbstractUser3.cs</DependentUpon>
+    <Compile Include="Migrations\201702242025322_Azure.cs" />
+    <Compile Include="Migrations\201702242025322_Azure.Designer.cs">
+      <DependentUpon>201702242025322_Azure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
@@ -189,22 +174,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702121238311_secondMigration.resx">
-      <DependentUpon>201702121238311_secondMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702121302586_withAbstractUser.resx">
-      <DependentUpon>201702121302586_withAbstractUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702121416127_withoutAbstractUser.resx">
-      <DependentUpon>201702121416127_withoutAbstractUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702121514504_withAbstractUser2.resx">
-      <DependentUpon>201702121514504_withAbstractUser2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702121516200_withAbstractUser3.resx">
-      <DependentUpon>201702121516200_withAbstractUser3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702242025322_Azure.resx">
+      <DependentUpon>201702242025322_Azure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
