@@ -26,6 +26,6 @@ namespace ExtraAirCore.API_DTOs
 		public string Phone;
 		public DateTime Birthday;
 		public bool Deleted;
-		public int? AddressId;
+		public AddressDto Address;
 	}
 }

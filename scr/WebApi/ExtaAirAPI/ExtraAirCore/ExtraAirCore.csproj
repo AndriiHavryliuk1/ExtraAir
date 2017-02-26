@@ -160,6 +160,7 @@
     <Compile Include="Models\EFModels\Tour.cs" />
     <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Models\EFModels\UserClaim.cs" />
+    <Compile Include="Models\Enumeration\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

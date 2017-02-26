@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using ExtraAirCore.API_DTOs;
-using ExtraAirCore.Command.User;
+﻿using ExtraAirCore.Command.User;
 using ExtraAirCore.Models.EFContex;
 
-namespace Data.Api.Client
+namespace Data.Api.Clients
 {
 	public class SaveUser : ISaveUser
 	{

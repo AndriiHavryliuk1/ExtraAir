@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ExtraAirApi.Utils.Ninject;
@@ -13,6 +11,7 @@ using ExtraAirCore.API_DTOs;
 using ExtraAirCore.Command.User;
 using ExtraAirCore.Models.EFContex;
 using ExtraAirCore.Models.EFModels;
+using ExtraAirCore.Models.Enumeration;
 
 namespace ExtraAirApi.Controllers
 {
@@ -23,20 +22,14 @@ namespace ExtraAirApi.Controllers
 		// GET: api/Clients
 		public IEnumerable<UserForViewDto> GetUsers()
 		{
-			return IoC.Get<IGetUsers>().GetAllUsers<UserForViewDto>();
+			return IoC.Get<IGetUsers>().GetAllUsers(UserType.Client);
 		}
 
 		// GET: api/Clients/5
 		[ResponseType(typeof(Client))]
 		public IHttpActionResult GetClient(int id)
 		{
-			var client = db.Clients.Find(id);
-			if (client == null)
-			{
-				return NotFound();
-			}
-
-			return Ok(client);
+			return Ok(IoC.Get<IGetUsers>().GetUser<UserForViewDto>(id));
 		}
 
 		// PUT: api/Clients/5
@@ -85,7 +78,7 @@ namespace ExtraAirApi.Controllers
 
 			IoC.Get<ISaveUser>().Save(client);
 
-			return CreatedAtRoute("DefaultApi", new { id = client.UserId }, client);
+			return Ok(client);
 		}
 
 		// DELETE: api/Clients/5

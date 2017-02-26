@@ -1,5 +1,5 @@
 ﻿using Data.Api.Addresses;
-using Data.Api.Client;
+using Data.Api.Clients;
 using ExtraAirCore.Command.Address;
 using ExtraAirCore.Command.User;
 using Ninject.Modules;
