@@ -129,6 +129,7 @@
     <Compile Include="Api\Addresses\SaveAddress.cs" />
     <Compile Include="Api\Clients\GetClients.cs" />
     <Compile Include="Api\Clients\SaveUser.cs" />
+    <Compile Include="Api\Tours\GetTours.cs" />
     <Compile Include="AutoMapper\AutoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

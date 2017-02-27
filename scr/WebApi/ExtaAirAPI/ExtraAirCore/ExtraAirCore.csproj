@@ -134,15 +134,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API_DTOs\AddressDto.cs" />
+    <Compile Include="API_DTOs\AirportDto.cs" />
+    <Compile Include="API_DTOs\Helper_DTOs\TourSearchHelperDto.cs" />
+    <Compile Include="API_DTOs\OrderDto.cs" />
+    <Compile Include="API_DTOs\PlaneDto.cs" />
+    <Compile Include="API_DTOs\TourDto.cs" />
     <Compile Include="API_DTOs\UserDto.cs" />
     <Compile Include="Command\Address\IGetAllAddresses.cs" />
     <Compile Include="Command\Address\ISaveAddress.cs" />
+    <Compile Include="Command\Tour\IGetTours.cs" />
     <Compile Include="Command\User\IGetUsers.cs" />
     <Compile Include="Command\User\ISaveUser.cs" />
     <Compile Include="Constants\Path.cs" />
-    <Compile Include="Migrations\201702242025322_Azure.cs" />
-    <Compile Include="Migrations\201702242025322_Azure.Designer.cs">
-      <DependentUpon>201702242025322_Azure.cs</DependentUpon>
+    <Compile Include="Migrations\201702271101132_toAzure.cs" />
+    <Compile Include="Migrations\201702271101132_toAzure.Designer.cs">
+      <DependentUpon>201702271101132_toAzure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
@@ -158,6 +164,7 @@
     <Compile Include="Models\EFModels\Passenger.cs" />
     <Compile Include="Models\EFModels\Plane.cs" />
     <Compile Include="Models\EFModels\Tour.cs" />
+    <Compile Include="Models\EFModels\TourToAirport.cs" />
     <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Models\EFModels\UserClaim.cs" />
     <Compile Include="Models\Enumeration\UserType.cs" />
@@ -176,8 +183,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702242025322_Azure.resx">
-      <DependentUpon>201702242025322_Azure.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702271101132_toAzure.resx">
+      <DependentUpon>201702271101132_toAzure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,6 +12,7 @@ namespace ExtraAirCore.Models.EFModels
 		{
 			Passengers = new List<Passenger>();
 			Feedbacks = new List<Feedback>();
+			TourToAirports = new List<TourToAirport>();
 		}
 
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
@@ -31,5 +32,6 @@ namespace ExtraAirCore.Models.EFModels
 
 		public virtual ICollection<Passenger> Passengers { get; set; }
 		public virtual ICollection<Feedback> Feedbacks { get; set; }
+		public virtual ICollection<TourToAirport> TourToAirports { get; set; }
 	}
 }

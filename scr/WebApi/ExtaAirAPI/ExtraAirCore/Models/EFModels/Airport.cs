@@ -9,7 +9,7 @@ namespace ExtraAirCore.Models.EFModels
 	{
 		public Airport()
 		{
-			Tours = new List<Tour>();
+			TourToAirports = new List<TourToAirport>();
 			Feedbacks = new List<Feedback>();
 		}
 
@@ -21,7 +21,7 @@ namespace ExtraAirCore.Models.EFModels
 
 		public virtual Address Address { get; set; }
 
-		public virtual ICollection<Tour> Tours { get; set; }
+		public virtual ICollection<TourToAirport> TourToAirports { get; set; }
 		public virtual ICollection<Feedback> Feedbacks { get; set; }
 	}
 }
