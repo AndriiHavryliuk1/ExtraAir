@@ -1,6 +1,8 @@
 ﻿using Data.Api.Addresses;
 using Data.Api.Clients;
+using Data.Api.Tours;
 using ExtraAirCore.Command.Address;
+using ExtraAirCore.Command.Tour;
 using ExtraAirCore.Command.User;
 using Ninject.Modules;
 
@@ -15,6 +17,8 @@ namespace ExtraAirApi.Utils.Ninject
 
 			Bind<IGetUsers>().To<GetClients>();
 			Bind<ISaveUser>().To<SaveUser>();
+
+			Bind<IGetTours>().To<GetTours>();
 		}
 	}
 }

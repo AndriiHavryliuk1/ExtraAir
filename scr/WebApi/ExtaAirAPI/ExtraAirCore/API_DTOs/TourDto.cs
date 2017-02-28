@@ -10,7 +10,6 @@ namespace ExtraAirCore.API_DTOs
 		public DateTime DateFinish;
 		public decimal Price;
 		public int CurrentCountPassenger;
-		public int OrderId;
 
 		public AirportDto AirportFrom;
 		public AirportDto AirportTo;

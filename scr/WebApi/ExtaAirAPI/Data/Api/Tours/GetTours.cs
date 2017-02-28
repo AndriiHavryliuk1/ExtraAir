@@ -31,18 +31,22 @@ namespace Data.Api.Tours
 
 		private static TourDto MapHelder(Tour tour)
 		{
-
 			var airports = tour.TourToAirports.ToList();
-			var airportFrom = airports.OrderBy(x => x.DateStart).FirstOrDefault().Airport;
-			airports[0] = null;
-			var airportTo = airports.OrderByDescending(x => x.DateStart).FirstOrDefault().Airport;
-			airports[0] = null;
-			var itnerimAirports = airports.OrderBy(x => x.DateStart);
+			Airport airportFrom = null;
+			Airport airportTo = null;
+			if (airports.Any())
+			{
+				airportFrom = airports.Where(x => x.DateStart != null).OrderBy(x => x.DateStart).FirstOrDefault().Airport;
+				airports[0].DateStart = null;
+				airportTo = airports.Where(x => x.DateFinish != null).OrderByDescending(x => x.DateFinish).FirstOrDefault().Airport;
+				airports[0].DateFinish = null;
+			}
+
+			var itnerimAirports = airports.Where(x => x.DateStart == null && x.DateFinish == null).OrderBy(x => x.DateStart);
 			return new TourDto
 			{
 				TourId = tour.TourId,
 				CurrentCountPassenger = tour.CurrentCountPassenger,
-				OrderId = tour.OrderId,
 				DateStart = tour.DateStart,
 				DateFinish = tour.DateFinish,
 				Price = tour.Price,
@@ -52,27 +56,27 @@ namespace Data.Api.Tours
 					PlaneId = tour.Plane.PlaneId,
 					MaxCountPassenger = tour.Plane.MaxCountPassenger
 				},
-				AirportFrom = new AirportDto
+				AirportFrom = airportFrom != null ? new AirportDto
 				{
 					AirportId = airportFrom.AirportId,
 					Name = airportFrom.Name,
 					City = airportFrom.Address.City,
 					Country = airportFrom.Address.Country
-				},
-				AirportTo = new AirportDto
+				} : null,
+				AirportTo = airportTo != null ? new AirportDto
 				{
 					AirportId = airportTo.AirportId,
 					Name = airportTo.Name,
 					City = airportTo.Address.City,
 					Country = airportTo.Address.Country
-				},
-				ItnerimAirports = itnerimAirports.Select(x => new AirportDto()
+				} : null,
+				ItnerimAirports = itnerimAirports.Any() ? itnerimAirports.Select(x => new AirportDto()
 				{
 					AirportId = x.AirportId,
 					Name = x.Airport.Name,
 					Country = x.Airport.Address.Country,
 					City = x.Airport.Address.City
-				}).ToList()
+				}).ToList() : null
 			};
 		}
 	}

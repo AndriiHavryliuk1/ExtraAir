@@ -13,6 +13,7 @@ namespace ExtraAirCore.Models.EFModels
 			Passengers = new List<Passenger>();
 			Feedbacks = new List<Feedback>();
 			TourToAirports = new List<TourToAirport>();
+			Orders = new List<Order>();
 		}
 
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
@@ -24,13 +25,11 @@ namespace ExtraAirCore.Models.EFModels
 		public int CurrentCountPassenger { get; set; }
 		[ForeignKey("Plane")]
 		public int PlaneId { get; set; }
-		[ForeignKey("Order")]
-		public int OrderId { get; set; }
 
 		public virtual Plane Plane { get; set; }
-		public virtual Order Order { get; set; }
 
 		public virtual ICollection<Passenger> Passengers { get; set; }
+		public virtual ICollection<Order> Orders { get; set; }
 		public virtual ICollection<Feedback> Feedbacks { get; set; }
 		public virtual ICollection<TourToAirport> TourToAirports { get; set; }
 	}

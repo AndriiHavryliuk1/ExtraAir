@@ -238,6 +238,7 @@
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

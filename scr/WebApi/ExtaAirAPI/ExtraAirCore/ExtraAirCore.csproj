@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201702271101132_toAzure.Designer.cs">
       <DependentUpon>201702271101132_toAzure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702281709462_updateDb.cs" />
+    <Compile Include="Migrations\201702281709462_updateDb.Designer.cs">
+      <DependentUpon>201702281709462_updateDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
     <Compile Include="Models\EFModels\Address.cs" />
@@ -185,6 +189,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702271101132_toAzure.resx">
       <DependentUpon>201702271101132_toAzure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702281709462_updateDb.resx">
+      <DependentUpon>201702281709462_updateDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
