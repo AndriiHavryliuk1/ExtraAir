@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ExtraAirApi.Utils.Ninject;
+using ExtraAirCore.Command.Airport;
 using ExtraAirCore.Models.EFContex;
 using ExtraAirCore.Models.EFModels;
 
@@ -18,9 +20,9 @@ namespace ExtraAirApi.Controllers
         private ExtraAirContext db = new ExtraAirContext();
 
         // GET: api/Airports
-        public IQueryable<Airport> GetAirports()
+        public object GetAirports()
         {
-            return db.Airports;
+	        return IoC.Get<IGetAirports>().GetAllAirports();
         }
 
         // GET: api/Airports/5

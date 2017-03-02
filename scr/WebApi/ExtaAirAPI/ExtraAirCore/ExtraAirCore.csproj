@@ -142,6 +142,7 @@
     <Compile Include="API_DTOs\UserDto.cs" />
     <Compile Include="Command\Address\IGetAllAddresses.cs" />
     <Compile Include="Command\Address\ISaveAddress.cs" />
+    <Compile Include="Command\Airport\IGetAirports.cs" />
     <Compile Include="Command\Tour\IGetTours.cs" />
     <Compile Include="Command\User\IGetUsers.cs" />
     <Compile Include="Command\User\ISaveUser.cs" />

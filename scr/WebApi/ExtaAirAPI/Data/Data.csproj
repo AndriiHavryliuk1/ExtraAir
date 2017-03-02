@@ -127,6 +127,7 @@
   <ItemGroup>
     <Compile Include="Api\Addresses\GetAllAddresses.cs" />
     <Compile Include="Api\Addresses\SaveAddress.cs" />
+    <Compile Include="Api\Airports\GetAirports.cs" />
     <Compile Include="Api\Clients\GetClients.cs" />
     <Compile Include="Api\Clients\SaveUser.cs" />
     <Compile Include="Api\Tours\GetTours.cs" />
