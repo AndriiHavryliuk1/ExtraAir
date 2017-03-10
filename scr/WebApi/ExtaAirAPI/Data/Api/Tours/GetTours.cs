@@ -37,12 +37,10 @@ namespace Data.Api.Tours
 			if (airports.Any())
 			{
 				airportFrom = airports.Where(x => x.DateStart != null).OrderBy(x => x.DateStart).FirstOrDefault().Airport;
-				airports[0].DateStart = null;
 				airportTo = airports.Where(x => x.DateFinish != null).OrderByDescending(x => x.DateFinish).FirstOrDefault().Airport;
-				airports[0].DateFinish = null;
 			}
 
-			var itnerimAirports = airports.Where(x => x.DateStart == null && x.DateFinish == null).OrderBy(x => x.DateStart);
+			var itnerimAirports = airports.Skip(1).Take(airports.Count - 2);
 			return new TourDto
 			{
 				TourId = tour.TourId,
@@ -70,12 +68,16 @@ namespace Data.Api.Tours
 					City = airportTo.Address.City,
 					Country = airportTo.Address.Country
 				} : null,
-				ItnerimAirports = itnerimAirports.Any() ? itnerimAirports.Select(x => new AirportDto()
+				ItnerimAirports = itnerimAirports.Any() ? itnerimAirports.Select(x => new InterimTourDto()
 				{
-					AirportId = x.AirportId,
-					Name = x.Airport.Name,
-					Country = x.Airport.Address.Country,
-					City = x.Airport.Address.City
+					Airport = new AirportDto() {
+						AirportId = x.AirportId,
+						Name = x.Airport.Name,
+						Country = x.Airport.Address.Country,
+						City = x.Airport.Address.City
+					},
+					DateStart = x.DateStart,
+					DateFinish = x.DateFinish
 				}).ToList() : null
 			};
 		}
