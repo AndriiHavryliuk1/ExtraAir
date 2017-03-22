@@ -23,5 +23,6 @@ namespace ExtraAirCore.Models.EFContex
 		public virtual DbSet<Admin> Admins { get; set; }
 		public virtual DbSet<UserClaim> UserClaims { get; set; }
 		public virtual DbSet<TourToAirport> TourToAirports { get; set; }
+		public virtual DbSet<TourSearchHistory> TourSearchHistories { get; set; }
 	}
 }

@@ -1,9 +1,11 @@
 ﻿using Data.Api.Addresses;
 using Data.Api.Airports;
 using Data.Api.Clients;
+using Data.Api.Orders;
 using Data.Api.Tours;
 using ExtraAirCore.Command.Address;
 using ExtraAirCore.Command.Airport;
+using ExtraAirCore.Command.Orders;
 using ExtraAirCore.Command.Tour;
 using ExtraAirCore.Command.User;
 using Ninject.Modules;
@@ -22,6 +24,8 @@ namespace ExtraAirApi.Utils.Ninject
 
 			Bind<IGetTours>().To<GetTours>();
 			Bind<IGetAirports>().To<GetAirports>();
+
+			Bind<IGetOrders>().To<GetOrders>();
 		}
 	}
 }

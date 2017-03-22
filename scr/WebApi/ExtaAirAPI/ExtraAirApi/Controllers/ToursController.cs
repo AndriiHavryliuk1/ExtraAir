@@ -5,20 +5,34 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ExtraAirApi.Utils.Ninject;
+using ExtraAirCore.API_DTOs.Helper_DTOs;
 using ExtraAirCore.Command.Tour;
 using ExtraAirCore.Models.EFContex;
 using ExtraAirCore.Models.EFModels;
 
 namespace ExtraAirApi.Controllers
 {
+	[RoutePrefix("api/tours")]
 	public class ToursController : ApiController
 	{
 		private ExtraAirContext db = new ExtraAirContext();
 
 		// GET: api/Tours
+		[Route("")]
 		public object GetTours()
 		{
 			return IoC.Get<IGetTours>().GetAllTours();
+		}
+
+		[HttpGet]
+		[Route("bysearch")]
+		public object GetToursBySearch([FromUri]int airportFromId, [FromUri]int airportToId)
+		{
+			return IoC.Get<IGetTours>().GetToursBySearch(new TourSearchHelperDto
+			{
+				AirportFormId = airportFromId,
+				AirportToId = airportToId
+			});
 		}
 
 		// GET: api/Tours/5

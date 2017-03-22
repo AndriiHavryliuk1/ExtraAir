@@ -19,12 +19,11 @@ namespace Data.Api.Tours
 		}
 
 
-		public IEnumerable<TourDto> GetToursBySearch(TourSearchHelperDto addressFrom, TourSearchHelperDto addressTo)
+		public IEnumerable<TourDto> GetToursBySearch(TourSearchHelperDto address)
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				return dbContext.Tours.Where(x => x.DateStart >= addressFrom.Time && x.DateFinish <= addressTo.Time).Select(MapHelder)
-					.Where(a=> a.AirportFrom.AirportId == addressFrom.AirportId || a.AirportTo.AirportId == addressTo.AirportId).ToList();
+				return dbContext.Tours.Select(MapHelder).ToList().Where(a=>(a.AirportFrom != null && a.AirportFrom.AirportId == address.AirportFormId) && (a.AirportTo != null && a.AirportTo.AirportId == address.AirportToId)).ToList();
 			}
 		}
 

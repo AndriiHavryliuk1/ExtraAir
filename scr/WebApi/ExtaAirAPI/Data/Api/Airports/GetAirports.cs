@@ -24,7 +24,35 @@ namespace Data.Api.Airports
 
 		public IEnumerable<AirportDto> GetAirportsById(int id)
 		{
-			throw new System.NotImplementedException();
+			using (var dbContext = new ExtraAirContext())
+			{
+				Mapper.Initialize(cfg => cfg.CreateMap<Airport, AirportDto>()
+				.ForMember(d => d.Country, o => o.MapFrom(a => a.Address.Country))
+				.ForMember(d => d.City, o => o.MapFrom(a => a.Address.City)));
+				var tourIds =
+					dbContext.TourToAirports.ToList()
+						.Where(x => !x.isInterim && x.DateStart != null && x.AirportId == id)
+						.Select(x => x.TourId);
+				var toursList = dbContext.TourToAirports.Where(x => !x.isInterim && x.DateFinish != null).ToList();
+				var res = new List<AirportDto>();
+				foreach (var tourid in tourIds)
+				{
+					res.AddRange(toursList.Where(x => x.TourId == tourid).Select(x => MapHepler(x.Airport)));
+				}
+				return res.GroupBy(p => p.AirportId) .Select(g => g.First()).ToList();
+			}
+		}
+
+
+		private static AirportDto MapHepler(Airport airport)
+		{
+			return new AirportDto
+			{
+				AirportId = airport.AirportId,
+				Name = airport.Name,
+				City = airport.Address.City,
+				Country = airport.Address.Country
+			};
 		}
 	}
 }

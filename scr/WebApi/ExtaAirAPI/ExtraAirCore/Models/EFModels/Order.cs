@@ -25,7 +25,10 @@ namespace ExtraAirCore.Models.EFModels
 		[ForeignKey("User")]
 		public int UserId { get; set; }
 		[ForeignKey("CreditCard")]
-		public int CreditCardId { get; set; }
+		public int? CreditCardId { get; set; }
+		public DateTime? DateStartTour { get; set; }
+		public DateTime? DateFinishTour { get; set; }
+
 
 		public virtual CreditCard CreditCard { get; set; }
 		public virtual User User { get; set; }

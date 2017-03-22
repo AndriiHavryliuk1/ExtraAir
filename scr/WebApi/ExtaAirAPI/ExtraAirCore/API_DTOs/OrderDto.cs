@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using ExtraAirCore.Models.EFModels;
+﻿using System;
 
 namespace ExtraAirCore.API_DTOs
 {
 	public class OrderDto
 	{
-		public int PlaneId;
-		public string Name;
-		public int MaxCountPassenger;
+		public TourDto tour;
+		public decimal Price;
+		public DateTime? DateStart;
+		public DateTime? DateFinish;
+		public bool Paid;
 
-		public virtual ICollection<TourDto> Tours { get; set; }
-		public virtual ICollection<Comfort> Comforts { get; set; }
+		//public int CountPassenger;
 	}
 }

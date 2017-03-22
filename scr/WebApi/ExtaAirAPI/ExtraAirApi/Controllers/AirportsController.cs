@@ -15,18 +15,29 @@ using ExtraAirCore.Models.EFModels;
 
 namespace ExtraAirApi.Controllers
 {
-    public class AirportsController : ApiController
+	[RoutePrefix("api/airports")]
+	public class AirportsController : ApiController
     {
         private ExtraAirContext db = new ExtraAirContext();
 
-        // GET: api/Airports
-        public object GetAirports()
+		// GET: api/Airports
+		[Route("")]
+		public object GetAirports()
         {
 	        return IoC.Get<IGetAirports>().GetAllAirports();
         }
 
-        // GET: api/Airports/5
-        [ResponseType(typeof(Airport))]
+		// GET: api/Airports
+		[Route("byid/{id:int}")]
+		[HttpGet]
+		[ActionName("ById")]
+		public object GetAirportsById(int id)
+		{
+			return IoC.Get<IGetAirports>().GetAirportsById(id);
+		}
+
+		// GET: api/Airports/5
+		[ResponseType(typeof(Airport))]
         public IHttpActionResult GetAirport(int id)
         {
             Airport airport = db.Airports.Find(id);

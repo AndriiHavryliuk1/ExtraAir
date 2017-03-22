@@ -7,6 +7,6 @@ namespace ExtraAirCore.Command.Tour
 	public interface IGetTours
 	{
 		IEnumerable<TourDto> GetAllTours();
-		IEnumerable<TourDto> GetToursBySearch(TourSearchHelperDto addressFrom, TourSearchHelperDto addressTo);
+		IEnumerable<TourDto> GetToursBySearch(TourSearchHelperDto address);
 	}
 }

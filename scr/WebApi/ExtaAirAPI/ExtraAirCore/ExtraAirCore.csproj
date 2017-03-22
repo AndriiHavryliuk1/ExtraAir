@@ -92,6 +92,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -116,9 +120,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -139,11 +140,14 @@
     <Compile Include="API_DTOs\InterimTourDto.cs" />
     <Compile Include="API_DTOs\OrderDto.cs" />
     <Compile Include="API_DTOs\PlaneDto.cs" />
+    <Compile Include="API_DTOs\SearchHistoryDto.cs" />
     <Compile Include="API_DTOs\TourDto.cs" />
     <Compile Include="API_DTOs\UserDto.cs" />
     <Compile Include="Command\Address\IGetAllAddresses.cs" />
     <Compile Include="Command\Address\ISaveAddress.cs" />
     <Compile Include="Command\Airport\IGetAirports.cs" />
+    <Compile Include="Command\Orders\IGetOrders.cs" />
+    <Compile Include="Command\SearchHistory\IGetSearchHistory.cs" />
     <Compile Include="Command\Tour\IGetTours.cs" />
     <Compile Include="Command\User\IGetUsers.cs" />
     <Compile Include="Command\User\ISaveUser.cs" />
@@ -155,6 +159,26 @@
     <Compile Include="Migrations\201702281709462_updateDb.cs" />
     <Compile Include="Migrations\201702281709462_updateDb.Designer.cs">
       <DependentUpon>201702281709462_updateDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703112311469_withflag.cs" />
+    <Compile Include="Migrations\201703112311469_withflag.Designer.cs">
+      <DependentUpon>201703112311469_withflag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191148311_addedTourSearchHistory.cs" />
+    <Compile Include="Migrations\201703191148311_addedTourSearchHistory.Designer.cs">
+      <DependentUpon>201703191148311_addedTourSearchHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191237481_addedTourSearchHistory2.cs" />
+    <Compile Include="Migrations\201703191237481_addedTourSearchHistory2.Designer.cs">
+      <DependentUpon>201703191237481_addedTourSearchHistory2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191406082_addedTourSearchHistory3.cs" />
+    <Compile Include="Migrations\201703191406082_addedTourSearchHistory3.Designer.cs">
+      <DependentUpon>201703191406082_addedTourSearchHistory3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191538266_addedTourSearchHistory4.cs" />
+    <Compile Include="Migrations\201703191538266_addedTourSearchHistory4.Designer.cs">
+      <DependentUpon>201703191538266_addedTourSearchHistory4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
@@ -170,6 +194,7 @@
     <Compile Include="Models\EFModels\Passenger.cs" />
     <Compile Include="Models\EFModels\Plane.cs" />
     <Compile Include="Models\EFModels\Tour.cs" />
+    <Compile Include="Models\EFModels\TourSearchHistory.cs" />
     <Compile Include="Models\EFModels\TourToAirport.cs" />
     <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Models\EFModels\UserClaim.cs" />
@@ -195,7 +220,23 @@
     <EmbeddedResource Include="Migrations\201702281709462_updateDb.resx">
       <DependentUpon>201702281709462_updateDb.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703112311469_withflag.resx">
+      <DependentUpon>201703112311469_withflag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191148311_addedTourSearchHistory.resx">
+      <DependentUpon>201703191148311_addedTourSearchHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191237481_addedTourSearchHistory2.resx">
+      <DependentUpon>201703191237481_addedTourSearchHistory2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191406082_addedTourSearchHistory3.resx">
+      <DependentUpon>201703191406082_addedTourSearchHistory3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191538266_addedTourSearchHistory4.resx">
+      <DependentUpon>201703191538266_addedTourSearchHistory4.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

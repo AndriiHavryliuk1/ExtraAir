@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -75,7 +76,14 @@ namespace ExtraAirApi.Controllers
 				return BadRequest(ModelState);
 			}
 
-			IoC.Get<ISaveUser>().Save(client);
+			try
+			{
+				IoC.Get<ISaveUser>().Save(client);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 
 			return Ok(client);
 		}

@@ -11,6 +11,7 @@ namespace ExtraAirCore.Models.EFModels
 		public int TourToAirportId { get; set; }
 		public DateTime? DateStart { get; set; }
 		public DateTime? DateFinish { get; set; }
+		public bool isInterim { get; set; } = false;
 
 		[ForeignKey("Tour")]
 		public int TourId { get; set; }
