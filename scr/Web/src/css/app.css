@@ -1,0 +1,25 @@
+.navbar {
+    border: none !important;
+    border-radius: 0% !important;
+    background-color: #059FE1 !important;
+    color: rgba(255,255,255,0.87) !important;
+    margin-bottom: 0 !important;
+}
+
+.header-link-active{
+    background-color: #0B80E1 !important;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: rgba(255,255,255,0.87) !important;
+}
+
+.navbar-default .navbar-nav>li>a :hover {
+    color: rgba(255,255,12,0.87) !important;
+}
+
+md-autocomplete button {
+    position: absolute !important;
+    right: 0;
+    top: 6px;
+}

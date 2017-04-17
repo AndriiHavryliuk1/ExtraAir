@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="extraAir" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="apple-touch-icon" href="content/images/icon.png">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+
+    <link rel="stylesheet" href="css/app.css">
+
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>ExtraAir</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+
+<body ng-controller="commonController">
+<!-- Nwvbar -->
+    <customheader></customheader>
+
+<div id="wrap" class="noMarginTop">
+    <div id="main">
+        <ng-view></ng-view>
+    </div>
+</div>
+<div id="footer">
+    <footer class="navbar navbar-inverse  footer topMargin noMarginBot noBorderRarius" id="bottom-Navabar">
+        <div class="col-md-12">
+            <h5 class="text-center footerText ">2017 ExtraAir</h5>
+        </div>
+    </footer>
+</div>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+
+<script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+<script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+
+
+<script src="js/module_app.js"></script>
+<script src="js/app.js"></script>
+<script src="js/constants.js"></script>
+<script src="js/commonController.js"></script>
+<script src="js/header/headerDirective.js"></script>
+
+<!-- Main -->
+<script src="js/main/mainController.js"></script>
+
+<!-- Tours -->
+<script src="js/services/tour/toursResource.js"></script>
+
+<!-- Airports -->
+<script src="js/services/airports/airportsResource.js"></script>
+<script src="js/services/airports/get.js"></script>
+
+
+</body>
+
+</html>

@@ -28,26 +28,13 @@ namespace ExtraAirApi.Controllers
         }
 
 		// GET: api/Airports
-		[Route("byid/{id:int}")]
+		[Route("{id:int}")]
 		[HttpGet]
 		[ActionName("ById")]
 		public object GetAirportsById(int id)
 		{
 			return IoC.Get<IGetAirports>().GetAirportsById(id);
 		}
-
-		// GET: api/Airports/5
-		[ResponseType(typeof(Airport))]
-        public IHttpActionResult GetAirport(int id)
-        {
-            Airport airport = db.Airports.Find(id);
-            if (airport == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(airport);
-        }
 
         // PUT: api/Airports/5
         [ResponseType(typeof(void))]

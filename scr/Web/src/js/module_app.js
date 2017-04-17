@@ -1,0 +1,10 @@
+angular.module('extraAir',
+    [
+        //external
+        "ngRoute",
+        "angular.filter",
+        "angular-jwt",
+        "ngSanitize",
+        "ngMaterial",
+        "ngResource"
+    ]);
