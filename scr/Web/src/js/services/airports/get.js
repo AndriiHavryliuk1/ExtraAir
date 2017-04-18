@@ -1,8 +1,8 @@
-angular.module("extraAir").factory('getService', [ '$http',  '$q','REST_URL',
-    function ($http, $q,  REST_URL ){
+angular.module("extraAir").factory('getService', [ '$http',  '$q',
+    function ($http, $q){
 
         var GetObjects = function (control) {
-            return  $http.get(REST_URL.url + control)
+            return  $http.get(Constants.REST_URL + control)
                 .then(function(responce) {
                     return $q.resolve(responce);
                 })

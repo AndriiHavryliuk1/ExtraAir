@@ -1,24 +1,26 @@
-angular.module('extraAir').factory("airportsResource", function (REST_URL, $resource) {
+'use strict';
 
-    var URL = REST_URL.url + 'api/airports/:id';
-    return $resource(URL, null, {
-        getAll: {
-            method: 'GET',
-            isArray: true,
-            timeout: 30000
-        },
-        get: {
-            method: 'GET',
-            isArray: true,
-            timeout: 30000
-        },
+angular.module('extraAir').factory("airportsResource", function ($resource) {
+
+    var URL = Constants.REST_URL + 'api/airports/:id';
+    return {
+        airportResource: $resource(URL,
+            null,
+            {
+                get: {
+                    method: 'GET',
+                    isArray: true,
+                    timeout: 30000
+                }
+            }
+        ),
 
         getAirports: function () {
-            return this.getAll();
+            return this.airportResource.get();
         },
 
         getAirport: function (id) {
-            return this.get({id: id}).$promise;
+            return this.airportResource.get({id: id});
         }
-    });
+    }
 });

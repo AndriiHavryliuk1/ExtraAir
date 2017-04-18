@@ -1,22 +1,24 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('mainController', function($rootScope, $scope, getService, airportsResource){
+app.controller('mainController', function($rootScope, $scope, getService, airportsService){
 
 
     $scope.showPlaceTo = false;
 
-    getService.GetObjects('api/airports').then(function(data){
-        $scope.allAirports = data.data;
+    var a = airportsService.getAirports();
+     airportsService.getAirports().then(function(data){
+        $scope.allAirports = data;
         $scope.adventAirports = undefined;
     }, function(){ });
 
     $scope.getAdventAirport = function(selectedAirport){
         $scope.adventAirports = undefined;
+        resetAutocomplete();
         if (!!selectedAirport && selectedAirport.AirportId !== undefined) {
-            getService.GetObjects('api/airports/' + selectedAirport.AirportId).then(function (data) {
-                $scope.adventAirports = data.data;
-                $scope.showPlaceTo = !!data.data.length;
+            airportsService.getAirport(selectedAirport.AirportId).then(function (data) {
+                $scope.adventAirports = data;
+                $scope.showPlaceTo = !!data.length;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -25,11 +27,10 @@ app.controller('mainController', function($rootScope, $scope, getService, airpor
         else {
             $scope.showPlaceTo = false;
         }
-    }
+    };
 
     function resetAutocomplete(){
         $scope.searchItem  = null;
-        $scope.item = null;
     }
 
 
