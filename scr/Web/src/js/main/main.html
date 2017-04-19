@@ -36,8 +36,8 @@
 <div>
     <md-card>
         <h3 style="text-align: center;">Виконати пошук</h3>
-        <div layout="column">
-            <div flex-offset="20">
+        <div layout-gt-xs="row">
+            <div flex-gt-xs>
                 <md-content class="md-padding">
                     <md-autocomplete
                             ng-disabled="false"
@@ -80,6 +80,26 @@
                         <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
                     </md-not-found>
                 </md-autocomplete>
+            </md-content>
+
+
+            <md-content layout-padding ng-cloak>
+                <div layout-gt-xs="row">
+                    <form name="myForm" flex-gt-xs>
+                        <label>Виберіть дату відправлення</label>
+                        <md-input-container>
+                            <md-datepicker ng-model="ctrl.myDate" name="dateField" md-min-date="ctrl.minDate"
+                                           md-max-date="ctrl.maxDate"></md-datepicker>
+<!--
+                            <div ng-messages="">
+                                <div ng-message="valid">The entered value is not a date!</div>
+                                <div ng-message="required">This date is required!</div>
+                                <div ng-message="mindate">Date is too early!</div>
+                                <div ng-message="maxdate">Date is too late!</div>
+                            </div> -->
+                        </md-input-container>
+                    </form>
+                </div>
             </md-content>
         </div>
     </md-card>

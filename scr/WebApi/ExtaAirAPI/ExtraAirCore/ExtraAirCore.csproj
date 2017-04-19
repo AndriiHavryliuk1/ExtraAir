@@ -180,6 +180,10 @@
     <Compile Include="Migrations\201703191538266_addedTourSearchHistory4.Designer.cs">
       <DependentUpon>201703191538266_addedTourSearchHistory4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704192156539_kjkj.cs" />
+    <Compile Include="Migrations\201704192156539_kjkj.Designer.cs">
+      <DependentUpon>201704192156539_kjkj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
     <Compile Include="Models\EFModels\Address.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="Models\EFModels\TourToAirport.cs" />
     <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Models\EFModels\UserClaim.cs" />
+    <Compile Include="Models\Enumeration\DaysType.cs" />
     <Compile Include="Models\Enumeration\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -234,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703191538266_addedTourSearchHistory4.resx">
       <DependentUpon>201703191538266_addedTourSearchHistory4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704192156539_kjkj.resx">
+      <DependentUpon>201704192156539_kjkj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

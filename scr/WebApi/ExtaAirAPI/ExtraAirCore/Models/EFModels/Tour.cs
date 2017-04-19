@@ -23,6 +23,7 @@ namespace ExtraAirCore.Models.EFModels
 		[Required]
 		public decimal Price { get; set; }
 		public int CurrentCountPassenger { get; set; }
+		public string StringDays { get; set; }
 		[ForeignKey("Plane")]
 		public int PlaneId { get; set; }
 

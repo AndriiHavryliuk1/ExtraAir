@@ -19,11 +19,14 @@ namespace Data.Api.Tours
 		}
 
 
-		public IEnumerable<TourDto> GetToursBySearch(TourSearchHelperDto address)
+		public IEnumerable<TourDto> GetToursBySearch(TourSearchHelperDto searchHelper)
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				return dbContext.Tours.Select(MapHelder).ToList().Where(a=>(a.AirportFrom != null && a.AirportFrom.AirportId == address.AirportFormId) && (a.AirportTo != null && a.AirportTo.AirportId == address.AirportToId)).ToList();
+				return dbContext.Tours.Select(MapHelder).ToList().Where(a=>(a.AirportFrom != null 
+				&& a.AirportFrom.AirportId == searchHelper.AirportFormId)
+				&& (a.AirportTo != null && a.AirportTo.AirportId == searchHelper.AirportToId)
+				&& (a.PossibleDays.Contains(searchHelper.DayStart))).ToList();
 			}
 		}
 
@@ -77,8 +80,9 @@ namespace Data.Api.Tours
 					},
 					DateStart = x.DateStart,
 					DateFinish = x.DateFinish
-				}).ToList() : null
-			};
+				}).ToList() : null,
+				PossibleDays = !string.IsNullOrEmpty(tour.StringDays) ? tour.StringDays.Split(' ').ToList() : new List<string>()
+		};
 		}
 	}
 }
