@@ -26,12 +26,13 @@ namespace ExtraAirApi.Controllers
 
 		[HttpGet]
 		[Route("bysearch")]
-		public object GetToursBySearch([FromUri]int airportFromId, [FromUri]int airportToId)
+		public object GetToursBySearch([FromUri]int airportFromId, [FromUri]int airportToId, [FromUri]string dayStart)
 		{
 			return IoC.Get<IGetTours>().GetToursBySearch(new TourSearchHelperDto
 			{
 				AirportFormId = airportFromId,
-				AirportToId = airportToId
+				AirportToId = airportToId,
+				DayStart = dayStart
 			});
 		}
 

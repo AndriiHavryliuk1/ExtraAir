@@ -1,0 +1,86 @@
+<div class="container-fluid fullHeight ">
+    <h2>Реєстрація</h2>
+    <hr class="colorgraph">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <h3 class="text-center" ng-hide="loading">Введіть свої дані</h3>
+            <br>
+            <div class="alert alert-danger" ng-show="failed">
+                <strong>Помилка!
+                </strong>
+                Такий email вже зайнятий
+            </div>
+
+            <div class="form-group" ng-show="loading">
+                <br><br><br>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4 col-md-offset-4">
+                        <img src="src/img/loading.gif" ng-show="loading">
+                    </div>
+                </div>
+            </div>
+
+            <form class="form-horizontal" ng-submit="submit()" ng-hide="loading">
+
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">Ім'я*</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="name" placeholder="Ім'я" ng-model="client.FirstName" class="form-control"  required maxlength="30">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="surname" class="col-sm-3 control-label">Прізвище*</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="surname" placeholder="Прізвище" ng-model="client.LastName" class="form-control" required maxlength="30">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email*</label>
+                    <div class="col-sm-9">
+                        <input type="email" id="email" placeholder="Email" ng-model="client.Email" class="form-control" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Пароль*</label>
+                    <div class="col-sm-9">
+                        <input type="password" id="password" placeholder="Пароль" ng-model="client.Password" class="form-control" required pattern="^\S{6,}$">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Підтвердіть пароль*</label>
+                    <div class="col-sm-9">
+                        <input type="password" placeholder="Підтвердіть пароль" class="form-control" id="password_confirm" oninput="check(this)" pattern="^\S{6,}$" required>
+                    </div>
+
+                </div>
+
+                <label class="col-lg-11 col-md-11 col-sm-11 control-label">Required fields are noted as follows with an asterics.*
+                </label>
+                <br><br><br>
+                <div class="form-group">
+                    <div class="row">
+                        <!--<button type="submit" class="btn btn-primary btn-block">Register</button>-->
+                        <div class="col-xs-6 col-md-6 col-xs-offset-3">
+                            <input type="submit" value="Зареєструвати" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /form -->
+        </div>
+        <!-- ./container -->
+    </div>
+</div>
+
+<script language='javascript' type='text/javascript'>
+    function check(input) {
+        if (input.value != document.getElementById('password').value) {
+            input.setCustomValidity('Password Must be Matching.');
+        } else {
+            // input is valid -- reset the error message
+            input.setCustomValidity('');
+        }
+    }
+</script>

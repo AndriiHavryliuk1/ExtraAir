@@ -1,17 +1,13 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('mainController', function($rootScope, $scope, getService, airportsService){
-
-
-
+app.controller('mainController', function($rootScope, $scope, $window, getService, airportsService, crossingService){
     $scope.tourDetails = {
         origin: null,
         destination: null,
         date: null,
         passenger: {}
     };
-
 
     $scope.passenger = {
         adult: 1,
@@ -20,7 +16,6 @@ app.controller('mainController', function($rootScope, $scope, getService, airpor
     };
     $scope.showPlaceTo = false;
 
-    airportsService.getAirports();
      airportsService.getAirports().then(function(data){
         $scope.allAirports = data;
         $scope.adventAirports = undefined;
@@ -46,26 +41,19 @@ app.controller('mainController', function($rootScope, $scope, getService, airpor
 
     $scope.prepareTo = function() {
         $scope.tourDetails.passenger = $scope.passenger;
-        $scope.tourDetails.date.day = getDay($scope.tourDetails.date);
+        $scope.tourDetails.date = {
+            day: Constants.DAYS[$scope.tourDetails.date.getDay()],
+            allDate: $scope.tourDetails.date
+        };
+        crossingService.setTour($scope.tourDetails);
         console.log($scope.tourDetails);
+        $window.location.href = "#/tours";
     };
 
     $scope.setAdventAirport = function(selectedAirport){
         $scope.tourDetails.destination = selectedAirport !== null ? selectedAirport.AirportId : null;
     };
 
-
-    function getDay(d){
-        var weekday = new Array(7);
-        weekday[0] = "Sunday";
-        weekday[1] = "Monday";
-        weekday[2] = "Tuesday";
-        weekday[3] = "Wednesday";
-        weekday[4] = "Thursday";
-        weekday[5] = "Friday";
-        weekday[6] = "Saturday";
-        return weekday[d.getDay()];
-    }
 
     function resetAutocomplete() {
         $scope.searchItem  = null;

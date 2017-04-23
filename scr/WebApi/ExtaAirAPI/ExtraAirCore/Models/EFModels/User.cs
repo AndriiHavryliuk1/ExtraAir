@@ -17,7 +17,6 @@ namespace ExtraAirCore.Models.EFModels
 		public string Password { get; set; }
 		[DataType(DataType.PhoneNumber)]
 		public string Phone { get; set; }
-		[Required]
 		public DateTime Birthday { get; set; }
 		[Required]
 		public bool Deleted { get; set; }

@@ -6,5 +6,7 @@ angular.module('extraAir',
         "angular-jwt",
         "ngSanitize",
         "ngMaterial",
-        "ngResource"
+        "ngResource",
+        "ui.bootstrap",
+        "angular-encryption"
     ]);

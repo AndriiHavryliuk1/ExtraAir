@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201704192156539_kjkj.Designer.cs">
       <DependentUpon>201704192156539_kjkj.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704231412335_dvckljl.cs" />
+    <Compile Include="Migrations\201704231412335_dvckljl.Designer.cs">
+      <DependentUpon>201704231412335_dvckljl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
     <Compile Include="Models\EFModels\Address.cs" />
@@ -242,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704192156539_kjkj.resx">
       <DependentUpon>201704192156539_kjkj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704231412335_dvckljl.resx">
+      <DependentUpon>201704231412335_dvckljl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
