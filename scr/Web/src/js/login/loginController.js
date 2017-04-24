@@ -32,7 +32,7 @@ app.controller('loginController', function($rootScope, $interval, $scope, sha256
                             break;
                         }
                     }
-                    $rootScope.$emit('headerDirective', x);
+                    $rootScope.$emit('headerDirective', $rootScope.isAuthorized);
             } ,function(data, status, headers, config) {
                 localStorage.removeItem('token');
                 $rootScope.isAuthorized = false;

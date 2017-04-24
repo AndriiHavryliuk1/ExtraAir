@@ -32,15 +32,15 @@
 
                 </div>
                 <div>
-                    <ul class="nav navbar-nav navbar-right" id="forUnautorized" ng-if="!isAutorized">
-                        <li><a href="#/registration"><span>Registration</span></a>
+                    <ul class="nav navbar-nav navbar-right" id="forUnautorized" ng-if="!isAutorizedLocal">
+                        <li><a href="#/registration"><span>Реєстрація</span></a>
                         </li>
-                        <li><a href="#/login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span>Login</span></a>
+                        <li><a href="#/login"><span class="glyphicon glyphicon-user" aria-hidden="true"> Вхід</span></a>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right" id="forAutorized" ng-if="isAutorized">
-                        <li><a href="#/">Registration</a></li>
-                        <li><a href="/" ng-click="logout()">Logout</a></li>
+                    <ul class="nav navbar-nav navbar-right" id="forAutorized" ng-if="isAutorizedLocal">
+                        <li><a href="#/"><span>Особистий кабінет</span></a></li>
+                        <li><a href="/" ng-click="logout()"><span>Вихід<span></a></li>
                     </ul>
                 </div>
             </div><!-- /.navbar-collapse -->
