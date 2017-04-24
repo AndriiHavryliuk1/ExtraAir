@@ -23,3 +23,78 @@ md-autocomplete button {
     right: 0;
     top: 6px;
 }
+
+
+
+body{
+    min-height: calc(100%) ;
+    overflow: inherit;
+    padding-right: 0 !important;
+}
+
+.nopadding {
+    padding-right: 0;
+    padding-left: 0;
+}
+.home-Margin
+{
+    margin: 10px;
+}
+
+.lessMarginLeft{
+    margin-left: -70px;
+}
+
+.lessMarginLeftMore{
+    margin-left: -110px;
+}
+.appointment-button
+{
+    margin-left:  60px;
+    height:80px;
+}
+
+.topMargin
+{
+    margin-top: 20px;
+}
+.footerText
+{
+    color:  #FFFFFF;
+
+}
+
+
+
+
+.footer {
+    width:100%;
+    background-color: #2d2d30;
+    color: #f5f5f5;
+    padding: 22.5px;
+    margin-bottom: 0px;
+    position: relative;
+    top: 90%;
+}
+
+
+
+.page{
+    color: green;
+}
+.centerPageError {text-align: center; color: #FFF8DC; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;}
+.errorPage{
+    background-image: url("../img/morgue-error.jpg");
+}
+
+html, body {height: 100%;}
+
+#wrap {min-height: 90%;}
+
+#main {overflow:auto;
+    padding-bottom: 50px;}
+
+#footer {position: relative;
+    margin-top: -50px;
+    height: 50px;
+    clear:both;}
