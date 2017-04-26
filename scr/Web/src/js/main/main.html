@@ -36,29 +36,12 @@
 <div>
     <h3 style="text-align: center;">Виконати пошук</h3>
     <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-2">
-        <div layout-gt-xs="row">
-            <div flex-gt-xs>
-                <md-autocomplete
-                        ng-disabled="false"
-                        md-selected-item="item"
-                        md-search-text-change=""
-                        md-search-text=""
-                        md-selected-item-change="getAdventAirport(item)"
-                        md-items="i in allAirports"
-                        md-item-text="i.Name"
-                        md-min-length="0"
-                        style="max-width: 400px;"
-                        placeholder="Пункт відправлення">
-                    <md-item-template>
-                        <span md-highlight-text="i.Name" md-highlight-flags="^i">{{i.Name}}</span>
-                    </md-item-template>
-                    <md-not-found>
-                        No states matching "{{ctrl.searchText}}" were found.
-                        <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
-                    </md-not-found>
-                </md-autocomplete>
-            </div>
-
+        <div>
+            <select class="form-control" id=""  ng-model="tourDetails.origin" ng-change="getAdventAirport(tourDetails.origin)">
+                <option value="" selected>Choose option...</option>
+                <option ng-repeat="airport in allAirports" value="{{airport.AirportId}}">{{airport.Name}}</option>
+            </select>
+        </div>
             <md-autocomplete
                     md-no-cache="true"
                     ng-disabled="!showPlaceTo"
@@ -82,21 +65,14 @@
             </md-autocomplete>
 
 
-            <div layout-gt-xs="row">
-                <form name="myForm" flex-gt-xs>
+            <div>
+
                     <label>Виберіть дату відправлення</label>
-                    <md-input-container>
-                        <md-datepicker ng-model="tourDetails.date" name="dateField" md-min-date=""
-                                       md-max-date=""></md-datepicker>
-                        <!--
-                                                    <div ng-messages="">
-                                                        <div ng-message="valid">The entered value is not a date!</div>
-                                                        <div ng-message="required">This date is required!</div>
-                                                        <div ng-message="mindate">Date is too early!</div>
-                                                        <div ng-message="maxdate">Date is too late!</div>
-                                                    </div> -->
-                    </md-input-container>
-                </form>
+
+                    <div style="display:inline-block; min-height:290px;">
+                        <div uib-datepicker ng-model="tourDetails.date" class="well well-sm" datepicker-options="options"></div>
+                    </div>
+
             </div>
 
 
@@ -129,6 +105,5 @@
             <button type="button" class="btn btn-primary col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2"
                     ng-click="prepareTo()">Пошук
             </button>
-        </div>
     </div>
 </div>

@@ -8,5 +8,6 @@ angular.module('extraAir',
         "ngMaterial",
         "ngResource",
         "ui.bootstrap",
-        "angular-encryption"
+        "angular-encryption",
+        "ui.bootstrap.modal"
     ]);
