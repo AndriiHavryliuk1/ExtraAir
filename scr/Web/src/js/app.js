@@ -31,8 +31,11 @@ app.config(function($routeProvider, $locationProvider) {
         reloadOnSearch: false
     });
 
-
-
+    $routeProvider.when('/tours/:id', {
+        templateUrl: 'js/tours/tourDetail/tourDetailTemplate.html',
+        controller: 'tourDetailController',
+        reloadOnSearch: false
+    });
 
 
     //  "medicalhistory/" + $routeParams["id"] + "/page/" + $scope.searchInfo.page

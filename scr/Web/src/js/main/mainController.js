@@ -21,12 +21,12 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
         $scope.adventAirports = undefined;
     }, function(){ });
 
-    $scope.getAdventAirport = function(selectedAirport){
-        $scope.tourDetails.origin = selectedAirport !== null ? selectedAirport.AirportId : null;
+    $scope.getAdventAirport = function(selectedAirportId){
+        $scope.tourDetails.origin = !!selectedAirportId ? selectedAirportId : null;
         $scope.adventAirports = undefined;
         resetAutocomplete();
-        if (!!selectedAirport && selectedAirport.AirportId !== undefined) {
-            airportsService.getAirport(selectedAirport.AirportId).then(function (data) {
+        if (!!selectedAirportId) {
+            airportsService.getAirport(selectedAirportId).then(function (data) {
                 $scope.adventAirports = data;
                 $scope.showPlaceTo = !!data.length;
                 if (!$scope.$$phase) {
@@ -48,10 +48,6 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
         crossingService.setTour($scope.tourDetails);
         console.log($scope.tourDetails);
         $window.location.href = "#/tours";
-    };
-
-    $scope.setAdventAirport = function(selectedAirport){
-        $scope.tourDetails.destination = selectedAirport !== null ? selectedAirport.AirportId : null;
     };
 
 

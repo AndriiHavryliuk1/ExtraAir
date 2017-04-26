@@ -19,7 +19,7 @@
 
     <div class="container-fluid mycontent-center">
         <hr>
-        <div class="panel panel-default  col-sm-10 col-sm-offset-1" ng-repeat="res in tours" ng-click="GoToTourDetail(res.TourId)">
+        <div class="panel panel-default  col-sm-10 col-sm-offset-1" ng-repeat="res in tours">
             <div class="panel panel-body">
                 <div class="row">
                     <div class=" col-sm-5 col-xs-6 col-md-5">
@@ -66,6 +66,7 @@
                 <h3>
                     Ціна: {{res.Price}}$
                 </h3>
+                <span ng-click="goToDetailPage(res)">Детальніше</span>
             </div>
         </div>
 

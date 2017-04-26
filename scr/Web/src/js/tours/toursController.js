@@ -1,15 +1,11 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('toursController', function($rootScope, $scope, $location, $filter, getService, airportsService, crossingService){
+app.controller('toursController', function($rootScope, $scope, $location, $window,  $filter, getService, airportsService, crossingService){
 
 
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
-    //set url
-    $location.search('airportFromId', $scope.tourSearchInfo.origin);
-    $location.search('airportToId', $scope.tourSearchInfo.destination);
-    $location.search('dateStart', $filter('date')($scope.tourSearchInfo.date.allDate, 'yyyy-MM-dd'));
-    $location.search('dayStart', $scope.tourSearchInfo.date.day);
+    setupURL();
 
     var restURL = 'api/tours/bysearch?airportFromId=' + $scope.tourSearchInfo.origin + '&airportToId='
         + $scope.tourSearchInfo.destination + '&dayStart=' + $scope.tourSearchInfo.date.day;
@@ -20,6 +16,13 @@ app.controller('toursController', function($rootScope, $scope, $location, $filte
     }, function(){
             console.log("error");
     });
+
+
+    $scope.goToDetailPage = function (tour) {
+        crossingService.setTour(tour);
+        console.log(tour);
+        $window.location.href = "#/tours/" + tour.TourId;
+    };
 
     function getSearchInfoURL() {
         return {
@@ -73,6 +76,14 @@ app.controller('toursController', function($rootScope, $scope, $location, $filte
                 return 'Неділя';
                 break;
         }
+    }
+
+    function setupURL(){
+        //set url
+        $location.search('airportFromId', $scope.tourSearchInfo.origin);
+        $location.search('airportToId', $scope.tourSearchInfo.destination);
+        $location.search('dateStart', $filter('date')($scope.tourSearchInfo.date.allDate, 'yyyy-MM-dd'));
+        $location.search('dayStart', $scope.tourSearchInfo.date.day);
     }
 
 
