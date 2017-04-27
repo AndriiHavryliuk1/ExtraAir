@@ -2,22 +2,28 @@
     <h2>Детальна інформація про рейс</h2>
 
     <hr class="colorgraph">
+    <div class="container-fluid">
     <div class="row" >
-        <div class=" col-sm-2 col-xs-2">
-
-        </div>
-        <div class=" col-sm-4 col-xs-4 col-offset-sm-1 col-offset-xs-1">
-            <h3>{{tours[0].AirportFrom.City}}</h3>
+        <div class=" col-sm-4 col-xs-4">
+            <label>Пункт відправлення:</label>
+            <h4><span>Місто: </span>{{tour.AirportFrom.City}}</h4>
+            <h4><span>Країна: </span>{{tour.AirportFrom.Country}}</h4>
+            <h5><span>Аеропорт: </span>{{tour.AirportFrom.Name}}</h5>
+            <h5><span>Дата відправлення: </span>{{tour.timeStart }} {{tour.dateStartR }}({{tour.dayStart}})</h5>
         </div>
         <div class=" col-sm-1 col-xs-1">
-            <i class="fa fa-plane" style="font-size: 14px;"></i>
+
         </div>
-        <div class=" col-sm-3 col-xs-3">
-            <h3>{{tours[0].AirportTo.City}}</h3>
+        <div class=" col-sm-6 col-xs-6">
+            <label>Пункт прибуття:</label>
+            <h4><span>Місто: </span>{{tour.AirportTo.City}}</h4>
+            <h4><span>Країна: </span>{{tour.AirportTo.Country}}</h4>
+            <h5><span>Аеропорт: </span>{{tour.AirportTo.Name}}</h5>
+            <h5><span>Дата прибуття: </span>{{tour.timeFinish }} {{tour.dateFinishR }}({{tour.dayFinish}})</h5>
         </div>
     </div>
 
-
+    </div>
 
 
     </div>

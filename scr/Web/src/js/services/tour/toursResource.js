@@ -7,16 +7,20 @@ angular.module('extraAir').factory("toursResource", function ($resource) {
         tourResource: $resource(URL,
             null,
             {
-                get: {
+                getAll: {
                     method: 'GET',
                     isArray: true,
+                    timeout: 30000
+                },
+                get: {
+                    method: 'GET',
                     timeout: 30000
                 }
             }
         ),
 
         getTours: function () {
-            return this.tourResource.get();
+            return this.tourResource.getAll();
         },
 
         getTour: function (id) {

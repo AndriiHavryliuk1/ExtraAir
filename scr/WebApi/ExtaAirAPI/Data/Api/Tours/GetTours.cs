@@ -23,8 +23,7 @@ namespace Data.Api.Tours
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				var b = dbContext.Tours.Select(MapHelder).ToList();
-				return b.Where(a=>(a.AirportFrom != null 
+				return dbContext.Tours.Select(MapHelder).ToList().Where(a => (a.AirportFrom != null
 				&& a.AirportFrom.AirportId == searchHelper.AirportFormId)
 				&& (a.AirportTo != null && a.AirportTo.AirportId == searchHelper.AirportToId)
 				&& (a.PossibleDays.Contains(searchHelper.DayStart))).ToList();
@@ -73,7 +72,8 @@ namespace Data.Api.Tours
 				} : null,
 				ItnerimAirports = itnerimAirports.Any() ? itnerimAirports.Select(x => new InterimTourDto()
 				{
-					Airport = new AirportDto() {
+					Airport = new AirportDto()
+					{
 						AirportId = x.AirportId,
 						Name = x.Airport.Name,
 						Country = x.Airport.Address.Country,
@@ -83,7 +83,16 @@ namespace Data.Api.Tours
 					DateFinish = x.DateFinish
 				}).ToList() : null,
 				PossibleDays = !string.IsNullOrEmpty(tour.StringDays) ? tour.StringDays.Split(' ').ToList() : new List<string>()
-		};
+			};
+		}
+
+
+		public TourDto GetTourById(int id)
+		{
+			using (var dbContext = new ExtraAirContext())
+			{
+				return dbContext.Tours.Where(x => x.TourId == id).Select(MapHelder).FirstOrDefault();
+			}
 		}
 	}
 }

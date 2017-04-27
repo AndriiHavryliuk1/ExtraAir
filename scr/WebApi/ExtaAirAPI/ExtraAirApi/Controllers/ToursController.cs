@@ -40,12 +40,7 @@ namespace ExtraAirApi.Controllers
 		[ResponseType(typeof(Tour))]
 		public IHttpActionResult GetTour(int id)
 		{
-			Tour tour = db.Tours.Find(id);
-			if (tour == null)
-			{
-				return NotFound();
-			}
-
+			var tour = IoC.Get<IGetTours>().GetTourById(id);
 			return Ok(tour);
 		}
 

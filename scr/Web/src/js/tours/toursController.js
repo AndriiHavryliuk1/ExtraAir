@@ -7,6 +7,7 @@ app.controller('toursController', function($rootScope, $scope, $location, $windo
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
     setupURL();
 
+    var utils = new CommonUtils();
     var restURL = 'api/tours/bysearch?airportFromId=' + $scope.tourSearchInfo.origin + '&airportToId='
         + $scope.tourSearchInfo.destination + '&dayStart=' + $scope.tourSearchInfo.date.day;
 
@@ -46,35 +47,11 @@ app.controller('toursController', function($rootScope, $scope, $location, $windo
                 $filter('date')(new Date(d.setDate(d.getDate() + 1)), 'dd-MM-yyyy')
                 : $scope.tours[i].dateStartR;
             $scope.tours[i].Price = ($scope.tours[i].Price * coef).toFixed(0);
-            $scope.tours[i].dayStart = translateDays($scope.tourSearchInfo.date.day);
-            $scope.tours[i].dayFinish = translateDays(Constants.DAYS[
+            $scope.tours[i].dayStart = utils.translateDays($scope.tourSearchInfo.date.day);
+            $scope.tours[i].dayFinish = utils.translateDays(Constants.DAYS[
                 new Date(d).getDay()]);
-        }
-    }
-
-    function translateDays(day){
-        switch(day){
-            case Constants.DAYS[1]:
-                return 'Понеділок';
-                break;
-            case Constants.DAYS[2]:
-                return 'Вівторок';
-                break;
-            case Constants.DAYS[3]:
-                return 'Середа';
-                break;
-            case Constants.DAYS[4]:
-                return 'Четвер';
-                break;
-            case Constants.DAYS[5]:
-                return "П'ятниця";
-                break;
-            case Constants.DAYS[6]:
-                return 'Субота';
-                break;
-            case Constants.DAYS[0]:
-                return 'Неділя';
-                break;
+            $scope.tours[i].dayStartO = $scope.tourSearchInfo.date.day;
+            $scope.tours[i].dayFinishO = Constants.DAYS[new Date(d).getDay()];
         }
     }
 
