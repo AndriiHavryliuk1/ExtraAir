@@ -3,28 +3,36 @@
 
     <hr class="colorgraph">
     <div class="container-fluid">
-    <div class="row" >
-        <div class=" col-sm-4 col-xs-4">
-            <label>Пункт відправлення:</label>
-            <h4><span>Місто: </span>{{tour.AirportFrom.City}}</h4>
-            <h4><span>Країна: </span>{{tour.AirportFrom.Country}}</h4>
-            <h5><span>Аеропорт: </span>{{tour.AirportFrom.Name}}</h5>
-            <h5><span>Дата відправлення: </span>{{tour.timeStart }} {{tour.dateStartR }}({{tour.dayStart}})</h5>
-        </div>
-        <div class=" col-sm-1 col-xs-1">
+        <div class="row">
+            <div class=" col-sm-4 col-xs-4">
+                <label>Пункт відправлення:</label>
+                <h4><span>Місто: </span>{{tour.AirportFrom.City}}</h4>
+                <h4><span>Країна: </span>{{tour.AirportFrom.Country}}</h4>
+                <h5><span>Аеропорт: </span>{{tour.AirportFrom.Name}}</h5>
+                <h5><span>Дата відправлення: </span>{{tour.timeStart }} {{tour.dateStartR }}({{tour.dayStart}})</h5>
+            </div>
+            <div class=" col-sm-1 col-xs-1">
+
+            </div>
+            <div class=" col-sm-6 col-xs-6">
+                <label>Пункт прибуття:</label>
+                <h4><span>Місто: </span>{{tour.AirportTo.City}}</h4>
+                <h4><span>Країна: </span>{{tour.AirportTo.Country}}</h4>
+                <h5><span>Аеропорт: </span>{{tour.AirportTo.Name}}</h5>
+                <h5><span>Дата прибуття: </span>{{tour.timeFinish }} {{tour.dateFinishR }}({{tour.dayFinish}})</h5>
+            </div>
 
         </div>
-        <div class=" col-sm-6 col-xs-6">
-            <label>Пункт прибуття:</label>
-            <h4><span>Місто: </span>{{tour.AirportTo.City}}</h4>
-            <h4><span>Країна: </span>{{tour.AirportTo.Country}}</h4>
-            <h5><span>Аеропорт: </span>{{tour.AirportTo.Name}}</h5>
-            <h5><span>Дата прибуття: </span>{{tour.timeFinish }} {{tour.dateFinishR }}({{tour.dayFinish}})</h5>
-        </div>
+
+        <div><h5>Модель літака: {{tour.Plane.Name}}</h5></div>
+        <div><h3>Ціна: {{tour.Price}}$</h3></div>
+        <button type="button" class="btn btn-primary col-md-2"
+                ng-click="">Замовити квиток
+        </button>
     </div>
 
-    </div>
+    <hr class="colorgraph">
 
 
-    </div>
+</div>
 </div>

@@ -13,7 +13,10 @@ var Constants = {
     'ROLES': {
         'CLIENT': 'Client',
         'ADMIN': 'Admin'
+    },
+    'PRICE_COEF': {
+        'BUSSINESS': 2.15,
+        'ECONOMY': 1.15
     }
-
 };
 
