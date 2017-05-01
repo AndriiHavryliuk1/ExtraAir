@@ -103,3 +103,23 @@ html, body {height: 100%;}
     position:fixed;
     z-index:100;
 }
+
+#places .material-icons{
+    cursor: pointer;
+    font-size:36px;
+}
+
+#places .middle-row-style {
+    padding-top: 15px;
+    padding-left: 23px;
+}
+
+.active-place-icon {
+    background-color: red !important;
+}
+
+.delete-icon-choose-place {
+    padding-left: 20px;
+    font-size: 20px;
+}
+

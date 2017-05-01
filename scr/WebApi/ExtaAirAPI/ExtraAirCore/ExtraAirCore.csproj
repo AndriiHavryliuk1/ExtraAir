@@ -136,11 +136,13 @@
   <ItemGroup>
     <Compile Include="API_DTOs\AddressDto.cs" />
     <Compile Include="API_DTOs\AirportDto.cs" />
+    <Compile Include="API_DTOs\Helper_DTOs\TourDetailsHelper.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\TourSearchHelperDto.cs" />
     <Compile Include="API_DTOs\InterimTourDto.cs" />
     <Compile Include="API_DTOs\OrderDto.cs" />
     <Compile Include="API_DTOs\PlaneDto.cs" />
     <Compile Include="API_DTOs\SearchHistoryDto.cs" />
+    <Compile Include="API_DTOs\TourDetailsDto.cs" />
     <Compile Include="API_DTOs\TourDto.cs" />
     <Compile Include="API_DTOs\UserDto.cs" />
     <Compile Include="Command\Address\IGetAllAddresses.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Command\Airport\IGetAirports.cs" />
     <Compile Include="Command\Orders\IGetOrders.cs" />
     <Compile Include="Command\SearchHistory\IGetSearchHistory.cs" />
+    <Compile Include="Command\TourDetails\IGetTourDetails.cs" />
     <Compile Include="Command\Tour\IGetTours.cs" />
     <Compile Include="Command\User\IGetUsers.cs" />
     <Compile Include="Command\User\ISaveUser.cs" />
@@ -188,6 +191,30 @@
     <Compile Include="Migrations\201704231412335_dvckljl.Designer.cs">
       <DependentUpon>201704231412335_dvckljl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704301021494_addtourdetailandbookedtables.cs" />
+    <Compile Include="Migrations\201704301021494_addtourdetailandbookedtables.Designer.cs">
+      <DependentUpon>201704301021494_addtourdetailandbookedtables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704301538524_addtourdetailandbookedtables2.cs" />
+    <Compile Include="Migrations\201704301538524_addtourdetailandbookedtables2.Designer.cs">
+      <DependentUpon>201704301538524_addtourdetailandbookedtables2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704301614257_addtourdetailandbookedtables3.cs" />
+    <Compile Include="Migrations\201704301614257_addtourdetailandbookedtables3.Designer.cs">
+      <DependentUpon>201704301614257_addtourdetailandbookedtables3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704301758349_addtourdetailandbookedtables4.cs" />
+    <Compile Include="Migrations\201704301758349_addtourdetailandbookedtables4.Designer.cs">
+      <DependentUpon>201704301758349_addtourdetailandbookedtables4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704301933303_addtourdetailandbookedtables5.cs" />
+    <Compile Include="Migrations\201704301933303_addtourdetailandbookedtables5.Designer.cs">
+      <DependentUpon>201704301933303_addtourdetailandbookedtables5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705011043326_addtourdetailandbookedta.cs" />
+    <Compile Include="Migrations\201705011043326_addtourdetailandbookedta.Designer.cs">
+      <DependentUpon>201705011043326_addtourdetailandbookedta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
     <Compile Include="Models\EFModels\Address.cs" />
@@ -202,6 +229,7 @@
     <Compile Include="Models\EFModels\Passenger.cs" />
     <Compile Include="Models\EFModels\Plane.cs" />
     <Compile Include="Models\EFModels\Tour.cs" />
+    <Compile Include="Models\EFModels\TourDetails.cs" />
     <Compile Include="Models\EFModels\TourSearchHistory.cs" />
     <Compile Include="Models\EFModels\TourToAirport.cs" />
     <Compile Include="Models\EFModels\User.cs" />
@@ -249,6 +277,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704231412335_dvckljl.resx">
       <DependentUpon>201704231412335_dvckljl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301021494_addtourdetailandbookedtables.resx">
+      <DependentUpon>201704301021494_addtourdetailandbookedtables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301538524_addtourdetailandbookedtables2.resx">
+      <DependentUpon>201704301538524_addtourdetailandbookedtables2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301614257_addtourdetailandbookedtables3.resx">
+      <DependentUpon>201704301614257_addtourdetailandbookedtables3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301758349_addtourdetailandbookedtables4.resx">
+      <DependentUpon>201704301758349_addtourdetailandbookedtables4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301933303_addtourdetailandbookedtables5.resx">
+      <DependentUpon>201704301933303_addtourdetailandbookedtables5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705011043326_addtourdetailandbookedta.resx">
+      <DependentUpon>201705011043326_addtourdetailandbookedta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

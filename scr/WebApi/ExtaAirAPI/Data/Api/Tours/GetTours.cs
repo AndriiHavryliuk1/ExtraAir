@@ -46,7 +46,6 @@ namespace Data.Api.Tours
 			return new TourDto
 			{
 				TourId = tour.TourId,
-				CurrentCountPassenger = tour.CurrentCountPassenger,
 				DateStart = tour.DateStart,
 				DateFinish = tour.DateFinish,
 				Price = tour.Price,
@@ -54,7 +53,11 @@ namespace Data.Api.Tours
 				{
 					Name = tour.Plane.Name,
 					PlaneId = tour.Plane.PlaneId,
-					MaxCountPassenger = tour.Plane.MaxCountPassenger
+					MaxCountPassenger = new CountPassengerDto
+					{
+						CountOfBusinessPassenger = tour.Plane.MaxCountPassengerBusiness,
+						CountOfEconomyPassenger = tour.Plane.MaxCountPassengerEconomy
+					}
 				},
 				AirportFrom = airportFrom != null ? new AirportDto
 				{

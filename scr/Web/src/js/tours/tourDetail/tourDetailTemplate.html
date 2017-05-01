@@ -36,3 +36,55 @@
 
 </div>
 </div>
+
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <label>Зареєстрований багаж:</label>
+                <md-radio-group ng-model="tourDetails.ryt">
+                    <md-radio-button value="0" >Жодної</md-radio-button>
+                    <md-radio-button value="27">23 кг(+27$)</md-radio-button>
+                    <md-radio-button value="38">32 кг(+38$)</md-radio-button>
+                </md-radio-group>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <label>Ручна поклажа:</label>
+                <md-radio-group ng-model="tourDetails.jbgk">
+                    <md-radio-button value="0">Маленька(безкоштовна)</md-radio-button>
+                    <md-radio-button value="14">Велика(+14$)</md-radio-button>
+                </md-radio-group>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <label>Метод Реєстрації:</label>
+                <md-radio-group ng-model="tourDetails.uy">
+                    <md-radio-button value="0" >Онлайн</md-radio-button>
+                    <md-radio-button value="10">Аеропорт(+10$)</md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+        <div class="row">
+                <button type="button" class="btn btn-default col-md-2"  data-toggle="modal" data-target="#plaseChooseModalView"
+                        ng-click="getTourDetails()">Обрати місця
+                </button>
+        </div>
+
+        <choose-place></choose-place>
+
+        <div class="col-md-4">
+
+            <div ng-repeat="actPlace in activePlacesList">
+                <span>Пасажир {{($index + 1)}}</span>
+                <h5>Місце: {{actPlace.value}}</h5>
+                <hr>
+
+            </div>
+        </div>
+
+
+        <hr class="colorgraph">
+    </div>
+
+
+</div>

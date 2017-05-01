@@ -4,6 +4,12 @@
 	{
 		public int PlaneId;
 		public string Name;
-		public int MaxCountPassenger;
+		public CountPassengerDto MaxCountPassenger;
+	}
+
+	public class CountPassengerDto
+	{
+		public int CountOfEconomyPassenger;
+		public int CountOfBusinessPassenger;
 	}
 }

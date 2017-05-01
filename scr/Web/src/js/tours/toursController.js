@@ -23,6 +23,7 @@ app.controller('toursController', function ($rootScope, $scope, $location, $wind
 
     $scope.goToDetailPage = function (tour) {
         tour.tourClass = $scope.tours.tourClass;
+        tour.passengerCount = $scope.tourSearchInfo.passengerCount;
         crossingService.setTour(tour);
         console.log(tour);
         $window.location.href = "#/tours/" + tour.TourId;
@@ -36,7 +37,8 @@ app.controller('toursController', function ($rootScope, $scope, $location, $wind
                 day: $location.search().dayStart,
                 allDate: $location.search().dateStart
             },
-            tourClass:$location.search().tourClass
+            tourClass: $location.search().tourClass,
+            passengerCount: $location.search().passengerCount
         }
     }
 
@@ -66,6 +68,7 @@ app.controller('toursController', function ($rootScope, $scope, $location, $wind
         $location.search('dateStart', $filter('date')($scope.tourSearchInfo.date.allDate, 'yyyy-MM-dd'));
         $location.search('dayStart', $scope.tourSearchInfo.date.day);
         $location.search('tourClass', $scope.tourSearchInfo.tourClass);
+        $location.search('passengerCount', $scope.tourSearchInfo.passengerCount);
     }
 
 

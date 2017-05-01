@@ -1,9 +1,11 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('tourDetailController', function ($rootScope, $scope, $location, $filter, $routeParams, getService, airportsService, toursService, crossingService) {
+app.controller('tourDetailController', function ($rootScope, $scope, $location, $filter, $routeParams, getService, airportsService,
+                                                 tourDetailsService, toursService, crossingService) {
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
     setupURL();
+    $scope.activePlacesList = [];
 
     var utils = new CommonUtils();
     toursService.getTour($routeParams.id).then(function (data) {
@@ -11,6 +13,101 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         var coef = $scope.tourSearchInfo.tourClass === 'Economy' ? Constants.PRICE_COEF.ECONOMY : Constants.PRICE_COEF.BUSSINESS;
         correctData(coef);
     });
+
+    $scope.getTourDetails = function () {
+        $scope.allPlaces = $scope.allPlaces !== undefined ? $scope.allPlaces : getAllPlaces();
+        var additionUrl = {
+            comfort: $scope.tourSearchInfo.tourClass === 'Economy' ? 0 : 1,
+            dateStart: getGeneralDateFormat($scope.tourSearchInfo.dateStartR, $scope.tourSearchInfo.timeStart),
+            dateFinish: getGeneralDateFormat($scope.tourSearchInfo.dateFinishR, $scope.tourSearchInfo.timeFinish)
+        };
+        tourDetailsService.getTourDetails($routeParams.id, additionUrl).then(function (data) {
+            setCheckedPlaces(data.BookedPoints);
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        })
+    };
+
+
+    $scope.setActivePlaces = function (coordinate) {
+        $scope.allPlaces.forEach(function (place) {
+            place.forEach(function (point) {
+                if (coordinate.x === point.coordinate.x && coordinate.y === point.coordinate.y) {
+                    if (point.active) {
+                        point.active = false;
+                        for (var i = 0; i < $scope.activePlacesList.length; i++){
+                            if ($scope.activePlacesList[i].coordinate.x === coordinate.x
+                                && $scope.activePlacesList[i].coordinate.y === coordinate.y){
+                                $scope.activePlacesList.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        if ($scope.activePlacesList.length >= $scope.tourSearchInfo.passengerCount){
+                            return;
+                        }
+                        point.active = true;
+                        $scope.activePlacesList.push({
+                            coordinate: point.coordinate,
+                            value: point.value
+                        })
+                    }
+                }
+            });
+        });
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+    };
+
+    function setCheckedPlaces(bookedPoints) {
+        if (bookedPoints === undefined) {
+            return;
+        }
+
+        $scope.allPlaces.forEach(function (place) {
+            place.forEach(function (point) {
+                bookedPoints.forEach(function (booked) {
+                    if (point.coordinate.x === booked.X && point.coordinate.y === booked.Y) {
+                        booked.booked = true;
+                    }
+                });
+            });
+        });
+    }
+
+
+    function getAllPlaces() {
+        var tmp = $scope.tourSearchInfo.tourClass === 'Economy' ? 'CountOfEconomyPassenger' : 'CountOfBusinessPassenger';
+        var list = [];
+        var res = [];
+        var literals = ['A', 'B', 'C', 'D', 'E', 'F'];
+        for (var i = 1, x = 0, y = 0; i <= $scope.tour.Plane.MaxCountPassenger[tmp]; i++, x++) {
+            list.push({
+                value: (y + 1) + literals[x],
+                coordinate: {
+                    x: x,
+                    y: y
+                },
+                booked: false,
+                active: false
+            });
+            if (i % 6 === 0) {
+                res.push(list);
+                list = [];
+                x = -1;
+                y++;
+            }
+        }
+        return res;
+    }
+
+    function getGeneralDateFormat(date, time) {
+        var from = date.split("-");
+        return from[2] + '-' + from[1] + '-' + from[0] + 'T' + time + ':00';
+    }
 
     function setupURL() {
         $location.search('dateStart', $scope.tourSearchInfo.dateStartR);
@@ -20,6 +117,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         $location.search('dayStart', $scope.tourSearchInfo.dayStartO);
         $location.search('dayFinish', $scope.tourSearchInfo.dayFinishO);
         $location.search('tourClass', $scope.tourSearchInfo.tourClass);
+        $location.search('passengerCount', $scope.tourSearchInfo.passengerCount);
     }
 
     function getSearchInfoURL() {
@@ -30,7 +128,8 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             timeFinish: $location.search().timeFinish,
             dayStartO: $location.search().dayStart,
             dayFinishO: $location.search().dayFinish,
-            tourClass: $location.search().tourClass
+            tourClass: $location.search().tourClass,
+            passengerCount: $location.search().passengerCount
         }
     }
 
@@ -41,6 +140,6 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         $scope.tour.dateFinishR = $scope.tourSearchInfo.dateFinishR;
         $scope.tour.Price = ($scope.tour.Price * coef).toFixed(0);
         $scope.tour.dayStart = utils.translateDays($scope.tourSearchInfo.dayStartO);
-        $scope.tour.dayFinish = utils.translateDays($scope.tourSearchInfo.dayStartO);
+        $scope.tour.dayFinish = utils.translateDays($scope.tourSearchInfo.dayFinishO);
     }
 });

@@ -69,12 +69,15 @@ namespace Data.Api.Orders
 			return new TourDto
 			{
 				TourId = tour.TourId,
-				CurrentCountPassenger = tour.CurrentCountPassenger,
 				Plane = new PlaneDto
 				{
 					Name = tour.Plane.Name,
 					PlaneId = tour.Plane.PlaneId,
-					MaxCountPassenger = tour.Plane.MaxCountPassenger
+					MaxCountPassenger = new CountPassengerDto()
+					{
+						CountOfBusinessPassenger = tour.Plane.MaxCountPassengerBusiness,
+						CountOfEconomyPassenger = tour.Plane.MaxCountPassengerEconomy
+					}
 				},
 				AirportFrom = airportFrom != null ? new AirportDto
 				{

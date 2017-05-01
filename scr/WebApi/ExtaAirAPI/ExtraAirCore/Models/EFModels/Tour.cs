@@ -14,6 +14,7 @@ namespace ExtraAirCore.Models.EFModels
 			Feedbacks = new List<Feedback>();
 			TourToAirports = new List<TourToAirport>();
 			Orders = new List<Order>();
+			TourDetailses = new List<TourDetails>();
 		}
 
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
@@ -22,7 +23,6 @@ namespace ExtraAirCore.Models.EFModels
 		public DateTime DateFinish { get; set; }
 		[Required]
 		public decimal Price { get; set; }
-		public int CurrentCountPassenger { get; set; }
 		public string StringDays { get; set; }
 		[ForeignKey("Plane")]
 		public int PlaneId { get; set; }
@@ -33,5 +33,6 @@ namespace ExtraAirCore.Models.EFModels
 		public virtual ICollection<Order> Orders { get; set; }
 		public virtual ICollection<Feedback> Feedbacks { get; set; }
 		public virtual ICollection<TourToAirport> TourToAirports { get; set; }
+		public virtual ICollection<TourDetails> TourDetailses { get; set; }
 	}
 }

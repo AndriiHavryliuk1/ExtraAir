@@ -16,7 +16,8 @@ namespace ExtraAirCore.Models.EFModels
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
 		public int PlaneId { get; set; }
 		public string Name { get; set; }
-		public int MaxCountPassenger { get; set; }
+		public int MaxCountPassengerEconomy { get; set; }
+		public int MaxCountPassengerBusiness { get; set; }
 
 		public virtual ICollection<Tour> Tours { get; set; }
 		public virtual ICollection<Comfort> Comforts { get; set; }

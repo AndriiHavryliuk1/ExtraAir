@@ -1,0 +1,82 @@
+<!-- Modal -->
+<div class="modal fade" id="plaseChooseModalView" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content container-fluid">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times</button>
+                <h4 class="modal-title">Виберіть місце</h4>
+            </div>
+            <div class="alert alert-danger" ng-show="notifyError">
+                <strong>Server Error!
+                </strong>
+                {{message}}
+            </div>
+            <div class="alert alert-success" ng-show="notifySuccess">
+                <strong>Success
+                </strong>
+                {{message}}
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-8" id="places">
+                    <div class="row" ng-repeat="place in  allPlaces">
+
+                        <div class="col-md-1 col-md-offset-1 ">
+                            <i class="material-icons" ng-if="place[0].booked">&#xe8e6;</i>
+                            <i class="material-icons" ng-if="!place[0].booked" ng-click="setActivePlaces(place[0].coordinate)"
+                               ng-class="place[0].active ? 'active-place-icon' : ''">&#xe8e7;</i>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="material-icons" ng-if="place[1].booked">&#xe8e6;</i>
+                            <i class="material-icons" ng-if="!place[1].booked" ng-click="setActivePlaces(place[1].coordinate)"
+                               ng-class="place[1].active ? 'active-place-icon' : ''">&#xe8e7;</i>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="material-icons" ng-if="place[2].booked">&#xe8e6;</i>
+                            <i class="material-icons" ng-if="!place[2].booked" ng-click="setActivePlaces(place[2].coordinate)"
+                               ng-class="place[2].active ? 'active-place-icon' : ''">&#xe8e7;</i>
+                        </div>
+                        <div class="col-md-2 middle-row-style">
+                            <div style="width: 50px;"> Ряд {{place[2].coordinate.y + 1}}</div>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="material-icons" ng-if="place[3].booked">&#xe8e6;</i>
+                            <i class="material-icons" ng-if="!place[3].booked" ng-click="setActivePlaces(place[3].coordinate)"
+                               ng-class="place[3].active ? 'active-place-icon' : ''">&#xe8e7;</i>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="material-icons" ng-if="place[4].booked">&#xe8e6;</i>
+                            <i class="material-icons" ng-if="!place[4].booked" ng-click="setActivePlaces(place[4].coordinate)"
+                               ng-class="place[4].active ? 'active-place-icon' : ''">&#xe8e7;</i>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="material-icons" ng-if="place[5].booked">&#xe8e6;</i>
+                            <i class="material-icons" ng-if="!place[5].booked" ng-click="setActivePlaces(place[5].coordinate)"
+                               ng-class="place[5].active ? 'active-place-icon' : ''">&#xe8e7;</i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div ng-repeat="actPlace in activePlacesList">
+                       <span>Пасажир {{($index + 1)}}</span>
+                        <span class="glyphicon glyphicon-remove delete-icon-choose-place" ng-click="setActivePlaces(actPlace.coordinate)"></span>
+                        <h5>Місце: {{actPlace.value}}</h5>
+                        <hr>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <br>
+            <br>
+
+        </div>
+    </div>
+</div>

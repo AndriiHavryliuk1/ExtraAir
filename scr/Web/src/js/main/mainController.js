@@ -6,14 +6,9 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
         origin: null,
         destination: null,
         date: null,
-        passenger: {}
+        passengerCount: 1
     };
 
-    $scope.passenger = {
-        adult: 1,
-        child: null,
-        baby: null
-    };
     $scope.showPlaceTo = false;
 
      airportsService.getAirports().then(function(data){
@@ -40,7 +35,6 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
     };
 
     $scope.prepareTo = function() {
-        $scope.tourDetails.passenger = $scope.passenger;
         $scope.tourDetails.date = {
             day: Constants.DAYS[$scope.tourDetails.date.getDay()],
             allDate: $scope.tourDetails.date
