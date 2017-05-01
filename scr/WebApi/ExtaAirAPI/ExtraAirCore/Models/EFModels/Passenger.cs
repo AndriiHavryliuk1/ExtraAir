@@ -17,6 +17,10 @@ namespace ExtraAirCore.Models.EFModels
 		public int PassengerId { get; set; }
 		[Required]
 		public PassengerType PassengerType { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public GenderType Gender { get; set; }
+		public string CoordinateValue { get; set; }
 
 		public virtual ICollection<Order> Orders { get; set; }
 		public virtual ICollection<Tour> Tours { get; set; }
@@ -28,5 +32,11 @@ namespace ExtraAirCore.Models.EFModels
 		Adult = 0,
 		Child = 1,
 		Infant = 2
+	}
+
+	public enum GenderType
+	{
+		Male = 0,
+		Female = 1
 	}
 }

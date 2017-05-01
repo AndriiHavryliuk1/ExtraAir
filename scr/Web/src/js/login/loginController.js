@@ -27,8 +27,8 @@ app.controller('loginController', function($rootScope, $interval, $scope, sha256
                             break;
                         }
                         case Constants.ROLES.CLIENT:
-                            $rootScope.isReceptionist = true;
-                            $window.location.href = "#/";
+                            $rootScope.isClient = true;
+                            $window.location.href = "#/userCabinet";
                             break;
                         }
                     }

@@ -6,6 +6,8 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
     setupURL();
     $scope.activePlacesList = [];
+    $scope.ordering = false;
+    $rootScope.isAutorized = !!localStorage.getItem('token');
 
     var utils = new CommonUtils();
     toursService.getTour($routeParams.id).then(function (data) {
@@ -14,7 +16,63 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         correctData(coef);
     });
 
-    $scope.getTourDetails = function () {
+
+    $scope.setActivePlaces = function (coordinate) {
+        $scope.allPlaces.forEach(function (place) {
+            place.forEach(function (point) {
+                if (coordinate.x === point.coordinate.x && coordinate.y === point.coordinate.y) {
+                    if (point.active) {
+                        point.active = false;
+                        for (var i = 0; i < $scope.activePlacesList.length; i++) {
+                            if ($scope.activePlacesList[i].coordinate.x === coordinate.x
+                                && $scope.activePlacesList[i].coordinate.y === coordinate.y) {
+
+                                for (var j = 0; j < $scope.allPassengers.length; j++) {
+                                    if ($scope.activePlacesList[i].passengerIndex === j){
+                                        $scope.allPassengers[j].coordinate = null;
+                                        $scope.allPassengers[j].coordinateValue = null;
+                                        break;
+                                    }
+                                }
+                                $scope.activePlacesList.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        if ($scope.activePlacesList.length >= $scope.tourSearchInfo.passengerCount) {
+                            return;
+                        }
+                        point.active = true;
+                        for (var i = 0; i < $scope.allPassengers.length; i++) {
+                            if ($scope.allPassengers[i].coordinate === null) {
+                                $scope.activePlacesList.push({
+                                    coordinate: point.coordinate,
+                                    value: point.value,
+                                    passenger: $scope.allPassengers[i].name + ' ' + $scope.allPassengers[i].surname,
+                                    passengerIndex: i
+                                });
+                                $scope.allPassengers[i].coordinate = point.coordinate;
+                                $scope.allPassengers[i].coordinateValue = point.value;
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+    };
+
+    $scope.openOrderingForm = function () {
+        $scope.ordering = true;
+        $scope.allPassengers = getAllPassenger();
+        setTourDetails();
+    };
+
+    function setTourDetails() {
         $scope.allPlaces = $scope.allPlaces !== undefined ? $scope.allPlaces : getAllPlaces();
         var additionUrl = {
             comfort: $scope.tourSearchInfo.tourClass === 'Economy' ? 0 : 1,
@@ -27,40 +85,27 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         }, function (data) {
             console.log(data);
         })
-    };
+    }
 
-
-    $scope.setActivePlaces = function (coordinate) {
-        $scope.allPlaces.forEach(function (place) {
-            place.forEach(function (point) {
-                if (coordinate.x === point.coordinate.x && coordinate.y === point.coordinate.y) {
-                    if (point.active) {
-                        point.active = false;
-                        for (var i = 0; i < $scope.activePlacesList.length; i++){
-                            if ($scope.activePlacesList[i].coordinate.x === coordinate.x
-                                && $scope.activePlacesList[i].coordinate.y === coordinate.y){
-                                $scope.activePlacesList.splice(i, 1);
-                                break;
-                            }
-                        }
-                    }
-                    else {
-                        if ($scope.activePlacesList.length >= $scope.tourSearchInfo.passengerCount){
-                            return;
-                        }
-                        point.active = true;
-                        $scope.activePlacesList.push({
-                            coordinate: point.coordinate,
-                            value: point.value
-                        })
-                    }
-                }
+    function getAllPassenger() {
+        var list = [];
+        for (var i = 0; i < $scope.tourSearchInfo.passengerCount; i++) {
+            list.push({
+                name: '',
+                surname: '',
+                gender: null,
+                idCard: '',
+                baggage: {
+                    inner: 0,
+                    external: 0
+                },
+                methodRegister: null,
+                coordinate: null,
+                coordinateValue: null
             });
-        });
-        if (!$scope.$$phase) {
-            $scope.$apply();
         }
-    };
+        return list;
+    }
 
     function setCheckedPlaces(bookedPoints) {
         if (bookedPoints === undefined) {

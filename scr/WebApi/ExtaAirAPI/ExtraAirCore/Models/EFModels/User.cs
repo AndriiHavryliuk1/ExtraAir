@@ -24,6 +24,8 @@ namespace ExtraAirCore.Models.EFModels
 		public int? AddressId { get; set; }
 		[ForeignKey("UserClaim")]
 		public int UserClaimId { get; set; }
+		public string ImagePath { get; set; }
+		public string IdCard { get; set; }
 
 		public virtual Address Address { get; set; }
 		public virtual UserClaim UserClaim { get; set; }

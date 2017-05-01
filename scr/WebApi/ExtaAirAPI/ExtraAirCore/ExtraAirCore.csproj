@@ -154,7 +154,9 @@
     <Compile Include="Command\Tour\IGetTours.cs" />
     <Compile Include="Command\User\IGetUsers.cs" />
     <Compile Include="Command\User\ISaveUser.cs" />
+    <Compile Include="Constants\Messages.cs" />
     <Compile Include="Constants\Path.cs" />
+    <Compile Include="Constants\Roles.cs" />
     <Compile Include="Migrations\201702271101132_toAzure.cs" />
     <Compile Include="Migrations\201702271101132_toAzure.Designer.cs">
       <DependentUpon>201702271101132_toAzure.cs</DependentUpon>
@@ -214,6 +216,10 @@
     <Compile Include="Migrations\201705011043326_addtourdetailandbookedta.cs" />
     <Compile Include="Migrations\201705011043326_addtourdetailandbookedta.Designer.cs">
       <DependentUpon>201705011043326_addtourdetailandbookedta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705012211508_addtou.cs" />
+    <Compile Include="Migrations\201705012211508_addtou.Designer.cs">
+      <DependentUpon>201705012211508_addtou.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705011043326_addtourdetailandbookedta.resx">
       <DependentUpon>201705011043326_addtourdetailandbookedta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705012211508_addtou.resx">
+      <DependentUpon>201705012211508_addtou.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

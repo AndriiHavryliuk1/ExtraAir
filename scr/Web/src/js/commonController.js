@@ -1,5 +1,5 @@
 angular.module('extraAir').controller('commonController', function($rootScope, $scope){
-    $rootScope.isAutorized = !!localStorage.getItem('token');
+    $rootScope.isAuthorized = !!localStorage.getItem('token');
 
     $scope.isAutorizedLocal = !!localStorage.getItem('token');
     $scope.logout = function(){

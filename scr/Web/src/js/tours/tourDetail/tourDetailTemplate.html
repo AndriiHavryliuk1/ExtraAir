@@ -27,7 +27,7 @@
         <div><h5>Модель літака: {{tour.Plane.Name}}</h5></div>
         <div><h3>Ціна: {{tour.Price}}$</h3></div>
         <button type="button" class="btn btn-primary col-md-2"
-                ng-click="">Замовити квиток
+                ng-click="openOrderingForm()">Замовити квиток
         </button>
     </div>
 
@@ -38,52 +38,103 @@
 </div>
 
 
-<div class="container-fluid">
+<div class="container-fluid" ng-if="ordering && isAuthorized">
     <div class="container-fluid">
+        <div ng-repeat="passenger in allPassengers">
+
+            <h3>{{($index + 1)}} Пасажир</h3>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <input type="text" placeholder="Ім'я" ng-model="passenger.name" class="form-control" required
+                           maxlength="30">
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <input type="text" placeholder="Прізвище" ng-model="passenger.surname" class="form-control" required
+                           maxlength="30">
+                </div>
+
+            </div>
+            <div class="row" style="padding-top: 5px;">
+                <div class="col-md-3 col-sm-3">
+                    <input type="text" placeholder="Номер паспорта" ng-model="passenger.idCard" class="form-control"
+                           required
+                           maxlength="30">
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group" style="padding-top: 10px;">
+                        <label class="control-label col-sm-3">Стать:</label>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="femaleRadio" value="1"
+                                           ng-model="passenger.gender">Жінка
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="maleRadio" ng-model="passenger.gender"
+                                           value="0">Чоловік
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-if="tourSearchInfo.tourClass === 'Economy'">
+                <div class="col-md-3 col-sm-3">
+                    <label>Зареєстрований багаж:</label>
+                    <md-radio-group ng-model="passenger.baggage.external">
+                        <md-radio-button value="0">Жодної</md-radio-button>
+                        <md-radio-button value="27">23 кг(+27$)</md-radio-button>
+                        <md-radio-button value="38">32 кг(+38$)</md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <label>Ручна поклажа:</label>
+                    <md-radio-group ng-model="passenger.baggage.inner">
+                        <md-radio-button value="0">Маленька(безкоштовна)</md-radio-button>
+                        <md-radio-button value="14">Велика(+14$)</md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+            <br>
+        </div>
+        <hr class="colorgraph">
         <div class="row">
             <div class="col-md-3 col-sm-3">
-                <label>Зареєстрований багаж:</label>
-                <md-radio-group ng-model="tourDetails.ryt">
-                    <md-radio-button value="0" >Жодної</md-radio-button>
-                    <md-radio-button value="27">23 кг(+27$)</md-radio-button>
-                    <md-radio-button value="38">32 кг(+38$)</md-radio-button>
-                </md-radio-group>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <label>Ручна поклажа:</label>
-                <md-radio-group ng-model="tourDetails.jbgk">
-                    <md-radio-button value="0">Маленька(безкоштовна)</md-radio-button>
-                    <md-radio-button value="14">Велика(+14$)</md-radio-button>
-                </md-radio-group>
-            </div>
-            <div class="col-md-3 col-sm-3">
                 <label>Метод Реєстрації:</label>
-                <md-radio-group ng-model="tourDetails.uy">
-                    <md-radio-button value="0" >Онлайн</md-radio-button>
+                <md-radio-group ng-model="passenger.methodRegister">
+                    <md-radio-button value="0">Онлайн</md-radio-button>
                     <md-radio-button value="10">Аеропорт(+10$)</md-radio-button>
                 </md-radio-group>
             </div>
-        </div>
-        <div class="row">
-                <button type="button" class="btn btn-default col-md-2"  data-toggle="modal" data-target="#plaseChooseModalView"
-                        ng-click="getTourDetails()">Обрати місця
-                </button>
+
+            <button type="button" class="btn btn-default col-md-2" data-toggle="modal"
+                    data-target="#plaseChooseModalView"
+                    ng-click="getTourDetails()">Обрати місця
+            </button>
         </div>
 
         <choose-place></choose-place>
 
-        <div class="col-md-4">
 
-            <div ng-repeat="actPlace in activePlacesList">
-                <span>Пасажир {{($index + 1)}}</span>
-                <h5>Місце: {{actPlace.value}}</h5>
-                <hr>
 
+        <div class="row">
+            <div class="col-md-4">
+
+                <div ng-repeat="actPlace in activePlacesList">
+                    <span>Пасажир {{($index + 1)}}</span>
+                    <h5>Місце: {{actPlace.value}}</h5>
+                    <hr>
+
+                </div>
             </div>
+
+
         </div>
 
 
-        <hr class="colorgraph">
     </div>
 
 

@@ -37,6 +37,11 @@ app.config(function($routeProvider, $locationProvider) {
         reloadOnSearch: false
     });
 
+    $routeProvider.when('/userCabinet', {
+        templateUrl: 'js/cabinets/client/clientCabinetTemplate.html',
+        controller: 'clientCabinetController',
+        reloadOnSearch: false
+    });
 
     //  "medicalhistory/" + $routeParams["id"] + "/page/" + $scope.searchInfo.page
 
