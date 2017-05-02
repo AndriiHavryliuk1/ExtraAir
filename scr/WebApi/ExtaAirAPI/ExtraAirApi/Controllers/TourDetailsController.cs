@@ -82,6 +82,15 @@ namespace ExtraAirApi.Controllers
 			{
 				return BadRequest(ModelState);
 			}
+			var list = db.TourDetailses.Where(x => x.TourId == tourDetails.TourId && x.DateStart == tourDetails.DateStart &&
+			                            x.DateFinish == tourDetails.DateFinish).ToList();
+			if (list.Count != 0)
+			{
+				tourDetails.CurrentCountOfBusinessPassenger +=
+					list.OrderBy(x => x.CurrentCountOfBusinessPassenger).First().CurrentCountOfBusinessPassenger;
+				tourDetails.CurrentCountOfEconomyPassenger +=
+					list.OrderBy(x => x.CurrentCountOfEconomyPassenger).First().CurrentCountOfEconomyPassenger;
+			}
 
 			db.TourDetailses.Add(tourDetails);
 			db.SaveChanges();

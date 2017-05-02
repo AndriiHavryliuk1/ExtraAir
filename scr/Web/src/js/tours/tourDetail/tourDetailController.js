@@ -7,7 +7,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
     setupURL();
     $scope.activePlacesList = [];
     $scope.ordering = false;
-    $rootScope.isAutorized = !!localStorage.getItem('token');
+    $scope.methodRegister = null;
 
     var utils = new CommonUtils();
     toursService.getTour($routeParams.id).then(function (data) {
@@ -72,6 +72,55 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         setTourDetails();
     };
 
+    $scope.lastStep = function() {
+        if (!validationLastStep()){
+            return;
+        }
+
+        $scope.showCreditCard = $scope.methodRegister === 0;
+
+        var BookedPlaces = [];
+        $scope.allPassengers.forEach(function(pas) {
+            BookedPlaces.push({
+                PointX: pas.coordinate.x,
+                PointY: pas.coordinate.y,
+                ComfortType: $scope.tourSearchInfo.tourClass === 'Economy' ? 0 : 1
+            })
+        });
+
+        var TourDetails = {
+            DateStart: getGeneralDateFormat($scope.tourSearchInfo.dateStartR, $scope.tourSearchInfo.timeStart),
+            DateFinish: getGeneralDateFormat($scope.tourSearchInfo.dateFinishR, $scope.tourSearchInfo.timeFinish),
+            CurrentCountOfBusinessPassenger: $scope.tourSearchInfo.tourClass !== 'Economy' ? $scope.allPassengers.length : 0,
+            CurrentCountOfEconomyPassenger: $scope.tourSearchInfo.tourClass === 'Economy' ? $scope.allPassengers.length : 0,
+            Temporary: false,
+            TourId: $routeParams.id,
+            BookedPlaces: BookedPlaces
+        };
+
+        tourDetailsService.saveTourDetails(TourDetails).then(function(data){
+            console.log("fine");
+        }, function(data){
+            console.log("fail");
+        });
+    };
+
+    function validationLastStep(){
+        if ($scope.activePlacesList.length !== $scope.allPassengers.length) {
+            alert("Виберіть місця!");
+            return false;
+        }
+
+        for (var i = 0; i < $scope.allPassengers.length; i++){
+            var pas = $scope.allPassengers[i];
+            if (!pas.name || !pas.surname || !pas.idCard || pas.gender === null){
+                alert("Заповніть дані про пасажирів!");
+                return false;
+            }
+        }
+        return true;
+    }
+
     function setTourDetails() {
         $scope.allPlaces = $scope.allPlaces !== undefined ? $scope.allPlaces : getAllPlaces();
         var additionUrl = {
@@ -99,7 +148,6 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
                     inner: 0,
                     external: 0
                 },
-                methodRegister: null,
                 coordinate: null,
                 coordinateValue: null
             });
@@ -116,7 +164,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             place.forEach(function (point) {
                 bookedPoints.forEach(function (booked) {
                     if (point.coordinate.x === booked.X && point.coordinate.y === booked.Y) {
-                        booked.booked = true;
+                        point.booked = true;
                     }
                 });
             });

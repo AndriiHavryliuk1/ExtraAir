@@ -32,7 +32,7 @@ namespace Data.Api.TourDetails
 
 				foreach (var l in list)
 				{
-					b.Concat(l.BookedPoints);
+					b = b.Concat(l.BookedPoints).ToList();
 					economyPass = l.CurrentPassengerCount.CountOfEconomyPassenger > economyPass ? 
 						l.CurrentPassengerCount.CountOfEconomyPassenger : economyPass;
 					businessPass += l.CurrentPassengerCount.CountOfBusinessPassenger > businessPass ?
