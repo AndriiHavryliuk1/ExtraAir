@@ -19,9 +19,28 @@ namespace ExtraAirApi.Controllers
 
 		// GET: api/Tours
 		[Route("")]
-		public object GetTours()
+		public object GetTours([FromUri]int page = 1, [FromUri]int itemsPerPage = 15, [FromUri]string search = null, [FromUri]int? airportFromId = null, [FromUri]int? airportToId = null,
+			[FromUri]string day = null)
 		{
-			return IoC.Get<IGetTours>().GetAllTours();
+			var list = IoC.Get<IGetTours>().GetAllTours();
+
+			var pagedList = IoC.Get<IGetTours>().GetToursWithPaginFiltering(new PaginFilteringHelper
+			{
+				Day = day,
+				AirportToId = airportToId,
+				AirportFromId = airportFromId,
+				ItemsPerPage = itemsPerPage,
+				Page = page,
+				Search = search
+			}, list);
+
+			var json = new
+			{
+				count = list.Count(),
+				list = pagedList
+			};
+
+			return json;
 		}
 
 		[HttpGet]

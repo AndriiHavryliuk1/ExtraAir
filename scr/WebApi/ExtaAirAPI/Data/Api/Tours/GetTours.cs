@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 using ExtraAirCore.API_DTOs;
 using ExtraAirCore.API_DTOs.Helper_DTOs;
 using ExtraAirCore.Command.Tour;
@@ -28,6 +29,29 @@ namespace Data.Api.Tours
 				&& (a.AirportTo != null && a.AirportTo.AirportId == searchHelper.AirportToId)
 				&& (a.PossibleDays.Contains(searchHelper.DayStart))).ToList();
 			}
+		}
+
+		public IEnumerable<TourDto> GetToursWithPaginFiltering(PaginFilteringHelper pfHelper, IEnumerable<TourDto> list)
+		{
+			list = list.OrderBy(x => x.TourId).ToList();
+			var listPaged = list.Skip((pfHelper.Page - 1) * pfHelper.ItemsPerPage).Take(pfHelper.ItemsPerPage).ToList();
+
+			if (pfHelper.AirportFromId != null)
+			{
+				listPaged = listPaged.Where(x => x.AirportFrom.AirportId == pfHelper.AirportFromId).ToList();
+			}
+
+			if (pfHelper.AirportToId != null)
+			{
+				listPaged = listPaged.Where(x => x.AirportTo.AirportId == pfHelper.AirportToId).ToList();
+			}
+
+			if (pfHelper.Day != null)
+			{
+				listPaged = listPaged.Where(x => x.PossibleDays.Contains(pfHelper.Day)).ToList();
+			}
+
+			return listPaged;
 		}
 
 

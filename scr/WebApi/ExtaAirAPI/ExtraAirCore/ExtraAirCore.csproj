@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="API_DTOs\AddressDto.cs" />
     <Compile Include="API_DTOs\AirportDto.cs" />
+    <Compile Include="API_DTOs\Helper_DTOs\PaginFilteringHelper.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\TourDetailsHelper.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\TourSearchHelperDto.cs" />
     <Compile Include="API_DTOs\InterimTourDto.cs" />

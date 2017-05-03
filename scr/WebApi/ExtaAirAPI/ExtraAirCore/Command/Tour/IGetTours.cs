@@ -8,6 +8,7 @@ namespace ExtraAirCore.Command.Tour
 	{
 		IEnumerable<TourDto> GetAllTours();
 		IEnumerable<TourDto> GetToursBySearch(TourSearchHelperDto address);
+		IEnumerable<TourDto> GetToursWithPaginFiltering(PaginFilteringHelper pfHelper, IEnumerable<TourDto> list);
 		TourDto GetTourById(int id);
 	}
 }

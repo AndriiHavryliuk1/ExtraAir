@@ -10,7 +10,15 @@ angular.module('extraAir').factory("toursResource", function ($resource) {
                 getAll: {
                     method: 'GET',
                     isArray: true,
-                    timeout: 30000
+                    timeout: 30000,
+                    params:{
+                        page: '@page',
+                        itemsPerPage: '@itemsPerPage',
+                        search: '@search',
+                        airportFromId: '@airportFromId',
+                        airportToId: '@airportToId',
+                        day: '@day'
+                    }
                 },
                 get: {
                     method: 'GET',
@@ -19,8 +27,15 @@ angular.module('extraAir').factory("toursResource", function ($resource) {
             }
         ),
 
-        getTours: function () {
-            return this.tourResource.getAll();
+        getTours: function (additionUrlParams) {
+            return this.tourResource.getAll({
+                page: additionUrlParams.page,
+                itemsPerPage: additionUrlParams.itemsPerPage,
+                search: additionUrlParams.search,
+                airportFromId: additionUrlParams.airportFromId,
+                airportToId: additionUrlParams.airportToId,
+                day: additionUrlParams.day
+            });
         },
 
         getTour: function (id) {
