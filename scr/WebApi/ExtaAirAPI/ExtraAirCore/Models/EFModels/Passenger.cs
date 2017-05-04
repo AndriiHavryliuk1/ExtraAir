@@ -21,6 +21,11 @@ namespace ExtraAirCore.Models.EFModels
 		public string LastName { get; set; }
 		public GenderType Gender { get; set; }
 		public string CoordinateValue { get; set; }
+		public string IdCard { get; set; }
+		public decimal TicketPrice { get; set; }
+		public bool BaggageInternal { get; set; }
+		public bool BaggageeExternal { get; set; }
+
 
 		public virtual ICollection<Order> Orders { get; set; }
 		public virtual ICollection<Tour> Tours { get; set; }

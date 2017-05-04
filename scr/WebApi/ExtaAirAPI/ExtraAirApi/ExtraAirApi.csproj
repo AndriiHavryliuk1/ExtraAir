@@ -237,6 +237,7 @@
     <Compile Include="Autorization\Providers\CustomJwtProvider.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\BookedPlacesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />

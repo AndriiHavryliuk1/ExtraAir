@@ -45,7 +45,7 @@ angular.module('extraAir').service('paginationService', function ($rootScope, $f
     };
 
     backToTop = function () {
-        $("html, body").animate({scrollTop: 0}, 50);
+        $("html, body").animate({scrollTop: 0}, 200);
     };
 
     this.ChangeURL = function (loadList, doctors, preArray, url, pagingInfo) {
@@ -53,7 +53,6 @@ angular.module('extraAir').service('paginationService', function ($rootScope, $f
             return;
         if ($location.path() != url) {
             $location.search('search', null);
-            $location.search('department', null);
             $location.search('page', null);
             return;
         }

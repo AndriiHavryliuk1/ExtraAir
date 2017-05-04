@@ -1,46 +1,79 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('toursListController', function ($rootScope, $scope, $location, $window, $filter, getService, airportsService, toursService, toursResource) {
+app.controller('toursListController', function ($rootScope, $scope, $location, $window, $filter, getService, paginationArrayService, paginationService, airportsService, toursService, toursResource) {
 
 
     $rootScope.pagingInfo = {
         page: 1,
-        itemsPerPage: 7,
+        itemsPerPage: 3,
         search: null,
         airportFromId: null,
         airportToId: null,
-        day: ""
+        day: ''
     };
+
+    $scope.$on('$locationChangeStart', function(e) {
+        $rootScope.pagingInfo = {
+            page: 1,
+            itemsPerPage: 3,
+            search: null,
+            airportFromId: null,
+            airportToId: null,
+            day: ''
+        };
+     //   paginationService.ChangeURL($scope.loadList, $scope.tours, $rootScope.preArray, '/toursList', $rootScope.pagingInfo);
+    });
+
+
 
     $scope.tours = [];
 
 
-    var URL = "api/tours?page=" + $rootScope.pagingInfo.page + "&itemsPerPage=" + $rootScope.pagingInfo.itemsPerPage +
-        "&search=" + $rootScope.pagingInfo.search + "&airportFromId=" + $rootScope.pagingInfo.airportFromId +
-        "&airportToId=" + $rootScope.pagingInfo.airportToId + "&day=" + $rootScope.pagingInfo.day;
-
-    getService.GetObjects(URL).then(function (data) {
-        $scope.tours = data.data.list;
-        $scope.toursListFullCount = data.data.count;
 
 
-        $rootScope.preArray = $scope.tours;
-        correctData();
+    $scope.loadList = function(){
+
+        var URL = "api/tours?page=" + $rootScope.pagingInfo.page + "&itemsPerPage=" + $rootScope.pagingInfo.itemsPerPage +
+            "&search=" + $rootScope.pagingInfo.search + "&airportFromId=" + $rootScope.pagingInfo.airportFromId +
+            "&airportToId=" + $rootScope.pagingInfo.airportToId + "&day=" + $rootScope.pagingInfo.day;
+
+
+        getService.GetObjects(URL).then(function (data) {
+            $scope.tours = data.data.list;
+
+
+            $scope.AnyElementOfList = data.data.count == 0;
+            $rootScope.pagingInfo.totalItems = data.data.count;
+            $scope.pages = Math.ceil(data.data.count / $rootScope.pagingInfo.itemsPerPage);
+            $scope.paginArray = paginationArrayService.Array($scope.pages, $rootScope.pagingInfo.page);
+
+            correctData();
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+          //  paginationService.ChangeURL($scope.loadList, $scope.tours, $rootScope.preArray, '/toursList', $rootScope.pagingInfo);
+
+
+        }, function (error) {
+            console.log("dfsbdfb");
+
+        });
 
         $location.search('search', !!$rootScope.pagingInfo.search ? $rootScope.pagingInfo.search : null);
         $location.search('page', $rootScope.pagingInfo.page);
         $location.search('airportFromId', $rootScope.pagingInfo.airportFromId);
         $location.search('airportToId', $rootScope.pagingInfo.airportToId);
-        $location.search('day', $rootScope.pagingInfo.day);
-        if (!$scope.$$phase) {
-            $scope.$apply();
-        }
+        $location.search('day', !!$rootScope.pagingInfo.day ? $rootScope.pagingInfo.day : null);
 
-    }, function (error) {
-        console.log("dfsbdfb");
 
-    });
+        $rootScope.preArray = $scope.tours;
+    };
+
+    $scope.loadList();
+
+
 
 
     function correctData() {

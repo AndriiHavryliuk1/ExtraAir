@@ -91,7 +91,7 @@
                     </md-radio-group>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                    <label>Ручна поклажа:</label>
+                    <label>Ручний багаж:</label>
                     <md-radio-group ng-model="passenger.baggage.inner">
                         <md-radio-button value="0">Маленька(безкоштовна)</md-radio-button>
                         <md-radio-button value="14">Велика(+14$)</md-radio-button>
@@ -116,25 +116,31 @@
             </button>
         </div>
 
-        <choose-place></choose-place>
 
-        <button type="button" class="btn btn-default col-md-2" ng-click="lastStep()">Продовжити</button>
+        <div>
+            <button type="button" class="btn btn-default col-md-2" ng-click="lastStep()">Продовжити</button>
+        </div>
 
-        <credit-card ng-if="showCreditCard"></credit-card>
 
-
-        <div class="row">
-            <div class="col-md-4">
-
-                <div ng-repeat="actPlace in activePlacesList">
-                    <span>Пасажир {{($index + 1)}}</span>
-                    <h5>Місце: {{actPlace.value}}</h5>
-                    <hr>
-
-                </div>
+        <div ng-if="showCheckStep">
+            <h3>Перевірити дані:</h3>
+            <div ng-repeat="passenger in allPassengers">
+                <h5>{{($index + 1)}} Пасажир {{passenger.name}} {{passenger.surname}}</h5>
+                <h5>Номер паспорта: {{passenger.idCard}}</h5>
+                <h5>Місце: {{passenger.coordinateValue}}</h5>
+                <h5>Зареєстрований багаж: {{passenger.baggage.externalValue}}</h5>
+                <h5>Ручний багаж: {{passenger.baggage.innerValue}}</h5>
             </div>
 
+            <h4>Метод реєстрації {{methodRegisterValue}}</h4>
+            <h4><label>Ціна: {{finishTourResult.Price}}$</label></h4>
+        </div>
 
+        <div ng-if="showCreditCard">
+            <credit-card></credit-card>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default col-md-2" ng-click="orderTickets()">Забронювати</button>
         </div>
 
 
@@ -142,3 +148,6 @@
 
 
 </div>
+
+<choose-place></choose-place>
+

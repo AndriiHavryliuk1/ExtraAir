@@ -92,10 +92,13 @@ namespace ExtraAirApi.Controllers
 					list.OrderBy(x => x.CurrentCountOfEconomyPassenger).First().CurrentCountOfEconomyPassenger;
 			}
 
+			tourDetails.BookedPlaces = null;
+
 			db.TourDetailses.Add(tourDetails);
 			db.SaveChanges();
 
-			return CreatedAtRoute("DefaultApi", new { id = tourDetails.TourDetailsId }, tourDetails);
+
+			return Ok(tourDetails);
 		}
 
 		// DELETE: api/TourDetails/5

@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201705012211508_addtou.Designer.cs">
       <DependentUpon>201705012211508_addtou.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705041328035_kldnlkn.cs" />
+    <Compile Include="Migrations\201705041328035_kldnlkn.Designer.cs">
+      <DependentUpon>201705041328035_kldnlkn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
     <Compile Include="Models\EFModels\Address.cs" />
@@ -305,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705012211508_addtou.resx">
       <DependentUpon>201705012211508_addtou.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041328035_kldnlkn.resx">
+      <DependentUpon>201705041328035_kldnlkn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

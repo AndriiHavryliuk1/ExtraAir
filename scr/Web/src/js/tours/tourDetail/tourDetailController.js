@@ -1,13 +1,14 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('tourDetailController', function ($rootScope, $scope, $location, $filter, $routeParams, getService, airportsService,
+app.controller('tourDetailController', function ($rootScope, $scope, $location, $filter, $http, $routeParams, getService, airportsService, jwtHelper,
                                                  tourDetailsService, toursService, crossingService) {
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
     setupURL();
     $scope.activePlacesList = [];
     $scope.ordering = false;
-    $scope.methodRegister = null;
+    $scope.methodRegister = 0;
+    $scope.showCheckStep = false;
 
     var utils = new CommonUtils();
     toursService.getTour($routeParams.id).then(function (data) {
@@ -28,7 +29,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
                                 && $scope.activePlacesList[i].coordinate.y === coordinate.y) {
 
                                 for (var j = 0; j < $scope.allPassengers.length; j++) {
-                                    if ($scope.activePlacesList[i].passengerIndex === j){
+                                    if ($scope.activePlacesList[i].passengerIndex === j) {
                                         $scope.allPassengers[j].coordinate = null;
                                         $scope.allPassengers[j].coordinateValue = null;
                                         break;
@@ -72,21 +73,49 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         setTourDetails();
     };
 
-    $scope.lastStep = function() {
-        if (!validationLastStep()){
+    $scope.lastStep = function () {
+        if (!validationLastStep()) {
             return;
         }
+        $scope.finishTourResult = {};
+        $scope.finishTourResult.Price = parseInt($scope.tour.Price) * $scope.allPassengers.length;
 
         $scope.showCreditCard = $scope.methodRegister === 0;
 
         var BookedPlaces = [];
-        $scope.allPassengers.forEach(function(pas) {
+        $scope.allPassengers.forEach(function (pas) {
             BookedPlaces.push({
                 PointX: pas.coordinate.x,
                 PointY: pas.coordinate.y,
                 ComfortType: $scope.tourSearchInfo.tourClass === 'Economy' ? 0 : 1
-            })
+            });
+
+            switch (parseInt(pas.baggage.external)) {
+                case 0:
+                    pas.baggage.externalValue = "Жодної";
+                    break;
+                case 27:
+                    pas.baggage.externalValue = "23 кг(+27$)";
+                    break;
+                case 38:
+                    pas.baggage.externalValue = "32 кг(+38$)";
+                    break;
+            }
+
+            switch (parseInt(pas.baggage.inner)) {
+                case 0:
+                    pas.baggage.innerValue = "Маленька(безкоштовна)";
+                    break;
+                case 14:
+                    pas.baggage.innerValue = "Велика(+14$)";
+                    break;
+            }
+
+            $scope.finishTourResult.Price += parseInt(pas.baggage.inner) + parseInt(pas.baggage.external);
         });
+
+        $scope.finishTourResult.Price += parseInt($scope.methodRegister);
+        $scope.methodRegisterValue = parseInt($scope.methodRegister) === 0 ? 'Онлайн' : 'Аеропорт(+10$)';
 
         var TourDetails = {
             DateStart: getGeneralDateFormat($scope.tourSearchInfo.dateStartR, $scope.tourSearchInfo.timeStart),
@@ -94,26 +123,86 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             CurrentCountOfBusinessPassenger: $scope.tourSearchInfo.tourClass !== 'Economy' ? $scope.allPassengers.length : 0,
             CurrentCountOfEconomyPassenger: $scope.tourSearchInfo.tourClass === 'Economy' ? $scope.allPassengers.length : 0,
             Temporary: false,
-            TourId: $routeParams.id,
-            BookedPlaces: BookedPlaces
+            TourId: $routeParams.id
         };
 
-        tourDetailsService.saveTourDetails(TourDetails).then(function(data){
-            console.log("fine");
-        }, function(data){
+        tourDetailsService.saveTourDetails(TourDetails).then(function (data) {
+            BookedPlaces.forEach(function (b) {
+                b.TourDetailsId = data.TourDetailsId;
+            });
+
+            $http.post(Constants.REST_URL + "api/BookedPlaces", BookedPlaces, {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }).then(function () {
+                console.log("fine");
+            }, function () {
+                console.log("error")
+            });
+
+        }, function (data) {
             console.log("fail");
         });
+        $scope.showCheckStep = true;
     };
 
-    function validationLastStep(){
+
+    $scope.orderTickets = function() {
+
+        var data = prepareDataForOrder();
+
+        $http.post(Constants.REST_URL + "api/Orders", data, {
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function () {
+            alert("Квиток замовлено!")
+        }, function () {
+            console.log("error")
+        });
+
+    };
+
+    function prepareDataForOrder(){
+        var Passengers = [];
+        $scope.allPassengers.forEach(function (pas) {
+            Passengers.push({
+                PassengerType: 0,
+                FirstName: pas.name,
+                LastName: pas.surname,
+                Gender: pas.gender,
+                CoordinateValue: pas.coordinateValue,
+                IdCard: pas.idCard,
+                TicketPrice: parseInt(pas.baggage.external) + parseInt(pas.baggage.inner) + parseInt($scope.tour.Price),
+                BaggageInternal: !!pas.baggage.inner,
+                BaggageeExternal: !!pas.baggage.external
+        });
+        });
+
+        var token = jwtHelper.decodeToken(localStorage.getItem('token'));
+        return {
+            Date: new Date(),
+            Price: $scope.finishTourResult.Price,
+            Paid: $scope.showCreditCard,
+            UserId: token.id,
+            DateStartTour: getGeneralDateFormat($scope.tourSearchInfo.dateStartR, $scope.tourSearchInfo.timeStart),
+            DateFinishTour: getGeneralDateFormat($scope.tourSearchInfo.dateFinishR, $scope.tourSearchInfo.timeFinish),
+            Passengers: Passengers
+        };
+    }
+
+
+    function validationLastStep() {
         if ($scope.activePlacesList.length !== $scope.allPassengers.length) {
             alert("Виберіть місця!");
             return false;
         }
 
-        for (var i = 0; i < $scope.allPassengers.length; i++){
+
+        for (var i = 0; i < $scope.allPassengers.length; i++) {
             var pas = $scope.allPassengers[i];
-            if (!pas.name || !pas.surname || !pas.idCard || pas.gender === null){
+            if (!pas.name || !pas.surname || !pas.idCard || pas.gender === null) {
                 alert("Заповніть дані про пасажирів!");
                 return false;
             }
