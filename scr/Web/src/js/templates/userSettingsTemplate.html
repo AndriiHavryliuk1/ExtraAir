@@ -1,0 +1,135 @@
+<!-- Modal -->
+<div class="modal fade" id="settingsModalView" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content container-fluid">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Налаштування</h4>
+            </div>
+            <div class="alert alert-danger" ng-show="notifyError">
+                <strong>Server Error!
+                </strong>
+                {{message}}
+            </div>
+            <div class="alert alert-success" ng-show="notifySuccess">
+                <strong>Success
+                </strong>
+                {{message}}
+            </div>
+
+            <br>
+            <br>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">Name:</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="name" placeholder="Ім'я" ng-model="bufferUser.FirstName"
+                               class="form-control" required maxlength="30">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="surname" class="col-sm-3 control-label">Surname:</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="surname" placeholder="Прізвище" ng-model="bufferUser.LastName"
+                               class="form-control" required maxlength="30">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
+                    <div class="col-sm-9">
+                        <input type="date" id="birthDate" class="form-control" ng-model="bufferUser.Birthday">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tel" class="col-sm-3 control-label">Номер телефону</label>
+                    <div class="col-sm-9">
+                        <input type="tel" id="tel" class="form-control" placeholder="Номер телефону"
+                               ng-model="bufferUser.Phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address" class="col-sm-3 control-label">Адреса</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="address" ng-model="bufferUser.Address.Country" placeholder="Країна" style="margin-bottom: 5px"
+                               class="form-control">
+                        <input type="text" id="address2" ng-model="bufferUser.Address.City" placeholder="Місто" style="margin-bottom: 5px"
+                               class="form-control">
+                        <input type="text" id="address3" ng-model="bufferUser.Address.Street" placeholder="Вулиця" style="margin-bottom: 5px"
+                               class="form-control">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="address4" ng-model="bufferUser.Address.StreetNumber"
+                                       placeholder="Номер вулиці" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="address5" ng-model="bufferUser.Address.PostIndex"
+                                       placeholder="Поштовий індекс"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="picture" class="col-sm-3 control-label">Змінити аватар</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="file" id="picture" file-model="picture">
+                    </div>
+                </div>
+
+
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="row">
+                        <!--<button type="submit" class="btn btn-primary btn-block">Register</button>-->
+                        <div class="col-xs-6 col-md-6 col-xs-offset-3">
+                            <input type="submit" value="Змінити" ng-click="ChangeUser()"
+                                   class="btn btn-primary btn-block btn-lg" tabindex="7">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div ng-if="hidePasswordFields!=true">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Change password</h4>
+                </div>
+                <br>
+                <br>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="prevpassword" class="col-sm-3 control-label">Previous password</label>
+                        <div class="col-sm-9">
+                            <input type="password" id="prevpassword" placeholder="Previous password"
+                                   ng-model="ChangePass.OldPass" class="form-control" required pattern="^\S{6,}$">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newpassword" class="col-sm-3 control-label">New password</label>
+                        <div class="col-sm-9">
+                            <input type="password" placeholder="New password" ng-model="ChangePass.NewPass"
+                                   class="form-control" id="newpassword" pattern="^\S{6,}$" required>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <!--<button type="submit" class="btn btn-primary btn-block">Register</button>-->
+                            <div class="col-xs-6 col-md-6 col-xs-offset-3">
+                                <input type="submit" value="Change" class="btn btn-primary btn-block btn-lg"
+                                       ng-click="ChangePassword()" tabindex="7">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

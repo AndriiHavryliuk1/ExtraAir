@@ -24,7 +24,7 @@ namespace ExtraAirApi.Controllers
 		{
 			var list = IoC.Get<IGetTours>().GetAllTours();
 
-			var pagedList = IoC.Get<IGetTours>().GetToursWithPaginFiltering(new PaginFilteringHelper
+			return IoC.Get<IGetTours>().GetToursWithPaginFiltering(new PaginFilteringHelper
 			{
 				Day = day,
 				AirportToId = airportToId,
@@ -33,14 +33,6 @@ namespace ExtraAirApi.Controllers
 				Page = page,
 				Search = search
 			}, list);
-
-			var json = new
-			{
-				count = list.Count(),
-				list = pagedList
-			};
-
-			return json;
 		}
 
 		[HttpGet]

@@ -26,7 +26,7 @@ namespace ExtraAirApi.Controllers
 	[RoutePrefix("api/image")]
 	public class FileUploadController : ApiController
 	{
-		private static readonly string ServerUploadFolder = System.Web.Hosting.HostingEnvironment.MapPath("~/img");
+		private static readonly string ServerUploadFolder = System.Web.Hosting.HostingEnvironment.MapPath("~/content/images");
 
 		private ExtraAirContext db = new ExtraAirContext();
 		[Route("{id:int}")]
@@ -65,12 +65,12 @@ namespace ExtraAirApi.Controllers
 					return NotFound();
 				}
 
-				user.ImagePath = "img/" + fileName;
+				user.ImagePath = "content/images/" + fileName;
 
 				db.Entry(user).State = System.Data.Entity.EntityState.Modified;
 
 				db.SaveChanges();
-				return Ok(ExtraAirCore.Constants.Path.WebApiPath + "img/" + fileName);
+				return Ok(ExtraAirCore.Constants.Path.WebApiPath + "content/images/" + fileName);
 			}
 			catch (Exception ex)
 			{

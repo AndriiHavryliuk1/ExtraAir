@@ -27,5 +27,7 @@ namespace ExtraAirCore.API_DTOs
 		public DateTime Birthday;
 		public bool Deleted;
 		public AddressDto Address;
+		public string ImagePath;
+		public string IdCard;
 	}
 }

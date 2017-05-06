@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.UI.WebControls;
 using ExtraAirCore.API_DTOs;
 using ExtraAirCore.API_DTOs.Helper_DTOs;
 using ExtraAirCore.Command.Tour;
@@ -31,27 +30,43 @@ namespace Data.Api.Tours
 			}
 		}
 
-		public IEnumerable<TourDto> GetToursWithPaginFiltering(PaginFilteringHelper pfHelper, IEnumerable<TourDto> list)
+		public object GetToursWithPaginFiltering(PaginFilteringHelper pfHelper, IEnumerable<TourDto> list)
 		{
 			list = list.OrderBy(x => x.TourId).ToList();
-			var listPaged = list.Skip((pfHelper.Page - 1) * pfHelper.ItemsPerPage).Take(pfHelper.ItemsPerPage).ToList();
 
 			if (pfHelper.AirportFromId != null)
 			{
-				listPaged = listPaged.Where(x => x.AirportFrom.AirportId == pfHelper.AirportFromId).ToList();
+				list = list.Where(x => x.AirportFrom.AirportId == pfHelper.AirportFromId).ToList();
 			}
 
 			if (pfHelper.AirportToId != null)
 			{
-				listPaged = listPaged.Where(x => x.AirportTo.AirportId == pfHelper.AirportToId).ToList();
+				list = list.Where(x => x.AirportTo.AirportId == pfHelper.AirportToId).ToList();
 			}
 
 			if (pfHelper.Day != null)
 			{
-				listPaged = listPaged.Where(x => x.PossibleDays.Contains(pfHelper.Day)).ToList();
+				list = list.Where(x => x.PossibleDays.Contains(pfHelper.Day)).ToList();
 			}
 
-			return listPaged;
+			if (pfHelper.Search != null)
+			{
+				pfHelper.Search = pfHelper.Search.ToLower();
+				list = list.Where(x =>
+					(x.AirportFrom.City + x.AirportFrom.Country + x.AirportFrom.Name +
+					x.AirportTo.City + x.AirportTo.Country + x.AirportTo.Name).ToLower().Contains(pfHelper.Search.Replace(" ", "")));
+			}
+
+			var listPaged = list.Skip((pfHelper.Page - 1) * pfHelper.ItemsPerPage).Take(pfHelper.ItemsPerPage).ToList();
+
+
+			var json = new
+			{
+				count = list.Count(),
+				list = listPaged
+			};
+
+			return json;
 		}
 
 

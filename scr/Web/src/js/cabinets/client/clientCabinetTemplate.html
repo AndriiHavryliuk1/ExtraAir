@@ -2,7 +2,32 @@
     <h2>Особистий кабінет</h2>
     <hr class="colorgraph">
     <div class="row">
-        <>
+        <div class="col-md-2">
+            <!-- ../../WebApi/ExtaAirAPI/ExtraAirApi/ -->
+            <img src="{{client.ImagePath}}" class="img-thumbnail profileAvatar" alt="Profile Avatar">
+        </div>
+        <div class="col-md-7">
+            <h3>Ім'я: {{client.FirstName}}</h3>
+            <h3>Прізвище: {{client.LastName}}</h3>
+
+            <h5>Email: {{client.Email}}</h5>
+            <h5>Номер телефону: {{client.Phone}}</h5>
+            <h5>Дата народження: {{client.Birthday}}</h5>
+            <h5 ng-if="client.Address !== null"><span>Адреса проживання: {{client.Address.Country}}, м.{{client.Address.City}}
+                вул.{{client.Address.Street}} {{client.Address.StreetNumber}} ({{client.Address.PostIndex}}) </span></h5>
+
+        </div>
     </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <button class="btn btn-default col-md-10" data-toggle="modal" data-target="#settingsModalView">Налаштування</button>
+        </div>
+
+    </div>
+
+
 </div>
 
+<div><settings></settings></div>

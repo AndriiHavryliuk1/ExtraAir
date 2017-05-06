@@ -16,7 +16,7 @@ angular.module('extraAir').controller('commonController', function ($rootScope, 
     $rootScope.$on('headerDirective', function (data) {
         $scope.isAutorizedLocal = !!localStorage.getItem('token');
 
-        setCabinetURL
+        setCabinetURL();
 
         if (!$scope.$$phase) {
             $scope.$apply();

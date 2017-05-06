@@ -1,4 +1,14 @@
-<div class="container-fluid">
+
+<div class="form-group" ng-if="isLoading">
+    <br><br><br>
+    <div class="">
+        <div style="position: absolute; right: 50%; left: 46%">
+            <img src="content/images/loading.gif">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" ng-if="!isLoading">
     <h2>Результат пошуку</h2>
 
     <hr class="colorgraph">
@@ -72,11 +82,10 @@
 
 
 
-        <div class="container-fluid" ng-show="AnyElementOfList">
+        <div class="container-fluid" ng-show="tours.length === 0">
             <br><br>
             <br><br>
-            <h3 class="text-muted text-center" ng-show="pagingInfo.search == ''">This list is empty, you don`t have any client!</h3>
-            <h3 class="text-muted text-center" ng-hide="pagingInfo.search == ''">There is no client with such name!</h3>
+            <h3 class="text-muted text-center" >На цю дату немає вільних рейсів, будь ласка виберіть іншу дату</h3>
             <br><br>
             <br><br>
         </div>

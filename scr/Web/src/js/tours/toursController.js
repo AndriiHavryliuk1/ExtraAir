@@ -5,6 +5,7 @@ app.controller('toursController', function ($rootScope, $scope, $location, $wind
 
 
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
+    $scope.isLoading = true;
     setupURL();
 
     var utils = new CommonUtils();
@@ -18,6 +19,8 @@ app.controller('toursController', function ($rootScope, $scope, $location, $wind
         correctData(coef);
     }, function () {
         console.log("error");
+    }).finally(function () {
+        $scope.isLoading = false;
     });
 
 

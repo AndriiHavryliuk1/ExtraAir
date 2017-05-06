@@ -2,15 +2,16 @@
     <h2>Список рейсів</h2>
 
     <hr class="colorgraph">
-    <div class="container-fluid">
+
+    <div class="container-fluid" >
 
         <div class="col-md-3 col-sm-4">
-            <label>Search of doctors:</label>
+            <label>Пошук:</label>
 
             <div class="input-group col-md-12 col-sm-12">
-                <input type="text" class="form-control" placeholder="Search" ng-change=""
+                <input type="text" class="form-control" placeholder="Search" ng-change="search(loadList)"
                        ng-model="pagingInfo.search"
-                       ng-model-options="{updateOn: 'default blur', debounce: {default: 300, blur: 0} }" name="q">
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 200, blur: 0} }" name="q">
                 <div class="input-group-btn">
                     <button class="btn btn-default" ng-click="">
                         <i class="glyphicon glyphicon-search"></i>
@@ -19,19 +20,36 @@
             </div>
         </div>
         <div class="col-md-3 col-sm-4" id="departmentDiv" >
+            <label for="airportSelectFrom">Виберіть пункт відправлення:</label>
 
-            <label for="departmentSelect">Choose department:</label>
-
-            <select class="form-control" id="departmentSelect" autofocus
-                    >
-                <option value="" selected>All</option>
+            <select class="form-control" id="airportSelectFrom" ng-model="pagingInfo.airportFromId" ng-change="search(loadList)">
+                <option value="" selected>Виберіть аеропорт</option>
+                <option ng-repeat="airport in airports" value="{{airport.AirportId}}">{{airport.Name}}</option>
             </select>
+        </div>
 
+        <div class="col-md-3 col-sm-4" >
+            <label for="airportSelectTo">Виберіть пункт прибуття:</label>
+
+            <select class="form-control" id="airportSelectTo" ng-model="pagingInfo.airportToId" ng-change="search(loadList)">
+                <option value="" selected>Виберіть аеропорт</option>
+                <option ng-repeat="airport in airports" value="{{airport.AirportId}}">{{airport.Name}}</option>
+            </select>
         </div>
     </div>
 
+    <div class="form-group" ng-if="isLoading">
+        <br><br><br>
+        <div class="">
+            <div style="position: absolute; right: 50%; left: 46%">
+                <img src="content/images/loading.gif">
+            </div>
+        </div>
+    </div>
+
+
     <!--<div class="container-fluid mycontent-bottom"></div>-->
-    <div class="container-fluid mycontent-center">
+    <div class="container-fluid mycontent-center" ng-if="!isLoading">
         <hr>
         <div class="panel panel-default  col-sm-10 col-sm-offset-1" ng-repeat="res in tours">
             <div class="panel panel-body">
@@ -93,7 +111,7 @@
         </div>
 
 
-        <div class="container-fluid" ng-show="tours.length === 0">
+        <div class="container-fluid" ng-show="tours.length === 0 && !isLoading">
             <br><br>
             <br><br>
             <h3 class="text-muted text-center" ng-hide="pagingInfo.search != undefined">This list is empty</h3>
