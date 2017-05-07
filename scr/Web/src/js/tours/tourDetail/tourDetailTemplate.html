@@ -104,7 +104,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-3">
                 <label>Метод Реєстрації:</label>
-                <md-radio-group ng-model="methodRegister">
+                <md-radio-group ng-model="methodRegistration.value">
                     <md-radio-button value="0">Онлайн</md-radio-button>
                     <md-radio-button value="10">Аеропорт(+10$)</md-radio-button>
                 </md-radio-group>
@@ -117,7 +117,7 @@
         </div>
 
 
-        <div>
+        <div class="row">
             <button type="button" class="btn btn-default col-md-2" ng-click="lastStep()">Продовжити</button>
         </div>
 
@@ -139,7 +139,7 @@
         <div ng-if="showCreditCard">
             <credit-card></credit-card>
         </div>
-        <div>
+        <div ng-if="!showCreditCard && showCheckStep">
             <button type="button" class="btn btn-default col-md-2" ng-click="orderTickets()">Забронювати</button>
         </div>
 

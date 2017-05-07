@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ExtraAirApi.Utils.Ninject;
+using ExtraAirCore.API_DTOs.Helper_DTOs;
 using ExtraAirCore.Command.Orders;
 using ExtraAirCore.Models.EFContex;
 using ExtraAirCore.Models.EFModels;
@@ -17,22 +17,43 @@ namespace ExtraAirApi.Controllers
 		private ExtraAirContext db = new ExtraAirContext();
 
 		// GET: api/Orders
-		public object GetOrders([FromUri] int userId, [FromUri] string type)
+		public object GetOrders([FromUri] int userId, [FromUri] string type = "All", [FromUri]int page = 1, [FromUri]int itemsPerPage = 15, [FromUri]string search = null)
 		{
 			switch (type)
 			{
 				case "All":
-				{
-					return IoC.Get<IGetOrders>().GetAllOrders(userId);
-				}
+					{
+						var list = IoC.Get<IGetOrders>().GetAllOrders(userId);
+						return IoC.Get<IGetOrders>().GetOrdersWithPagination(new PaginFilteringHelper()
+						{
+							ItemsPerPage = itemsPerPage,
+							Page = page,
+							Search = search,
+							Type = type
+						}, list);
+					}
 				case "Future":
-				{
-					return IoC.Get<IGetOrders>().GetFutureOrders(userId);
-				}
+					{
+						var list = IoC.Get<IGetOrders>().GetFutureOrders(userId);
+						return IoC.Get<IGetOrders>().GetOrdersWithPagination(new PaginFilteringHelper()
+						{
+							ItemsPerPage = itemsPerPage,
+							Page = page,
+							Search = search,
+							Type = type
+						}, list);
+					}
 				case "Last":
-				{
-					return IoC.Get<IGetOrders>().GetLastOrders(userId);
-				}
+					{
+						var list = IoC.Get<IGetOrders>().GetLastOrders(userId);
+						return IoC.Get<IGetOrders>().GetOrdersWithPagination(new PaginFilteringHelper()
+						{
+							ItemsPerPage = itemsPerPage,
+							Page = page,
+							Search = search,
+							Type = type
+						}, list);
+					}
 				default:
 					break;
 			}
@@ -44,13 +65,7 @@ namespace ExtraAirApi.Controllers
 		[ResponseType(typeof(Order))]
 		public IHttpActionResult GetOrder(int id)
 		{
-			Order order = db.Orders.Find(id);
-			if (order == null)
-			{
-				return NotFound();
-			}
-
-			return Ok(order);
+			return Ok(IoC.Get<IGetOrders>().GetOrder(id));
 		}
 
 		// PUT: api/Orders/5

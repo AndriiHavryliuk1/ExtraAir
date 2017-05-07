@@ -7,8 +7,8 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
     setupURL();
     $scope.activePlacesList = [];
     $scope.ordering = false;
-    $scope.methodRegister = 0;
     $scope.showCheckStep = false;
+    $scope.methodRegistration = {};
 
     var utils = new CommonUtils();
     toursService.getTour($routeParams.id).then(function (data) {
@@ -80,7 +80,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         $scope.finishTourResult = {};
         $scope.finishTourResult.Price = parseInt($scope.tour.Price) * $scope.allPassengers.length;
 
-        $scope.showCreditCard = $scope.methodRegister === 0;
+        $scope.showCreditCard = parseInt($scope.methodRegistration.value) === 0;
 
         var BookedPlaces = [];
         $scope.allPassengers.forEach(function (pas) {
@@ -114,8 +114,8 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             $scope.finishTourResult.Price += parseInt(pas.baggage.inner) + parseInt(pas.baggage.external);
         });
 
-        $scope.finishTourResult.Price += parseInt($scope.methodRegister);
-        $scope.methodRegisterValue = parseInt($scope.methodRegister) === 0 ? 'Онлайн' : 'Аеропорт(+10$)';
+        $scope.finishTourResult.Price += parseInt($scope.methodRegistration.value);
+        $scope.methodRegisterValue = parseInt($scope.methodRegistration.value) === 0 ? 'Онлайн' : 'Аеропорт(+10$)';
 
         var TourDetails = {
             DateStart: getGeneralDateFormat($scope.tourSearchInfo.dateStartR, $scope.tourSearchInfo.timeStart),
@@ -140,7 +140,6 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             }, function () {
                 console.log("error")
             });
-
         }, function (data) {
             console.log("fail");
         });
@@ -148,10 +147,8 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
     };
 
 
-    $scope.orderTickets = function() {
-
+    $scope.orderTickets = function () {
         var data = prepareDataForOrder();
-
         $http.post(Constants.REST_URL + "api/Orders", data, {
             headers: {
                 'Content-type': 'application/json'
@@ -164,7 +161,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
 
     };
 
-    function prepareDataForOrder(){
+    function prepareDataForOrder() {
         var Passengers = [];
         $scope.allPassengers.forEach(function (pas) {
             Passengers.push({
@@ -175,20 +172,23 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
                 CoordinateValue: pas.coordinateValue,
                 IdCard: pas.idCard,
                 TicketPrice: parseInt(pas.baggage.external) + parseInt(pas.baggage.inner) + parseInt($scope.tour.Price),
-                BaggageInternal: !!pas.baggage.inner,
-                BaggageeExternal: !!pas.baggage.external
+                BaggageInternal: pas.baggage.inner,
+                BaggageeExternal: pas.baggage.external
+            });
         });
+        var Tours = [];
+        Tours.push({
+            TourId: $scope.tour.TourId
         });
-
-        var token = jwtHelper.decodeToken(localStorage.getItem('token'));
         return {
             Date: new Date(),
             Price: $scope.finishTourResult.Price,
             Paid: $scope.showCreditCard,
-            UserId: token.id,
+            UserId: jwtHelper.decodeToken(localStorage.getItem('token')).id,
             DateStartTour: getGeneralDateFormat($scope.tourSearchInfo.dateStartR, $scope.tourSearchInfo.timeStart),
             DateFinishTour: getGeneralDateFormat($scope.tourSearchInfo.dateFinishR, $scope.tourSearchInfo.timeFinish),
-            Passengers: Passengers
+            Passengers: Passengers,
+            Tours: Tours
         };
     }
 
@@ -198,8 +198,6 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             alert("Виберіть місця!");
             return false;
         }
-
-
         for (var i = 0; i < $scope.allPassengers.length; i++) {
             var pas = $scope.allPassengers[i];
             if (!pas.name || !pas.surname || !pas.idCard || pas.gender === null) {
@@ -251,11 +249,12 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
 
         $scope.allPlaces.forEach(function (place) {
             place.forEach(function (point) {
-                bookedPoints.forEach(function (booked) {
-                    if (point.coordinate.x === booked.X && point.coordinate.y === booked.Y) {
+                for (var i = 0; i < bookedPoints.length; i++) {
+                    if (point.coordinate.x === bookedPoints[i].X && point.coordinate.y === bookedPoints[i].Y) {
                         point.booked = true;
+                        break;
                     }
-                });
+                }
             });
         });
     }

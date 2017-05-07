@@ -11,10 +11,11 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
 
     $scope.showPlaceTo = false;
 
-     airportsService.getAirports().then(function(data){
+    airportsService.getAirports().then(function (data) {
         $scope.allAirports = data;
         $scope.adventAirports = undefined;
-    }, function(){ });
+    }, function () {
+    });
 
     $scope.getAdventAirport = function(selectedAirportId){
         $scope.tourDetails.origin = !!selectedAirportId ? selectedAirportId : null;

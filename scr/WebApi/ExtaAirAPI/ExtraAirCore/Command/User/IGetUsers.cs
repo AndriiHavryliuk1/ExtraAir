@@ -8,6 +8,6 @@ namespace ExtraAirCore.Command.User
 	public interface IGetUsers
 	{
 		IEnumerable<UserForViewDto> GetAllUsers(UserType userType);
-		T GetUser<T>(int id);
+		T GetUser<T>(int id, UserType userType);
 	}
 }

@@ -8,7 +8,6 @@ angular.module('extraAir').service('fileUploadService', ['$http', function ($htt
         }).then(function (data) {
             return data;
         }, function () {
-
         });
         return imgurl;
     }

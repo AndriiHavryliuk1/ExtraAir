@@ -1,0 +1,121 @@
+<div class="container-fluid">
+    <h2>Список ваших замовлень</h2>
+
+    <hr class="colorgraph">
+
+    <div class="container-fluid" >
+
+        <div class="col-md-3 col-sm-4">
+            <label>Пошук:</label>
+
+            <div class="input-group col-md-12 col-sm-12">
+                <input type="text" class="form-control" placeholder="Search" ng-change="search(loadList)"
+                       ng-model="pagingInfo.search"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 200, blur: 0} }" name="q">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" ng-click="">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4" id="departmentDiv" >
+            <label for="airportSelectFrom">Стан замовлень:</label>
+            <select class="form-control" id="airportSelectFrom" ng-model="pagingInfo.type" ng-change="search(loadList)">
+                <option value="All" selected>Всі</option>
+                <option value="Future" >Майбутні</option>
+                <option value="Last" >Минулі</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-group" ng-if="isLoading">
+        <br><br><br>
+        <div class="">
+            <div style="position: absolute; right: 50%; left: 46%">
+                <img src="content/images/loading.gif">
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="container-fluid mycontent-bottom"></div>-->
+    <div class="container-fluid mycontent-center" ng-if="!isLoading">
+        <hr>
+        <div class="panel panel-default  col-sm-10 col-sm-offset-1" ng-repeat="res in orders">
+            <div class="panel panel-body">
+                <div class="row">
+                    <div class=" col-sm-5 col-xs-6 col-md-5">
+                        <h5>
+                            Пункт відправлення:
+                        </h5>
+                        <h4>
+                            {{res.tour.AirportFrom.Name }}({{res.tour.AirportFrom.City }})
+                        </h4>
+                        <p>{{res.tour.AirportFrom.Country}}</p>
+                    </div>
+                    <div class="col-md-2" style="">
+                        <img src="../content/images/logo.png" style="width: 130px; height: 100px;">
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-5">
+                        <h5>
+                            Пункт прибуття:
+                        </h5>
+                        <h4>
+                            {{res.tour.AirportTo.Name }}({{res.tour.AirportTo.City }})
+                        </h4>
+                        <p>{{res.tour.AirportTo.Country}}</p>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <h4>
+                            {{res.timeStart }}
+                        </h4>
+                        <h5>
+                            {{res.dateStart }}({{res.dayStart}})
+                        </h5>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                        <h4>
+                            {{res.timeFinish }}
+                        </h4>
+                        <h5>
+                            {{res.dateFinish }}({{res.dayFinish}})
+                        </h5>
+                    </div>
+                </div>
+                <h3>
+                    <div class="col-md-1 col-sm-1 col-xs-1">
+                        <h5>
+                            Ціна: {{res.Price}}$
+                        </h5>
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                        <h6>
+                            <span ng-click="goToDetailPage(res)">Детальніше</span>
+                        </h6>
+                    </div>
+
+                </h3>
+
+            </div>
+        </div>
+
+
+        <div class="container-fluid" ng-show="tours.length === 0 && !isLoading">
+            <br><br>
+            <br><br>
+            <h3 class="text-muted text-center" ng-hide="pagingInfo.search != undefined">This list is empty</h3>
+            <h3 class="text-muted text-center" ng-show="pagingInfo.search != undefined">There is no doctor with such
+                name!</h3>
+            <br><br>
+            <br><br>
+        </div>
+
+        <div custompagination ng-hide="tours.length === 0"></div>
+    </div>
+</div>

@@ -71,6 +71,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="idCard" class="col-sm-3 control-label">Номер паспорта</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="idCard" class="form-control" placeholder="Номер паспорта"
+                               ng-model="bufferUser.IdCard">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="picture" class="col-sm-3 control-label">Змінити аватар</label>
@@ -101,17 +108,17 @@
                 <br>
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="prevpassword" class="col-sm-3 control-label">Previous password</label>
+                        <label for="prevpassword" class="col-sm-3 control-label">Старий пароль</label>
                         <div class="col-sm-9">
-                            <input type="password" id="prevpassword" placeholder="Previous password"
+                            <input type="password" id="prevpassword" placeholder="Старий пароль"
                                    ng-model="ChangePass.OldPass" class="form-control" required pattern="^\S{6,}$">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="newpassword" class="col-sm-3 control-label">New password</label>
+                        <label for="newpassword" class="col-sm-3 control-label">Новий пароль</label>
                         <div class="col-sm-9">
-                            <input type="password" placeholder="New password" ng-model="ChangePass.NewPass"
+                            <input type="password" placeholder="Новий пароль" ng-model="ChangePass.NewPass"
                                    class="form-control" id="newpassword" pattern="^\S{6,}$" required>
                         </div>
                     </div>
@@ -122,7 +129,7 @@
                         <div class="row">
                             <!--<button type="submit" class="btn btn-primary btn-block">Register</button>-->
                             <div class="col-xs-6 col-md-6 col-xs-offset-3">
-                                <input type="submit" value="Change" class="btn btn-primary btn-block btn-lg"
+                                <input type="submit" value="Змінити" class="btn btn-primary btn-block btn-lg"
                                        ng-click="ChangePassword()" tabindex="7">
                             </div>
                         </div>

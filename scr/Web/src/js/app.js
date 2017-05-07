@@ -49,6 +49,18 @@ app.config(function($routeProvider, $locationProvider) {
         reloadOnSearch: false
     });
 
+    $routeProvider.when('/ordersList', {
+        templateUrl: 'js/orders/ordersListTemplate.html',
+        controller: 'ordersListController',
+        reloadOnSearch: false
+    });
+
+    $routeProvider.when('/orders/:id', {
+        templateUrl: 'js/orders/orderDetails/orderDetailsTemplate.html',
+        controller: 'orderDetailsController',
+        reloadOnSearch: false
+    });
+
     //  "medicalhistory/" + $routeParams["id"] + "/page/" + $scope.searchInfo.page
 
 

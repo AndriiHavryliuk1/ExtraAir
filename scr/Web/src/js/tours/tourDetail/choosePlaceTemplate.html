@@ -29,7 +29,7 @@
                                ng-class="place[0].active ? 'active-place-icon' : ''">&#xe8e7;</i>
                         </div>
                         <div class="col-md-1">
-                            <i class="material-icons" ng-if="place[1].booked">&#xe8e6;</i>
+                            <i class="material-icons booked-icon" ng-if="place[1].booked">&#xe8e6;</i>
                             <i class="material-icons" ng-if="!place[1].booked"
                                ng-click="setActivePlaces(place[1].coordinate)"
                                ng-class="place[1].active ? 'active-place-icon' : ''">&#xe8e7;</i>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="row">
                         <button type="button" class="btn btn-default col-md-6" data-dismiss="modal">OK</button>
-                        <button type="button" class="btn btn-default col-md-6" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default col-md-6" data-dismiss="modal">Закрити</button>
                     </div>
                 </div>
 

@@ -42,31 +42,31 @@
                 <option ng-repeat="airport in allAirports" value="{{airport.AirportId}}">{{airport.Name}}</option>
             </select>
         </div>
-<br>
+        <br>
 
         <div>
-            <select ng-disable="!showPlaceTo" class="form-control" ng-model="tourDetails.destination" >
+            <select ng-disable="!showPlaceTo" class="form-control" ng-model="tourDetails.destination">
                 <option value="" selected>Виберіть пункт призначення...</option>
                 <option ng-repeat="airport in adventAirports" value="{{airport.AirportId}}">{{airport.Name}}</option>
             </select>
         </div>
 
 
-            <div>
-                <label>Виберіть дату відправлення</label>
-                <input type="date" class="form-control" ng-model="tourDetails.date" required>
-            </div>
+        <div>
+            <label>Виберіть дату відправлення</label>
+            <input type="date" class="form-control" ng-model="tourDetails.date" required>
+        </div>
 
 
-            <label>Кількість пасажирів</label>
-            <div layout-gt-xs="row">
-                <md-input-container class="md-block">
-                    <input type="number" step="any" name="rate" ng-model="tourDetails.passengerCount" min="1"
-                           style="width: 200px;"
-                           max="11"/>
+        <label>Кількість пасажирів</label>
+        <div layout-gt-xs="row">
+            <md-input-container class="md-block">
+                <input type="number" step="any" name="rate" ng-model="tourDetails.passengerCount" min="1"
+                       style="width: 200px;"
+                       max="11"/>
 
-                </md-input-container>
-            </div>
+            </md-input-container>
+        </div>
 
 
         <div>
@@ -78,8 +78,8 @@
         </div>
 
 
-            <button type="button" class="btn btn-primary col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2"
-                    ng-click="prepareTo()">Пошук
-            </button>
+        <button type="button" class="btn btn-primary col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2"
+                ng-click="prepareTo()">Пошук
+        </button>
     </div>
 </div>

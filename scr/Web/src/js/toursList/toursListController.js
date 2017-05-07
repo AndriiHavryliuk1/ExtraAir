@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('toursListController', function ($rootScope, $scope, $location, $window, $filter, getService, paginationArrayService, paginationService, airportsService, toursService, toursResource) {
+app.controller('toursListController', function ($rootScope, $scope, $location, $window, $filter, getService, paginationArrayService, paginationService, airportsService) {
 
 
     $scope.isLoading = true;
@@ -60,7 +60,7 @@ app.controller('toursListController', function ($rootScope, $scope, $location, $
             }
 
           //  paginationService.ChangeURL($scope.loadList, $scope.tours, $rootScope.preArray, '/toursList', $rootScope.pagingInfo);
-            $scope.isLoading
+            $scope.isLoading = false
 
         }, function (error) { }).finally(function(){
             $scope.isLoading = false;

@@ -29,7 +29,7 @@ namespace ExtraAirApi.Controllers
 		[ResponseType(typeof(Client))]
 		public IHttpActionResult GetClient(int id)
 		{
-			return Ok(IoC.Get<IGetUsers>().GetUser<UserForViewDto>(id));
+			return Ok(IoC.Get<IGetUsers>().GetUser<UserForViewDto>(id, UserType.Client));
 		}
 
 		// PUT: api/Clients/5

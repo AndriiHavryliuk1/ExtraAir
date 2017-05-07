@@ -136,11 +136,13 @@
   <ItemGroup>
     <Compile Include="API_DTOs\AddressDto.cs" />
     <Compile Include="API_DTOs\AirportDto.cs" />
+    <Compile Include="API_DTOs\ChangePassDto.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\PaginFilteringHelper.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\TourDetailsHelper.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\TourSearchHelperDto.cs" />
     <Compile Include="API_DTOs\InterimTourDto.cs" />
     <Compile Include="API_DTOs\OrderDto.cs" />
+    <Compile Include="API_DTOs\PassengerDto.cs" />
     <Compile Include="API_DTOs\PlaneDto.cs" />
     <Compile Include="API_DTOs\SearchHistoryDto.cs" />
     <Compile Include="API_DTOs\TourDetailsDto.cs" />

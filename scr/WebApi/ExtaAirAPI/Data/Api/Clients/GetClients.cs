@@ -19,9 +19,9 @@ namespace Data.Api.Clients
 				switch (userType)
 				{
 					case UserType.Client:
-					{
-						return dbContext.Clients.ToList().Select(MapHelper).ToList();
-					}
+						{
+							return dbContext.Clients.ToList().Select(MapHelper).ToList();
+						}
 					case UserType.User:
 						{
 							return dbContext.Users.ToList().Select(MapHelper).ToList();
@@ -36,28 +36,32 @@ namespace Data.Api.Clients
 		}
 
 
-		public T GetUser<T>(int id)
+		public T GetUser<T>(int id, UserType userType)
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				var client = dbContext.Clients.FirstOrDefault(x => x.UserId == id);
-
-				if (client == null)
-					throw new Exception("User doesn`t exist");
-
-				Mapper.Initialize(cfg => cfg.CreateMap<Address, AddressDto>());
-				var address = Mapper.Map<Address, AddressDto>(client.Address);
-
-				Mapper.Initialize(cfg => cfg.CreateMap<Client, UserForViewDto>().ForMember(x => x.Address, y => y.Ignore()));
-				var clientToCast = Mapper.Map<Client, UserForViewDto>(client);
-				clientToCast.Address = address;
-
-				return (T) Convert.ChangeType(clientToCast, typeof(T));
+				switch (userType)
+				{
+					case UserType.Client:
+						{
+							return (T)Convert.ChangeType(MapHelper(dbContext.Clients.FirstOrDefault(x => x.UserId == id)), typeof(T));
+						}
+					case UserType.User:
+						{
+							return (T)Convert.ChangeType(MapHelper(dbContext.Users.FirstOrDefault(x => x.UserId == id)), typeof(T));
+						}
+					case UserType.Dispatcher:
+						{
+							return (T)Convert.ChangeType(MapHelper(dbContext.Dispatchers.FirstOrDefault(x => x.UserId == id)), typeof(T));
+						}
+					default:
+						throw new ArgumentOutOfRangeException(nameof(userType), userType, null);
+				}
 			}
 		}
 
 
-		private static UserForViewDto MapHelper(User user)
+		private static UserForViewDto MapHelper(ExtraAirCore.Models.EFModels.User user)
 		{
 			return new UserForViewDto
 			{
@@ -76,7 +80,9 @@ namespace Data.Api.Clients
 					Street = user.Address.Street,
 					StreetNumber = user.Address.StreetNumber,
 					Country = user.Address.Country
-				}
+				},
+				ImagePath = user.ImagePath,
+				IdCard = user.IdCard
 			};
 		}
 	}

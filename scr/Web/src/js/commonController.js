@@ -16,14 +16,20 @@ angular.module('extraAir').controller('commonController', function ($rootScope, 
     $rootScope.$on('headerDirective', function (data) {
         $scope.isAutorizedLocal = !!localStorage.getItem('token');
 
-        setCabinetURL();
+        if ($scope.isAutorizedLocal) {
+            setCabinetURL();
+        }
+
 
         if (!$scope.$$phase) {
             $scope.$apply();
         }
     });
 
-    function setCabinetURL(){
+    function setCabinetURL() {
+        if (!localStorage.getItem('token')){
+            return;
+        }
         switch (jwtHelper.decodeToken(localStorage.getItem('token')).role) {
             case Constants.ROLES.ADMIN: {
                 $rootScope.isAdmin = true;

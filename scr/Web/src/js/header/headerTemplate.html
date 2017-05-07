@@ -23,9 +23,9 @@
                                 <span>Список рейсів</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/">
-                                <span>Link2</span>
+                        <li ng-if="isAutorizedLocal">
+                            <a href="#/ordersList">
+                                <span>Список замовлень</span>
                             </a>
                         </li>
                     </ul>

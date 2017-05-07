@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <h2>Детальна інформація про ваше замовлення</h2>
+
+    <hr class="colorgraph">
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col-sm-4 col-xs-4">
+                <label>Пункт відправлення:</label>
+                <h4><span>Місто: </span>{{order.order.tour.AirportFrom.City}}</h4>
+                <h4><span>Країна: </span>{{order.order.tour.AirportFrom.Country}}</h4>
+                <h5><span>Аеропорт: </span>{{order.order.tour.AirportFrom.Name}}</h5>
+                <h5><span>Дата відправлення: </span>{{order.timeStart }} {{order.dateStart }}({{order.dayStart}})</h5>
+            </div>
+            <div class=" col-sm-1 col-xs-1">
+
+            </div>
+            <div class=" col-sm-6 col-xs-6">
+                <label>Пункт прибуття:</label>
+                <h4><span>Місто: </span>{{order.order.tour.AirportTo.City}}</h4>
+                <h4><span>Країна: </span>{{order.order.tour.AirportTo.Country}}</h4>
+                <h5><span>Аеропорт: </span>{{order.order.tour.AirportTo.Name}}</h5>
+                <h5><span>Дата прибуття: </span>{{order.timeFinish }} {{order.dateFinish }}({{order.dayFinish}})</h5>
+            </div>
+
+        </div>
+        <div><h5>Модель літака: {{order.order.tour.Plane.Name}}</h5></div>
+        <hr class="colorgraph">
+
+        <div ng-repeat="pas in order.Passengers">
+            <h3>{{($index + 1)}} Пасажир</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>Ініціали: {{pas.FirstName}} {{pas.LastName}}</h4>
+                    <h5>Номер паспорта: {{pas.IdCard}}</h5>
+                    <h5>Зареєстрований багаж:: {{pas.BaggageeExternalValue}}</h5>
+                    <h5>Ручний багаж: {{pas.BaggageInternalValue}}</h5>
+                    <h4>Ціна квитка: {{pas.TicketPrice}}$</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4>Стать: {{pas.GenderValue}}</h4>
+                    <h5>Місце: {{pas.CoordinateValue}}</h5>
+                </div>
+            </div>
+            <hr class="colorgraph">
+        </div>
+
+
+    </div>
+
+
+    <div><h3>Загальна ціна замовлення: {{order.order.Price}}$</h3></div>
+    <div><h5>Замовлення - {{order.paidValue}}</h5></div>
+    <hr class="colorgraph">
+
+
+</div>
+</div>
+
