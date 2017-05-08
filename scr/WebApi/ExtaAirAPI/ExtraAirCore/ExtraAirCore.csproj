@@ -147,6 +147,7 @@
     <Compile Include="API_DTOs\SearchHistoryDto.cs" />
     <Compile Include="API_DTOs\TourDetailsDto.cs" />
     <Compile Include="API_DTOs\TourDto.cs" />
+    <Compile Include="API_DTOs\TourStatusDto.cs" />
     <Compile Include="API_DTOs\UserDto.cs" />
     <Compile Include="Command\Address\IGetAllAddresses.cs" />
     <Compile Include="Command\Address\ISaveAddress.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Command\SearchHistory\IGetSearchHistory.cs" />
     <Compile Include="Command\TourDetails\IGetTourDetails.cs" />
     <Compile Include="Command\Tour\IGetTours.cs" />
+    <Compile Include="Command\Tour\IGetTourStatus.cs" />
     <Compile Include="Command\User\IGetUsers.cs" />
     <Compile Include="Command\User\ISaveUser.cs" />
     <Compile Include="Constants\Messages.cs" />
@@ -228,6 +230,10 @@
     <Compile Include="Migrations\201705041328035_kldnlkn.Designer.cs">
       <DependentUpon>201705041328035_kldnlkn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705081047155_withTourStatus.cs" />
+    <Compile Include="Migrations\201705081047155_withTourStatus.Designer.cs">
+      <DependentUpon>201705081047155_withTourStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
     <Compile Include="Models\EFModels\Address.cs" />
@@ -244,10 +250,12 @@
     <Compile Include="Models\EFModels\Tour.cs" />
     <Compile Include="Models\EFModels\TourDetails.cs" />
     <Compile Include="Models\EFModels\TourSearchHistory.cs" />
+    <Compile Include="Models\EFModels\TourStatus.cs" />
     <Compile Include="Models\EFModels\TourToAirport.cs" />
     <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Models\EFModels\UserClaim.cs" />
     <Compile Include="Models\Enumeration\DaysType.cs" />
+    <Compile Include="Models\Enumeration\TourStatus.cs" />
     <Compile Include="Models\Enumeration\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -314,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705041328035_kldnlkn.resx">
       <DependentUpon>201705041328035_kldnlkn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705081047155_withTourStatus.resx">
+      <DependentUpon>201705081047155_withTourStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

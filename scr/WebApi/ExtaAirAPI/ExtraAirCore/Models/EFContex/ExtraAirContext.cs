@@ -26,5 +26,6 @@ namespace ExtraAirCore.Models.EFContex
 		public virtual DbSet<TourSearchHistory> TourSearchHistories { get; set; }
 		public virtual DbSet<TourDetails> TourDetailses { get; set; }
 		public virtual DbSet<BookedPlace> BookedPlaces { get; set; }
+		public virtual DbSet<TourStatus> TourStatuses { get; set; }
 	}
 }

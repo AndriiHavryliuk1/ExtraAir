@@ -14,7 +14,7 @@ namespace Data.Api.Tours
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				return dbContext.Tours.Select(MapHelder).ToList();
+				return dbContext.Tours.Select(TourMapHelder).ToList();
 			}
 		}
 
@@ -23,7 +23,7 @@ namespace Data.Api.Tours
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				return dbContext.Tours.Select(MapHelder).ToList().Where(a => (a.AirportFrom != null
+				return dbContext.Tours.Select(TourMapHelder).ToList().Where(a => (a.AirportFrom != null
 				&& a.AirportFrom.AirportId == searchHelper.AirportFormId)
 				&& (a.AirportTo != null && a.AirportTo.AirportId == searchHelper.AirportToId)
 				&& (a.PossibleDays.Contains(searchHelper.DayStart))).ToList();
@@ -70,7 +70,7 @@ namespace Data.Api.Tours
 		}
 
 
-		private static TourDto MapHelder(Tour tour)
+		public static TourDto TourMapHelder(Tour tour)
 		{
 			var airports = tour.TourToAirports.ToList();
 			Airport airportFrom = null;
@@ -133,7 +133,7 @@ namespace Data.Api.Tours
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				return dbContext.Tours.Where(x => x.TourId == id).Select(MapHelder).FirstOrDefault();
+				return dbContext.Tours.Where(x => x.TourId == id).Select(TourMapHelder).FirstOrDefault();
 			}
 		}
 	}

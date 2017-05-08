@@ -134,6 +134,7 @@
     <Compile Include="Api\SearchHistory\GetSearchHistory.cs" />
     <Compile Include="Api\TourDetails\GetTourDetails.cs" />
     <Compile Include="Api\Tours\GetTours.cs" />
+    <Compile Include="Api\Tours\GetTourStatus.cs" />
     <Compile Include="AutoMapper\AutoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

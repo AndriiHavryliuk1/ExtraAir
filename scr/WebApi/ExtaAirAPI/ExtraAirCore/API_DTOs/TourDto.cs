@@ -14,6 +14,7 @@ namespace ExtraAirCore.API_DTOs
 		public AirportDto AirportFrom;
 		public AirportDto AirportTo;
 		public PlaneDto Plane;
+		public List<int> TourStatusIds;
 
 		public List<InterimTourDto> ItnerimAirports = new List<InterimTourDto>();
 	}
