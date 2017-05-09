@@ -13,6 +13,8 @@ namespace ExtraAirCore.Models.EFModels
 		public int TourStatusId { get; set; }
 		public DateTime DateStart { get; set; }
 		public DateTime DateFinish { get; set; }
+		public int? AirportFromId { get; set; }
+		public int? AirportToId { get; set; }
 		public TourStatusType TourStatusType { get; set; }
 		[ForeignKey("Tour")]
 		public int TourId { get; set; }

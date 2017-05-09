@@ -30,6 +30,7 @@ namespace ExtraAirApi.Utils.Ninject
 			Bind<IGetOrders>().To<GetOrders>();
 
 			Bind<IGetTourDetails>().To<GetTourDetails>();
+			Bind<IGetTourStatus>().To<GetTourStatus>();
 		}
 	}
 }

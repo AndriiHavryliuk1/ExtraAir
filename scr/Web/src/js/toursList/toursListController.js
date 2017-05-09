@@ -2,18 +2,14 @@
 
 var app = angular.module('extraAir');
 app.controller('toursListController', function ($rootScope, $scope, $location, $window, $filter, getService, paginationArrayService, paginationService, airportsService) {
-
-
+    
     $scope.isLoading = true;
 
     initPaginationParams();
 
-
     airportsService.getAirports().then(function(data){
         $scope.airports = data;
     });
-
-
 
     var utils = new CommonUtils();
 
@@ -24,31 +20,20 @@ app.controller('toursListController', function ($rootScope, $scope, $location, $
     });
 
 
-
     $scope.tours = [];
-
-
-
-
     $scope.loadList = function(){
-
         $scope.isLoading = true;
         var URL = "api/tours?page=" + $rootScope.pagingInfo.page + "&itemsPerPage=" + $rootScope.pagingInfo.itemsPerPage +
             "&search=" + $rootScope.pagingInfo.search + "&airportFromId=" + $rootScope.pagingInfo.airportFromId +
             "&airportToId=" + $rootScope.pagingInfo.airportToId + "&day=" + $rootScope.pagingInfo.day;
 
-
         getService.GetObjects(URL).then(function (data) {
             $scope.tours = data.data.list;
-
-
             $scope.AnyElementOfList = data.data.count == 0;
             $rootScope.pagingInfo.totalItems = data.data.count;
             $scope.pages = Math.ceil(data.data.count / $rootScope.pagingInfo.itemsPerPage);
             $scope.paginArray = paginationArrayService.Array($scope.pages, $rootScope.pagingInfo.page);
-
             correctData();
-
 
             $scope.paginationScope = {
                 data: !!$rootScope.pagingInfo ? {} : $rootScope.pagingInfo,
@@ -59,7 +44,6 @@ app.controller('toursListController', function ($rootScope, $scope, $location, $
                 $scope.$apply();
             }
 
-          //  paginationService.ChangeURL($scope.loadList, $scope.tours, $rootScope.preArray, '/toursList', $rootScope.pagingInfo);
             $scope.isLoading = false
 
         }, function (error) { }).finally(function(){
@@ -90,8 +74,6 @@ app.controller('toursListController', function ($rootScope, $scope, $location, $
         };
     }
 
-
-
     function correctData() {
         for (var i = 0; i < $scope.tours.length; i++) {
             $scope.tours[i].timeStart = $filter('date')($scope.tours[i].DateStart, 'HH:mm');
@@ -104,6 +86,4 @@ app.controller('toursListController', function ($rootScope, $scope, $location, $
             }
         }
     }
-
-
 });

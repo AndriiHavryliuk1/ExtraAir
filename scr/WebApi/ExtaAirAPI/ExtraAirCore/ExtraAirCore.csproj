@@ -234,6 +234,10 @@
     <Compile Include="Migrations\201705081047155_withTourStatus.Designer.cs">
       <DependentUpon>201705081047155_withTourStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705082156190_lkgj.cs" />
+    <Compile Include="Migrations\201705082156190_lkgj.Designer.cs">
+      <DependentUpon>201705082156190_lkgj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
     <Compile Include="Models\EFModels\Address.cs" />
@@ -325,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705081047155_withTourStatus.resx">
       <DependentUpon>201705081047155_withTourStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705082156190_lkgj.resx">
+      <DependentUpon>201705082156190_lkgj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
