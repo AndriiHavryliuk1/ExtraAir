@@ -17,7 +17,9 @@ namespace Data.Api.Airports
 			{
 				Mapper.Initialize(cfg => cfg.CreateMap<Airport, AirportDto>()
 				.ForMember(d => d.Country, o => o.MapFrom(a => a.Address.Country))
-				.ForMember(d => d.City, o => o.MapFrom(a => a.Address.City)));
+				.ForMember(d => d.City, o => o.MapFrom(a => a.Address.City))
+				.ForMember(d => d.Street, o => o.MapFrom(a => a.Address.Street))
+				.ForMember(d => d.StreetNumber, o => o.MapFrom(a => a.Address.StreetNumber)));
 				return dbContext.Airports.ProjectTo<AirportDto>().ToList();
 			}
 		}

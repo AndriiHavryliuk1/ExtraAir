@@ -11,6 +11,18 @@ angular.module('extraAir').factory("airportsResource", function ($resource) {
                     method: 'GET',
                     isArray: true,
                     timeout: 30000
+                },
+                post: {
+                    method: 'POST',
+                    timeout: 30000
+                },
+                put: {
+                    method: 'PUT',
+                    timeout: 30000
+                },
+                delete: {
+                    method: 'DELETE',
+                    timeout: 30000
                 }
             }
         ),
@@ -21,6 +33,18 @@ angular.module('extraAir').factory("airportsResource", function ($resource) {
 
         getAirport: function (id) {
             return this.airportResource.get({id: id});
+        },
+
+        putAirport: function (airport) {
+            return this.airportResource.put(airport);
+        },
+
+        postAirport: function (airport) {
+            return this.airportResource.post(airport);
+        },
+
+        deleteAirport: function (id) {
+            return this.airportResource.delete({id: id});
         }
     }
 });

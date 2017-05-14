@@ -29,13 +29,7 @@ namespace ExtraAirApi.Controllers
 		[ResponseType(typeof(User))]
 		public IHttpActionResult GetUser(int id)
 		{
-			User user = db.Users.Find(id);
-			if (user == null)
-			{
-				return NotFound();
-			}
-
-			return Ok(user);
+			return Ok(IoC.Get<IGetUsers>().GetUser<UserForViewDto>(id, UserType.User));
 		}
 
 		[Authorize]

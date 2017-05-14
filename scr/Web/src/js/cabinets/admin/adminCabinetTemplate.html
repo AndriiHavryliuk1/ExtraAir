@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <h2>Особистий кабінет</h2>
+    <hr class="colorgraph">
+    <div class="row">
+        <div class="col-md-2">
+            <!-- ../../WebApi/ExtaAirAPI/ExtraAirApi/ -->
+            <img src="{{admin.ImagePath}}" class="img-thumbnail profileAvatar" alt="Profile Avatar"
+                 style="max-width: 190px; max-height: 240px;">
+        </div>
+        <div class="col-md-7">
+            <h3>{{admin.FirstName}} {{admin.LastName}}</h3>
+            <h5>Email: {{admin.Email}}</h5>
+            <h5>Номер телефону: {{admin.Phone}}</h5>
+            <h5>Дата народження: {{admin.BirthdayForView}}</h5>
+            <h5 ng-if="!!admin.Address"><span>Адреса проживання: {{admin.Address.Country}}, м.{{admin.Address.City}}
+                вул.{{admin.Address.Street}} {{admin.Address.StreetNumber}} ({{admin.Address.PostIndex}}) </span></h5>
+            <h5 ng-if="!!admin.IdCard">Номер паспорта: {{admin.IdCard}}</h5>
+
+        </div>
+    </div>
+
+    <div class="row" style="padding-left: 15px;">
+
+        <div class="btn-group profileButtonMenu" role="group" aria-label="Menu">
+            <button class="btn btn-default" ng-click="selectView('airportsView')">Аеропорти</button>
+            <button class="btn btn-default" ng-click="selectView('doctorsView')">View Doctors</button>
+            <button class="btn btn-default" ng-click="selectView('patientsView')">View Patients</button>
+            <button class="btn btn-default" ng-click="selectView('employeeView')">View Employees</button>
+            <button class="btn btn-default" ng-click="selectView('medicationsView')">List of Medication</button>
+            <button class="btn btn-default" ng-click="selectView('newDepartment')">Add Department</button>
+            <button class="btn btn-default" data-toggle="modal" data-target="#settingsModalView">Налаштування</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div style="padding: 30px;">
+    <div ng-switch on="selectedView">
+        <div ng-switch-when="airportsView" table-view="airportsView"></div>
+        <div ng-switch-when="patientsView" table-view="patientsView"></div>
+        <div ng-switch-when="registerEmployeeView" table-view="registerEmployeeView"></div>
+        <div ng-switch-when="employeeView" table-view="employeeView"></div>
+        <div ng-switch-when="medicationsView" table-view="medicationsView"></div>
+        <div ng-switch-when="newDepartment" table-view="newDepartment">
+        </div>
+    </div>
+</div>
+
+<settings></settings>
+
+
+

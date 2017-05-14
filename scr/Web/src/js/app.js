@@ -67,6 +67,14 @@ app.config(function($routeProvider, $locationProvider) {
         reloadOnSearch: false
     });
 
+
+    $routeProvider.when('/adminCabinet', {
+        templateUrl: 'js/cabinets/admin/adminCabinetTemplate.html',
+        controller: 'adminCabinetController',
+        reloadOnSearch: false
+    });
+
+
     //  "medicalhistory/" + $routeParams["id"] + "/page/" + $scope.searchInfo.page
 
 

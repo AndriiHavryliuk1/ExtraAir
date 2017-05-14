@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ExtraAirApi.Utils.Ninject;
+using ExtraAirCore.API_DTOs;
 using ExtraAirCore.Command.Airport;
 using ExtraAirCore.Models.EFContex;
 using ExtraAirCore.Models.EFModels;
@@ -17,15 +18,15 @@ namespace ExtraAirApi.Controllers
 {
 	[RoutePrefix("api/airports")]
 	public class AirportsController : ApiController
-    {
-        private ExtraAirContext db = new ExtraAirContext();
+	{
+		private ExtraAirContext db = new ExtraAirContext();
 
 		// GET: api/Airports
 		[Route("")]
 		public object GetAirports()
-        {
-	        return IoC.Get<IGetAirports>().GetAllAirports();
-        }
+		{
+			return IoC.Get<IGetAirports>().GetAllAirports();
+		}
 
 		// GET: api/Airports
 		[Route("{id:int}")]
@@ -36,84 +37,90 @@ namespace ExtraAirApi.Controllers
 			return IoC.Get<IGetAirports>().GetAirportsById(id);
 		}
 
-        // PUT: api/Airports/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutAirport(int id, Airport airport)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// PUT: api/Airports/5
+		[Route("")]
+		[HttpPut]
+		[ResponseType(typeof(void))]
+		public IHttpActionResult PutAirport(AirportDto airportDto)
+		{
+			var airport = db.Airports.Find(airportDto.AirportId);
 
-            if (id != airport.AirportId)
-            {
-                return BadRequest();
-            }
+			if (airport == null)
+			{
+				return BadRequest();
+			}
 
-            db.Entry(airport).State = EntityState.Modified;
+			airport.Name = airport.Name != airportDto.Name ? airportDto.Name : airport.Name;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AirportExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			airport.Address.Country = airport.Address.Country != airportDto.Country ? airportDto.Country : airport.Address.Country;
+			airport.Address.Street = airport.Address.Street != airportDto.Street ? airportDto.Street : airport.Address.Street;
+			airport.Address.StreetNumber = airport.Address.StreetNumber != Convert.ToInt32(airportDto.StreetNumber) ? Convert.ToInt32(airportDto.StreetNumber) : airport.Address.StreetNumber;
+			airport.Address.City = airport.Address.City != airportDto.City ? airportDto.City : airport.Address.City;
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+			db.Entry(airport).State = EntityState.Modified;
 
-        // POST: api/Airports
-        [ResponseType(typeof(Airport))]
-        public IHttpActionResult PostAirport(Airport airport)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!AirportExists(airportDto.AirportId))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-            db.Airports.Add(airport);
-            db.SaveChanges();
+			return StatusCode(HttpStatusCode.NoContent);
+		}
 
-            return CreatedAtRoute("DefaultApi", new { id = airport.AirportId }, airport);
-        }
+		// POST: api/Airports
+		[ResponseType(typeof(Airport))]
+		public IHttpActionResult PostAirport(Airport airport)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-        // DELETE: api/Airports/5
-        [ResponseType(typeof(Airport))]
-        public IHttpActionResult DeleteAirport(int id)
-        {
-            Airport airport = db.Airports.Find(id);
-            if (airport == null)
-            {
-                return NotFound();
-            }
+			db.Airports.Add(airport);
+			db.SaveChanges();
 
-            db.Airports.Remove(airport);
-            db.SaveChanges();
+			return CreatedAtRoute("DefaultApi", new { id = airport.AirportId }, airport);
+		}
 
-            return Ok(airport);
-        }
+		// DELETE: api/Airports/5
+		[ResponseType(typeof(Airport))]
+		public IHttpActionResult DeleteAirport(int id)
+		{
+			Airport airport = db.Airports.Find(id);
+			if (airport == null)
+			{
+				return NotFound();
+			}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			db.Airports.Remove(airport);
+			db.SaveChanges();
 
-        private bool AirportExists(int id)
-        {
-            return db.Airports.Count(e => e.AirportId == id) > 0;
-        }
-    }
+			return Ok(airport);
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				db.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		private bool AirportExists(int id)
+		{
+			return db.Airports.Count(e => e.AirportId == id) > 0;
+		}
+	}
 }

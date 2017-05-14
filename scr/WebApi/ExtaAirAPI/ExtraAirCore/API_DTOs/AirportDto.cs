@@ -6,5 +6,7 @@
 		public string Name;
 		public string Country;
 		public string City;
+		public string Street;
+		public string StreetNumber;
 	}
 }

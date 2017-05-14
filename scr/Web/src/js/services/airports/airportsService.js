@@ -38,6 +38,22 @@ angular.module('extraAir').factory('airportsService', ['$q', 'airportsResource',
             return airport.$promise;
         };
 
+
+
+        AirportsService.prototype.postAirport = function (airport) {
+            return airportsResource.postAirport(airport).$promise;
+        };
+
+
+        AirportsService.prototype.putAirport = function (airport) {
+            return airportsResource.putAirport(airport).$promise;
+        };
+
+
+        AirportsService.prototype.deleteAirport = function (id) {
+            return airportsResource.deleteAirport(id).$promise;
+        };
+
         return new AirportsService();
     }
 ]);

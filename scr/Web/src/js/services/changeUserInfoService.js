@@ -38,6 +38,7 @@ angular.module('extraAir').service('changeUserInfoService', function (sha256, $h
     };
 
     this.ChangeUser = function (prewUser, user, id, scope) {
+        user.Birthday = $filter('date')(user.Birthday, 'yyyy-MM-dd');
         $http.put(Constants.REST_URL + "api/users/" + id, user).then(function (data, status, headers, config) {
             prewUser.FirstName = user.FirstName;
             prewUser.LastName = user.LastName;

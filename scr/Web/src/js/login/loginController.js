@@ -23,7 +23,7 @@ app.controller('loginController', function($rootScope, $interval, $scope, sha256
                     switch (x.role) {
                         case Constants.ROLES.ADMIN: {
                             $rootScope.isAdmin = true;
-                            $window.location.href = "#/administratorCabinet";
+                            $window.location.href = "#/adminCabinet";
                             break;
                         }
                         case Constants.ROLES.CLIENT:

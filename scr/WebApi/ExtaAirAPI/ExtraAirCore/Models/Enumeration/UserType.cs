@@ -4,6 +4,7 @@
 	{
 		User,
 		Client,
-		Dispatcher
+		Dispatcher,
+		Admin
 	}
 }

@@ -1,0 +1,59 @@
+<h2>Список аеропортів</h2>
+<hr class="colorgraph">
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Назва</th>
+                    <th>Країна</th>
+                    <th>Місто</th>
+                    <th>Вулиця</th>
+                    <th>Номер Вулиці</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="airport in  airports">
+                    <td>{{airport.AirportId}}</td>
+                    <td><div ng-if="airport.isEditing"><input type="text" placeholder="Назва"
+                               ng-model="airport.Name" class="form-control"></div><span ng-if="!airport.isEditing">{{airport.Name}}</span>
+                    </td>
+                    <td>
+                        <div ng-if="airport.isEditing">
+                        <input type="text" placeholder="Назва"
+                               ng-model="airport.Country" class="form-control"> </div><span ng-if="!airport.isEditing">{{airport.Country}}</span>
+                    </td>
+                    <td><div ng-if="airport.isEditing"><input type="text" placeholder="Назва"
+                                    ng-model="airport.City" class="form-control"></div><span ng-if="!airport.isEditing">{{airport.City}}</span>
+                    </td>
+                    <td><div ng-if="airport.isEditing"><input type="text" placeholder="Назва"
+                                    ng-model="airport.Street" class="form-control"></div><span ng-if="!airport.isEditing">{{airport.Street}}</span>
+                    </td>
+                    <td><div ng-if="airport.isEditing"><input type="text" placeholder="Назва"
+                                    ng-model="airport.StreetNumber" class="form-control"></div><span ng-if="!airport.isEditing">{{airport.StreetNumber}}</span>
+                    </td>
+                    <td>
+                        <div ng-if="!airport.isEditing">
+                            <input type="button" value="Редагувати" class="btn btn-primary btn-block btn-md"
+                                   ng-click="editAirport(airport)">
+                        </div>
+                        <div ng-if="airport.isEditing">
+                            <input type="button" value="Змінити" class="btn btn-primary btn-block btn-md"
+                                   ng-click="editAirport(airport)">
+
+                            <input type="button" value="Скасувати" class="btn btn-primary btn-block btn-md"
+                                   ng-click="cancel(airport)">
+
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
