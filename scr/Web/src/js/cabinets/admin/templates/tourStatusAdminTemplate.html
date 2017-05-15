@@ -56,6 +56,7 @@
                         <th>Час відправлення</th>
                         <th>Час прибуття</th>
                         <th>Статус</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -71,13 +72,13 @@
                         </td>
                         <td>
                             <div ng-if="tourStatus.isEditing">
-                                <input type="text" placeholder="Назва"
+                                <input type="date" placeholder="Назва"
                                        ng-model="tourStatus.DateStart" class="form-control"></div>
                             <span ng-if="!tourStatus.isEditing">{{tourStatus.DateStart}}</span>
                         </td>
                         <td>
                             <div ng-if="tourStatus.isEditing">
-                                <input type="text" placeholder="Назва"
+                                <input type="date" placeholder="Назва"
                                        ng-model="tourStatus.DateFinish" class="form-control"></div>
                             <span ng-if="!tourStatus.isEditing">{{tourStatus.DateFinish}}</span>
                         </td>
@@ -86,6 +87,21 @@
                                 <input type="text" placeholder="Назва"
                                        ng-model="tourStatus.TourStatusType" class="form-control"></div>
                             <span ng-if="!tourStatus.isEditing">{{tourStatus.TourStatusType}}</span>
+                        </td>
+                        <td>
+                            <div ng-if="!tourStatus.isEditing">
+                                <input type="button" value="Редагувати" class="btn btn-primary btn-block btn-md"
+                                       ng-click="editTourStatus(tourStatus)">
+                            </div>
+                            <div ng-if="tourStatus.isEditing">
+                                <input type="button" value="Змінити" class="btn btn-primary btn-block btn-md"
+                                       ng-click="editTourStatus(tourStatus)">
+
+                                <input type="button" value="Скасувати" class="btn btn-primary btn-block btn-md"
+                                       ng-click="cancel(tourStatus)">
+
+                            </div>
+
                         </td>
                     </tr>
                     </tbody>

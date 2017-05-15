@@ -7,8 +7,8 @@ app.directive("tableView", function() {
                 case "airportsView":
                     return "js/cabinets/admin/templates/airportsTemplate.html";
                     break;
-                case "patientsView":
-                    return "src/views/templates/ViewPatientsTemplate.html";
+                case "tourStatusView":
+                    return "js/cabinets/admin/templates/tourStatusAdminTemplate.html";
                     break;
                 case "registerEmployeeView":
                     return "src/views/templates/RegisterEmployeeTemplate.html";

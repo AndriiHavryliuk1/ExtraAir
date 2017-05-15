@@ -23,7 +23,7 @@
 
         <div class="btn-group profileButtonMenu" role="group" aria-label="Menu">
             <button class="btn btn-default" ng-click="selectView('airportsView')">Аеропорти</button>
-            <button class="btn btn-default" ng-click="selectView('doctorsView')">View Doctors</button>
+            <button class="btn btn-default" ng-click="selectView('tourStatusView')">Статус рейсу</button>
             <button class="btn btn-default" ng-click="selectView('patientsView')">View Patients</button>
             <button class="btn btn-default" ng-click="selectView('employeeView')">View Employees</button>
             <button class="btn btn-default" ng-click="selectView('medicationsView')">List of Medication</button>
@@ -39,7 +39,7 @@
 <div style="padding: 30px;">
     <div ng-switch on="selectedView">
         <div ng-switch-when="airportsView" table-view="airportsView"></div>
-        <div ng-switch-when="patientsView" table-view="patientsView"></div>
+        <div ng-switch-when="tourStatusView" table-view="tourStatusView"></div>
         <div ng-switch-when="registerEmployeeView" table-view="registerEmployeeView"></div>
         <div ng-switch-when="employeeView" table-view="employeeView"></div>
         <div ng-switch-when="medicationsView" table-view="medicationsView"></div>
