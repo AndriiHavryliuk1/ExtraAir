@@ -72,7 +72,7 @@ namespace Data.Api.Clients
 				Email = user.Email,
 				Phone = user.Phone,
 				UserId = user.UserId,
-				Address = new AddressDto
+				Address = user.Address != null ? new AddressDto
 				{
 					AddressId = user.Address.AddressId,
 					City = user.Address.City,
@@ -80,7 +80,7 @@ namespace Data.Api.Clients
 					Street = user.Address.Street,
 					StreetNumber = user.Address.StreetNumber,
 					Country = user.Address.Country
-				},
+				} : null,
 				ImagePath = user.ImagePath,
 				IdCard = user.IdCard
 			};

@@ -1,12 +1,13 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('mainController', function($rootScope, $scope, $window, getService, airportsService, crossingService){
+app.controller('mainController', function ($rootScope, $scope, $window, getService, airportsService, crossingService) {
     $scope.tourDetails = {
         origin: null,
         destination: null,
         date: null,
-        passengerCount: 1
+        passengerCount: 1,
+        tourClass: null
     };
 
     $scope.showPlaceTo = false;
@@ -17,10 +18,13 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
     }, function () {
     });
 
-    $scope.getAdventAirport = function(selectedAirportId){
+    getService.GetObjects('api/tours/alltours').then(function (data) {
+        $scope.allTours = data.data;
+    });
+
+    $scope.getAdventAirport = function (selectedAirportId) {
         $scope.tourDetails.origin = !!selectedAirportId ? selectedAirportId : null;
         $scope.adventAirports = undefined;
-        resetAutocomplete();
         if (!!selectedAirportId) {
             airportsService.getAirport(selectedAirportId).then(function (data) {
                 $scope.adventAirports = data;
@@ -28,14 +32,21 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
-            }, function () {  });
+            }, function () {
+            });
         }
         else {
             $scope.showPlaceTo = false;
         }
     };
 
-    $scope.prepareTo = function() {
+    $scope.prepareTo = function () {
+        for (var t in $scope.tourDetails) {
+            if ($scope.tourDetails.hasOwnProperty(t) && $scope.tourDetails[t] === null) {
+                alert("Заповніть усі поля");
+                return;
+            }
+        }
         $scope.tourDetails.date = {
             day: Constants.DAYS[$scope.tourDetails.date.getDay()],
             allDate: $scope.tourDetails.date
@@ -46,7 +57,4 @@ app.controller('mainController', function($rootScope, $scope, $window, getServic
     };
 
 
-    function resetAutocomplete() {
-        $scope.searchItem  = null;
-    }
 });

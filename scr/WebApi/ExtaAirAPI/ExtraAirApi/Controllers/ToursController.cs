@@ -36,6 +36,14 @@ namespace ExtraAirApi.Controllers
 		}
 
 		[HttpGet]
+		[Route("alltours")]
+		public object GetAllTours()
+		{
+			return IoC.Get<IGetTours>().GetAllTours();
+		}
+
+
+		[HttpGet]
 		[Route("bysearch")]
 		public object GetToursBySearch([FromUri]int airportFromId, [FromUri]int airportToId, [FromUri]string dayStart)
 		{

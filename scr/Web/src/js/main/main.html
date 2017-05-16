@@ -45,7 +45,7 @@
         <br>
 
         <div>
-            <select ng-disable="!showPlaceTo" class="form-control" ng-model="tourDetails.destination">
+            <select class="form-control" ng-model="tourDetails.destination">
                 <option value="" selected>Виберіть пункт призначення...</option>
                 <option ng-repeat="airport in adventAirports" value="{{airport.AirportId}}">{{airport.Name}}</option>
             </select>

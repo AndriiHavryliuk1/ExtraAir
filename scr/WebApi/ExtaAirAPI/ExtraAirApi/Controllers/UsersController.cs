@@ -48,11 +48,14 @@ namespace ExtraAirApi.Controllers
 			currentUser.LastName = currentUser.LastName != user.LastName ? user.LastName : currentUser.LastName;
 			currentUser.FirstName = currentUser.FirstName != user.FirstName ? user.FirstName : currentUser.FirstName;
 			currentUser.Phone = currentUser.Phone != user.Phone ? user.Phone : currentUser.Phone;
-			currentUser.Address.City = currentUser.Address.City != user.Address.City ? user.Address.City : currentUser.Address.City;
-			currentUser.Address.Country = currentUser.Address.Country != user.Address.Country ? user.Address.Country : currentUser.Address.Country;
-			currentUser.Address.Street = currentUser.Address.Street != user.Address.Street ? user.Address.Street : currentUser.Address.Street;
-			currentUser.Address.StreetNumber = currentUser.Address.StreetNumber != user.Address.StreetNumber ? user.Address.StreetNumber : currentUser.Address.StreetNumber;
-			currentUser.Address.PostIndex = currentUser.Address.PostIndex != user.Address.PostIndex ? user.Address.PostIndex : currentUser.Address.PostIndex;
+			if (currentUser.Address != null)
+			{
+				currentUser.Address.City = currentUser.Address.City != user.Address.City ? user.Address.City : currentUser.Address.City;
+				currentUser.Address.Country = currentUser.Address.Country != user.Address.Country ? user.Address.Country : currentUser.Address.Country;
+				currentUser.Address.Street = currentUser.Address.Street != user.Address.Street ? user.Address.Street : currentUser.Address.Street;
+				currentUser.Address.StreetNumber = currentUser.Address.StreetNumber != user.Address.StreetNumber ? user.Address.StreetNumber : currentUser.Address.StreetNumber;
+				currentUser.Address.PostIndex = currentUser.Address.PostIndex != user.Address.PostIndex ? user.Address.PostIndex : currentUser.Address.PostIndex;
+			}
 			currentUser.IdCard = currentUser.IdCard != user.IdCard ? user.IdCard : currentUser.IdCard;
 
 			db.Entry(currentUser).State = EntityState.Modified;
