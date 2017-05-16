@@ -7,6 +7,7 @@ namespace ExtraAirCore.API_DTOs
 	{
 		public int TourId;
 		public int? TourDetailsId;
+		public int? TourStatusId;
 		public AirportDto AirportFrom;
 		public AirportDto AirportTo;
 		public DateTime? DateStart;

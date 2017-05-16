@@ -51,8 +51,9 @@ namespace Data.Api.Tours
 				foreach (var mappedTour in mappedTours)
 				{
 					var stausFromTs = tourStatuses.FirstOrDefault(x => x.TourId == mappedTour.TourId
-																	   && x.DateStart == mappedTour.DateStart &&
-																	   x.DateFinish == mappedTour.DateFinish);
+																	   && (x.DateStart.Date.ToString("dddd") == mappedTour.DateStart.Value.ToString("dddd") ||
+																	   x.DateFinish.Date.ToString("dddd") == mappedTour.DateFinish.Value.ToString("dddd")) && 
+																	   ((x.DateStart.Date == dateStart.Value.Date) || (x.DateFinish.Date == dateStart.Value.Date)));
 					var tourStatus = new TourStatusType();
 					var newMappedDateStart = new DateTime(dateStart.Value.Year, dateStart.Value.Month, dateStart.Value.Day, mappedTour.DateStart.Value.Hour, 
 						mappedTour.DateStart.Value.Minute, mappedTour.DateStart.Value.Second);
@@ -82,8 +83,9 @@ namespace Data.Api.Tours
 					res.Add(new TourStatusDto
 					{
 						TourId = mappedTour.TourId,
-						DateStart = newMappedDateStart,
-						DateFinish = newMappedDateFinish,
+						TourStatusId = stausFromTs?.TourStatusId,
+						DateStart = stausFromTs?.DateStart ?? newMappedDateStart,
+						DateFinish = stausFromTs?.DateFinish ?? newMappedDateFinish,
 						AirportFrom = mappedTour.AirportFrom,
 						AirportTo = mappedTour.AirportTo,
 						TourStatusType = tourStatus

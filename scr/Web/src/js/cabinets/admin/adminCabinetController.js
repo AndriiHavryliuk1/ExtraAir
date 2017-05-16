@@ -12,7 +12,7 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
         airportToId: null
     };
 
-
+    $scope.constantTourStatuses = Constants.TOUR_STATUSES;
 
     var URL_forAdmin = "api/Users/" + currentUser.id;
     getService.GetObjects(URL_forAdmin).then(function(data) {
@@ -87,6 +87,7 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
 
         getService.GetObjects(URL).then(function (data) {
             $scope.tourStatuses = data.data;
+            $scope.tourStatuses = correctTourStatusData($scope.tourStatuses);
 
             $scope.tourStatuses = forEditing($scope.tourStatuses);
 
@@ -101,12 +102,67 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
 
     $scope.editTourStatus = function(tourStatus) {
         tourStatus.isEditing = !tourStatus.isEditing;
+        if (!tourStatus.isEditing) {
+            var postedTS = angular.copy(tourStatus);
+            delete postedTS.isEditing;
+            delete postedTS.dateStartView;
+            delete postedTS.dateFinishView;
+            delete postedTS.statusValue;
+
+            postedTS.DateStart = $filter('date')(postedTS.DateStart, 'yyyy-MM-dd') + "T" + $filter('date')(postedTS.DateStart, 'HH:mm');
+            postedTS.DateFinish = $filter('date')(postedTS.DateFinish, 'yyyy-MM-dd') + "T" + $filter('date')(postedTS.DateFinish, 'HH:mm');
+            $http.post(Constants.REST_URL + "api/TourStatus", postedTS, {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }).then(function (data) {
+                updateTourStatuses(data.data);
+                console.log("fine");
+            }, function () {
+                console.log("error")
+            });
+        }
+
+
     };
+
+    function updateTourStatuses(tourStatus){
+        for (var i=0; i < $scope.tourStatuses.length; i++){
+            if ($scope.tourStatuses[i].TourId === tourStatus.TourId){
+                $scope.tourStatuses[i].DateFinish = tourStatus.DateFinish;
+                $scope.tourStatuses[i].DateStart = tourStatus.DateStart;
+                $scope.tourStatuses[i].TourStatusId = tourStatus.TourStatusId;
+                $scope.tourStatuses[i].TourStatusType = tourStatus.TourStatusType;
+                $scope.tourStatuses[i].dateStartView = $filter('date')(tourStatus.DateStart, 'dd-MM-yyyy HH:mm');
+                $scope.tourStatuses[i].dateFinishView = $filter('date')(tourStatus.DateFinish, 'dd-MM-yyyy HH:mm');
+                for (var j = 0; j < Constants.TOUR_STATUSES.length; j++) {
+                    if (Constants.TOUR_STATUSES[j].KEY === $scope.tourStatuses[i].TourStatusType) {
+                        $scope.tourStatuses[i].statusValue = Constants.TOUR_STATUSES[j].VALUE;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
 
     function forEditing(data){
         data.forEach(function(d){
             d.isEditing = false;
+        });
+        return data;
+    }
+
+    function correctTourStatusData(data) {
+        data.forEach(function(status){
+            for (var i = 0; i < Constants.TOUR_STATUSES.length; i++) {
+                if (Constants.TOUR_STATUSES[i].KEY === status.TourStatusType) {
+                    status.statusValue = Constants.TOUR_STATUSES[i].VALUE;
+                    break;
+                }
+            }
+            status.dateStartView = $filter('date')(status.DateStart, 'dd-MM-yyyy HH:mm');
+            status.dateFinishView = $filter('date')(status.DateFinish, 'dd-MM-yyyy HH:mm');
         });
         return data;
     }

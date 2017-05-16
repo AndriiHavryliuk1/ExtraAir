@@ -72,21 +72,22 @@
                         </td>
                         <td>
                             <div ng-if="tourStatus.isEditing">
-                                <input type="date" placeholder="Назва"
+                                <input type="datetime-local" placeholder="Назва"
                                        ng-model="tourStatus.DateStart" class="form-control"></div>
-                            <span ng-if="!tourStatus.isEditing">{{tourStatus.DateStart}}</span>
+                            <span ng-if="!tourStatus.isEditing">{{tourStatus.dateStartView}}</span>
                         </td>
                         <td>
                             <div ng-if="tourStatus.isEditing">
-                                <input type="date" placeholder="Назва"
+                                <input type="datetime-local" placeholder="Назва"
                                        ng-model="tourStatus.DateFinish" class="form-control"></div>
-                            <span ng-if="!tourStatus.isEditing">{{tourStatus.DateFinish}}</span>
+                            <span ng-if="!tourStatus.isEditing">{{tourStatus.dateFinishView}}</span>
                         </td>
                         <td>
                             <div ng-if="tourStatus.isEditing">
-                                <input type="text" placeholder="Назва"
-                                       ng-model="tourStatus.TourStatusType" class="form-control"></div>
-                            <span ng-if="!tourStatus.isEditing">{{tourStatus.TourStatusType}}</span>
+                                <select class="form-control" ng-model="tourStatus.TourStatusType">
+                                    <option ng-repeat="statusType in constantTourStatuses" value="{{statusType.KEY}}">{{statusType.VALUE}}</option>
+                                </select></div>
+                            <span ng-if="!tourStatus.isEditing">{{tourStatus.statusValue}}</span>
                         </td>
                         <td>
                             <div ng-if="!tourStatus.isEditing">

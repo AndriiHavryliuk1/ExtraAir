@@ -74,13 +74,33 @@ namespace ExtraAirApi.Controllers
 		[ResponseType(typeof(TourStatus))]
 		public IHttpActionResult PostTourStatus(TourStatus tourStatus)
 		{
-			if (!ModelState.IsValid)
-			{
-				return BadRequest(ModelState);
-			}
+			var existed = db.TourStatuses.Find(tourStatus.TourStatusId);
 
-			db.TourStatuses.Add(tourStatus);
-			db.SaveChanges();
+			if (existed != null)
+			{
+				existed.DateStart = tourStatus.DateStart;
+				existed.DateFinish = tourStatus.DateFinish;
+				existed.AirportFromId = tourStatus.AirportFromId;
+				existed.AirportToId = tourStatus.AirportToId;
+				existed.TourStatusType = tourStatus.TourStatusType;
+
+				db.Entry(existed).State = EntityState.Modified;
+				db.SaveChanges();
+			}
+			else
+			{
+				db.TourStatuses.Add(new TourStatus()
+				{
+					DateStart = tourStatus.DateStart,
+					DateFinish = tourStatus.DateFinish,
+					AirportToId = tourStatus.AirportToId,
+					TourStatusId = tourStatus.TourStatusId,
+					AirportFromId = tourStatus.TourStatusId,
+					TourId = tourStatus.TourId,
+					TourStatusType = tourStatus.TourStatusType
+				});
+				db.SaveChanges();
+			}
 
 			return CreatedAtRoute("DefaultApi", new { id = tourStatus.TourStatusId }, tourStatus);
 		}
