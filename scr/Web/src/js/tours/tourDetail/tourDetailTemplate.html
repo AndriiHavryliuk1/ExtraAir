@@ -27,7 +27,7 @@
         <div><h5>Модель літака: {{tour.Plane.Name}}</h5></div>
         <div><h3>Ціна: {{tour.Price}}$</h3></div>
         <button type="button" class="btn btn-primary col-md-2"
-                ng-click="openOrderingForm()">Замовити квиток
+                ng-click="openOrderingForm()">Здійснити замовлення
         </button>
     </div>
 
@@ -122,14 +122,24 @@
         </div>
 
 
+
         <div ng-if="showCheckStep">
             <h3>Перевірити дані:</h3>
-            <div ng-repeat="passenger in allPassengers">
-                <h5>{{($index + 1)}} Пасажир {{passenger.name}} {{passenger.surname}}</h5>
-                <h5>Номер паспорта: {{passenger.idCard}}</h5>
-                <h5>Місце: {{passenger.coordinateValue}}</h5>
-                <h5>Зареєстрований багаж: {{passenger.baggage.externalValue}}</h5>
-                <h5>Ручний багаж: {{passenger.baggage.innerValue}}</h5>
+            <div ng-repeat="pas in allPassengers">
+                <h3>{{($index + 1)}} Пасажир</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4>Ініціали: {{pas.name}} {{pas.surname}}</h4>
+                        <h5>Номер паспорта: {{pas.idCard}}</h5>
+                        <h5>Зареєстрований багаж:: {{pas.baggage.externalValue}}</h5>
+                        <h5>Ручний багаж: {{pas.baggage.innerValue}}</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Стать: {{pas.gender === 0 ? 'Чоловік' : 'Жінка' }}</h4>
+                        <h5>Місце: {{pas.coordinateValue}}</h5>
+                    </div>
+                </div>
+                <hr class="colorgraph">
             </div>
 
             <h4>Метод реєстрації {{methodRegisterValue}}</h4>

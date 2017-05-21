@@ -162,81 +162,9 @@
     <Compile Include="Constants\Messages.cs" />
     <Compile Include="Constants\Path.cs" />
     <Compile Include="Constants\Roles.cs" />
-    <Compile Include="Migrations\201702271101132_toAzure.cs" />
-    <Compile Include="Migrations\201702271101132_toAzure.Designer.cs">
-      <DependentUpon>201702271101132_toAzure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702281709462_updateDb.cs" />
-    <Compile Include="Migrations\201702281709462_updateDb.Designer.cs">
-      <DependentUpon>201702281709462_updateDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703112311469_withflag.cs" />
-    <Compile Include="Migrations\201703112311469_withflag.Designer.cs">
-      <DependentUpon>201703112311469_withflag.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191148311_addedTourSearchHistory.cs" />
-    <Compile Include="Migrations\201703191148311_addedTourSearchHistory.Designer.cs">
-      <DependentUpon>201703191148311_addedTourSearchHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191237481_addedTourSearchHistory2.cs" />
-    <Compile Include="Migrations\201703191237481_addedTourSearchHistory2.Designer.cs">
-      <DependentUpon>201703191237481_addedTourSearchHistory2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191406082_addedTourSearchHistory3.cs" />
-    <Compile Include="Migrations\201703191406082_addedTourSearchHistory3.Designer.cs">
-      <DependentUpon>201703191406082_addedTourSearchHistory3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191538266_addedTourSearchHistory4.cs" />
-    <Compile Include="Migrations\201703191538266_addedTourSearchHistory4.Designer.cs">
-      <DependentUpon>201703191538266_addedTourSearchHistory4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704192156539_kjkj.cs" />
-    <Compile Include="Migrations\201704192156539_kjkj.Designer.cs">
-      <DependentUpon>201704192156539_kjkj.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704231412335_dvckljl.cs" />
-    <Compile Include="Migrations\201704231412335_dvckljl.Designer.cs">
-      <DependentUpon>201704231412335_dvckljl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704301021494_addtourdetailandbookedtables.cs" />
-    <Compile Include="Migrations\201704301021494_addtourdetailandbookedtables.Designer.cs">
-      <DependentUpon>201704301021494_addtourdetailandbookedtables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704301538524_addtourdetailandbookedtables2.cs" />
-    <Compile Include="Migrations\201704301538524_addtourdetailandbookedtables2.Designer.cs">
-      <DependentUpon>201704301538524_addtourdetailandbookedtables2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704301614257_addtourdetailandbookedtables3.cs" />
-    <Compile Include="Migrations\201704301614257_addtourdetailandbookedtables3.Designer.cs">
-      <DependentUpon>201704301614257_addtourdetailandbookedtables3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704301758349_addtourdetailandbookedtables4.cs" />
-    <Compile Include="Migrations\201704301758349_addtourdetailandbookedtables4.Designer.cs">
-      <DependentUpon>201704301758349_addtourdetailandbookedtables4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704301933303_addtourdetailandbookedtables5.cs" />
-    <Compile Include="Migrations\201704301933303_addtourdetailandbookedtables5.Designer.cs">
-      <DependentUpon>201704301933303_addtourdetailandbookedtables5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705011043326_addtourdetailandbookedta.cs" />
-    <Compile Include="Migrations\201705011043326_addtourdetailandbookedta.Designer.cs">
-      <DependentUpon>201705011043326_addtourdetailandbookedta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705012211508_addtou.cs" />
-    <Compile Include="Migrations\201705012211508_addtou.Designer.cs">
-      <DependentUpon>201705012211508_addtou.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705041328035_kldnlkn.cs" />
-    <Compile Include="Migrations\201705041328035_kldnlkn.Designer.cs">
-      <DependentUpon>201705041328035_kldnlkn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705081047155_withTourStatus.cs" />
-    <Compile Include="Migrations\201705081047155_withTourStatus.Designer.cs">
-      <DependentUpon>201705081047155_withTourStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705082156190_lkgj.cs" />
-    <Compile Include="Migrations\201705082156190_lkgj.Designer.cs">
-      <DependentUpon>201705082156190_lkgj.cs</DependentUpon>
+    <Compile Include="Migrations\201705202129472_localDB2.cs" />
+    <Compile Include="Migrations\201705202129472_localDB2.Designer.cs">
+      <DependentUpon>201705202129472_localDB2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
@@ -276,65 +204,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702271101132_toAzure.resx">
-      <DependentUpon>201702271101132_toAzure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702281709462_updateDb.resx">
-      <DependentUpon>201702281709462_updateDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703112311469_withflag.resx">
-      <DependentUpon>201703112311469_withflag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191148311_addedTourSearchHistory.resx">
-      <DependentUpon>201703191148311_addedTourSearchHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191237481_addedTourSearchHistory2.resx">
-      <DependentUpon>201703191237481_addedTourSearchHistory2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191406082_addedTourSearchHistory3.resx">
-      <DependentUpon>201703191406082_addedTourSearchHistory3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191538266_addedTourSearchHistory4.resx">
-      <DependentUpon>201703191538266_addedTourSearchHistory4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704192156539_kjkj.resx">
-      <DependentUpon>201704192156539_kjkj.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704231412335_dvckljl.resx">
-      <DependentUpon>201704231412335_dvckljl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704301021494_addtourdetailandbookedtables.resx">
-      <DependentUpon>201704301021494_addtourdetailandbookedtables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704301538524_addtourdetailandbookedtables2.resx">
-      <DependentUpon>201704301538524_addtourdetailandbookedtables2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704301614257_addtourdetailandbookedtables3.resx">
-      <DependentUpon>201704301614257_addtourdetailandbookedtables3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704301758349_addtourdetailandbookedtables4.resx">
-      <DependentUpon>201704301758349_addtourdetailandbookedtables4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704301933303_addtourdetailandbookedtables5.resx">
-      <DependentUpon>201704301933303_addtourdetailandbookedtables5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705011043326_addtourdetailandbookedta.resx">
-      <DependentUpon>201705011043326_addtourdetailandbookedta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705012211508_addtou.resx">
-      <DependentUpon>201705012211508_addtou.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705041328035_kldnlkn.resx">
-      <DependentUpon>201705041328035_kldnlkn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705081047155_withTourStatus.resx">
-      <DependentUpon>201705081047155_withTourStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705082156190_lkgj.resx">
-      <DependentUpon>201705082156190_lkgj.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705202129472_localDB2.resx">
+      <DependentUpon>201705202129472_localDB2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

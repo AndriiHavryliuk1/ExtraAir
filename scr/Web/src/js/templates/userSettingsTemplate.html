@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label for="surname" class="col-sm-3 control-label">Surname:</label>
                     <div class="col-sm-9">
-                        <input type="text" id="surname" placeholder="Прізвище" ng-model="bufferUser.LastName"
+                        <input type="text" id="surname"  placeholder="Прізвище" ng-model="bufferUser.LastName"
                                class="form-control" required maxlength="30">
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="form-group">
                     <label for="picture" class="col-sm-3 control-label">Змінити аватар</label>
                     <div class="col-sm-9">
-                        <input class="form-control" type="file" id="picture" file-model="picture">
+                        <input class="form-control" type="file" id="picture" lang="ua" file-model="picture">
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                     <div class="row">
                         <!--<button type="submit" class="btn btn-primary btn-block">Register</button>-->
                         <div class="col-xs-6 col-md-6 col-xs-offset-3">
-                            <input type="submit" value="Змінити" ng-click="ChangeUser()"
+                            <input type="submit" lang="ua" value="Змінити" ng-click="ChangeUser()"
                                    class="btn btn-primary btn-block btn-lg" tabindex="7">
                         </div>
                     </div>
@@ -102,7 +102,7 @@
             <div ng-if="hidePasswordFields!=true">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Change password</h4>
+                    <h4 class="modal-title">Змінити пароль</h4>
                 </div>
                 <br>
                 <br>

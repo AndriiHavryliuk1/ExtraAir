@@ -9,23 +9,10 @@ angular.module('extraAir').factory('toursService', ['$q', 'toursResource',
 
         ToursService.prototype.constructor = ToursService;
 
-        /**
-         * Get all tours.
-         * @public
-         * @return {!promise}
-         * @method
-         **/
         ToursService.prototype.getTours = function (additionUrlParams) {
             return toursResource.getTours(additionUrlParams).$promise;
         };
-
-        /**
-         * Get tour.
-         * @public
-         * @param {!int} id - tour id
-         * @return {!promise}
-         * @method
-         **/
+        
         ToursService.prototype.getTour = function (id) {
             var tour = toursResource.getTour(id);
             if (tour === null) {
