@@ -12,7 +12,7 @@ angular.module('extraAir').factory('toursService', ['$q', 'toursResource',
         ToursService.prototype.getTours = function (additionUrlParams) {
             return toursResource.getTours(additionUrlParams).$promise;
         };
-        
+
         ToursService.prototype.getTour = function (id) {
             var tour = toursResource.getTour(id);
             if (tour === null) {

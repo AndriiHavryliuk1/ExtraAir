@@ -6,7 +6,7 @@ namespace ExtraAirCore.Models.EFContex
 {
 	public class ExtraAirContext : DbContext
 	{
-		public ExtraAirContext(): base(ConfigurationManager.ConnectionStrings["ExtraAirContext"].ConnectionString) { }
+		public ExtraAirContext(): base(ConfigurationManager.ConnectionStrings["ExtraAirContextLocal"].ConnectionString) { }
 
 		public virtual DbSet<Address> Addresses { get; set; }
 		public virtual DbSet<Airport> Airports { get; set; }
