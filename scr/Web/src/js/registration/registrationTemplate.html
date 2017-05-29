@@ -15,7 +15,7 @@
                 <br><br><br>
                 <div class="row">
                     <div class="col-xs-4 col-md-4 col-md-offset-4">
-                        <img src="src/img/loading.gif" ng-show="loading">
+                        <img src="content/images/loading.gif" ng-show="loading">
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Підтвердіть пароль*</label>
                     <div class="col-sm-9">
-                        <input type="password" placeholder="Підтвердіть пароль" class="form-control" id="password_confirm" oninput="check(this)" pattern="^\S{6,}$" required>
+                        <input type="password" placeholder="Підтвердіть пароль" class="form-control" id="password_confirm" pattern="^\S{6,}$" required>
                     </div>
 
                 </div>
@@ -75,12 +75,17 @@
 </div>
 
 <script language='javascript' type='text/javascript'>
-    function check(input) {
-        if (input.value != document.getElementById('password').value) {
-            input.setCustomValidity('Password Must be Matching.');
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
         } else {
-            // input is valid -- reset the error message
-            input.setCustomValidity('');
+            confirm_password.setCustomValidity('');
         }
     }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
 </script>

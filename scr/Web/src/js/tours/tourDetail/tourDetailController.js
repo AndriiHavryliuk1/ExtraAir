@@ -2,7 +2,7 @@
 
 var app = angular.module('extraAir');
 app.controller('tourDetailController', function ($rootScope, $scope, $location, $filter, $http, $routeParams, getService, airportsService, jwtHelper,
-                                                 tourDetailsService, toursService, crossingService) {
+                                                 tourDetailsService, toursService, crossingService, sendMailService) {
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
     setupURL();
     $scope.activePlacesList = [];
@@ -68,6 +68,9 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
     };
 
     $scope.openOrderingForm = function () {
+        if (!localStorage.getItem('token')) {
+            alert("Будь ласка увійдіть в систему!");
+        }
         $scope.ordering = true;
         $scope.allPassengers = getAllPassenger();
         setTourDetails();
@@ -92,7 +95,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
 
             switch (parseInt(pas.baggage.external)) {
                 case 0:
-                    pas.baggage.externalValue = "Жодної";
+                    pas.baggage.externalValue = "Немає";
                     break;
                 case 27:
                     pas.baggage.externalValue = "23 кг(+27$)";
@@ -154,11 +157,22 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
                 'Content-type': 'application/json'
             }
         }).then(function () {
-            alert("Квиток замовлено!")
+            alert("Квиток замовлено успішно! Перевірте свою пошту для детальної інформації");
+            var html = 'Ви успішно здійснили замовлення, та купили такі квитки: <br>';
+            $scope.allPassengers.forEach(function(pas) {
+                html +=  "<div>";
+                html +=  "<h3>" + (pas.id + 1) + " Квиток</h3>";
+                html +=  "<h4>Ініціали пасажира: " + pas.name + " " + pas.surname + "</h4>";
+                html +=  "<h4>Стать: " +  pas.gender === 0 ? 'Чоловік' : 'Жінка' + "</h4>";
+                html +=  "<h5>Місце: " + pas.coordinateValue + "</h5>";
+            });
+            html += "<h4>Метод реєстрації - " + $scope.methodRegisterValue + "</h4>";
+            html += "<h4><label>Загальна ціна: " + $scope.finishTourResult.Price + "$</label></h4>";
+            sendMailService.sendMail(html);
+            $location.path('ordersList');
         }, function () {
-            console.log("error")
+            alert("Сталася помилка під час замовлення квитка!");
         });
-
     };
 
     function prepareDataForOrder() {
@@ -170,10 +184,10 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
                 LastName: pas.surname,
                 Gender: pas.gender,
                 CoordinateValue: pas.coordinateValue,
-                IdCard: pas.idCard,
+                IdCard: null,
                 TicketPrice: parseInt(pas.baggage.external) + parseInt(pas.baggage.inner) + parseInt($scope.tour.Price),
-                BaggageInternal: pas.baggage.inner,
-                BaggageeExternal: pas.baggage.external
+                BaggageInternal: $scope.tourSearchInfo.tourClass !== "Economy" ? true : !!parseInt(pas.baggage.inner),
+                BaggageeExternal: $scope.tourSearchInfo.tourClass !== "Economy" ? true : !!parseInt(pas.baggage.external)
             });
         });
         var Tours = [];
@@ -200,7 +214,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         }
         for (var i = 0; i < $scope.allPassengers.length; i++) {
             var pas = $scope.allPassengers[i];
-            if (!pas.name || !pas.surname || !pas.idCard || pas.gender === null) {
+            if (!pas.name || !pas.surname || pas.gender === null) {
                 alert("Заповніть дані про пасажирів!");
                 return false;
             }
@@ -227,10 +241,11 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         var list = [];
         for (var i = 0; i < $scope.tourSearchInfo.passengerCount; i++) {
             list.push({
+                id: i,
                 name: '',
                 surname: '',
                 gender: null,
-                idCard: '',
+                idCard: null,
                 baggage: {
                     inner: 0,
                     external: 0

@@ -58,7 +58,8 @@ namespace ExtraAirApi.Autorization.OAuthServerProvider
 		{
 			var userProvider = new UserProvider(new ExtraAirContext());
 			var user = await userProvider.FindByEmailAsync(context.UserName);
-			if (user == null || user.Password != context.Password || user.Deleted)
+			if (user == null || user.Password != context.Password || user.Deleted 
+				|| (user.IsActive == null || !user.IsActive.Value))
 			{
 				context.SetError(
 					"invalid_grant",

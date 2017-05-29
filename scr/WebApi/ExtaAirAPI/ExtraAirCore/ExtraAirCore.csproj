@@ -137,6 +137,8 @@
     <Compile Include="API_DTOs\AddressDto.cs" />
     <Compile Include="API_DTOs\AirportDto.cs" />
     <Compile Include="API_DTOs\ChangePassDto.cs" />
+    <Compile Include="API_DTOs\Helper_DTOs\EmailInputDto.cs" />
+    <Compile Include="API_DTOs\Helper_DTOs\HTMLDto.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\PaginFilteringHelper.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\TourDetailsHelper.cs" />
     <Compile Include="API_DTOs\Helper_DTOs\TourSearchHelperDto.cs" />
@@ -165,6 +167,14 @@
     <Compile Include="Migrations\201705202129472_localDB2.cs" />
     <Compile Include="Migrations\201705202129472_localDB2.Designer.cs">
       <DependentUpon>201705202129472_localDB2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705271643042_lkjl.cs" />
+    <Compile Include="Migrations\201705271643042_lkjl.Designer.cs">
+      <DependentUpon>201705271643042_lkjl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705281610125_kjklj.cs" />
+    <Compile Include="Migrations\201705281610125_kjklj.Designer.cs">
+      <DependentUpon>201705281610125_kjklj.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EFContex\ExtraAirContext.cs" />
@@ -206,6 +216,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705202129472_localDB2.resx">
       <DependentUpon>201705202129472_localDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705271643042_lkjl.resx">
+      <DependentUpon>201705271643042_lkjl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705281610125_kjklj.resx">
+      <DependentUpon>201705281610125_kjklj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -10,7 +10,7 @@ namespace ExtraAirCore.API_DTOs
 		public string Email;
 		public string Password;
 		public string Phone;
-		public DateTime Birthday;
+		public DateTime? Birthday;
 		public bool Deleted;
 		public int? AddressId;
 		public int UserClaimId;
@@ -24,7 +24,7 @@ namespace ExtraAirCore.API_DTOs
 		public string LastName;
 		public string Email;
 		public string Phone;
-		public DateTime Birthday;
+		public DateTime? Birthday;
 		public bool Deleted;
 		public AddressDto Address;
 		public string ImagePath;

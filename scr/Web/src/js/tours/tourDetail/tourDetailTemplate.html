@@ -56,23 +56,18 @@
             </div>
             <div class="row" style="padding-top: 5px;">
                 <div class="col-md-3 col-sm-3">
-                    <input type="text" placeholder="Номер паспорта" ng-model="passenger.idCard" class="form-control"
-                           required
-                           maxlength="30">
-                </div>
-                <div class="col-md-3 col-sm-3">
                     <div class="form-group" style="padding-top: 10px;">
                         <label class="control-label col-sm-3">Стать:</label>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="femaleRadio" value="1"
+                                    <input type="radio" name="{{passenger.id}}" id="femaleRadio" value="1"
                                            ng-model="passenger.gender">Жінка
                                 </label>
                             </div>
                             <div class="col-sm-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="maleRadio" ng-model="passenger.gender"
+                                    <input type="radio" name="{{passenger.id}}" id="maleRadio" ng-model="passenger.gender"
                                            value="0">Чоловік
                                 </label>
                             </div>
@@ -130,9 +125,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <h4>Ініціали: {{pas.name}} {{pas.surname}}</h4>
-                        <h5>Номер паспорта: {{pas.idCard}}</h5>
-                        <h5>Зареєстрований багаж:: {{pas.baggage.externalValue}}</h5>
-                        <h5>Ручний багаж: {{pas.baggage.innerValue}}</h5>
+                        <h5>Зареєстрований багаж:: {{tourSearchInfo.tourClass !== 'Economy' ? "Входить" : pas.baggage.externalValue}}</h5>
+                        <h5>Ручний багаж: {{tourSearchInfo.tourClass !== 'Economy' ? "Входить" : pas.baggage.innerValue}}</h5>
                     </div>
                     <div class="col-md-3">
                         <h4>Стать: {{pas.gender === 0 ? 'Чоловік' : 'Жінка' }}</h4>

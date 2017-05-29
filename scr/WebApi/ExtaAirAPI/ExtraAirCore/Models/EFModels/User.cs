@@ -17,7 +17,7 @@ namespace ExtraAirCore.Models.EFModels
 		public string Password { get; set; }
 		[DataType(DataType.PhoneNumber)]
 		public string Phone { get; set; }
-		public DateTime Birthday { get; set; }
+		public DateTime? Birthday { get; set; }
 		[Required]
 		public bool Deleted { get; set; }
 		[ForeignKey("Address")]
@@ -26,6 +26,7 @@ namespace ExtraAirCore.Models.EFModels
 		public int UserClaimId { get; set; }
 		public string ImagePath { get; set; }
 		public string IdCard { get; set; }
+		public bool? IsActive { get; set; }
 
 		public virtual Address Address { get; set; }
 		public virtual UserClaim UserClaim { get; set; }

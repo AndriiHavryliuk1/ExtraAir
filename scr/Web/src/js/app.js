@@ -74,6 +74,18 @@ app.config(function($routeProvider, $locationProvider) {
         reloadOnSearch: false
     });
 
+    $routeProvider.when('/confirmRegistration/:id', {
+        templateUrl: 'js/registration/confirmRegistration/confirmRegistrationTemplate.html',
+        controller: 'confirmRegistrationController',
+        reloadOnSearch: false
+    });
+
+    $routeProvider.when('/confirmRegistration', {
+        templateUrl: 'js/registration/confirmRegistration/confirmRegistrationTemplate.html',
+        controller: 'confirmRegistrationController',
+        reloadOnSearch: false
+    });
+
 
     //  "medicalhistory/" + $routeParams["id"] + "/page/" + $scope.searchInfo.page
 

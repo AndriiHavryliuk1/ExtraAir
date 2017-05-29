@@ -35,8 +35,8 @@ app.controller('orderDetailsController', function ($rootScope, $scope, $location
         $scope.order.paidValue = $scope.order.order.Paid ? "Оплачено" : "Зарезервовано";
         $scope.order.Passengers.forEach(function (pas) {
             pas.GenderValue = pas.Gender === 0 ? "Чоловіча" : "Жіноча";
-            pas.BaggageInternalValue = pas.BaggageInternal ? "Включено" : "Нема";
-            pas.BaggageeExternalValue = pas.BaggageeExternal ? "Включено" : "Нема";
+            pas.BaggageInternalValue = pas.BaggageInternal ? "Включено" : "Немає";
+            pas.BaggageeExternalValue = pas.BaggageeExternal ? "Включено" : "Немає";
         });
     }
 
