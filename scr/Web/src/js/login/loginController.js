@@ -48,26 +48,21 @@ app.controller('loginController', function($rootScope, $interval, $scope, sha256
     $scope.recoveryPass = function() {
         $scope.failed = false;
         $scope.loading = true;
-        $http.post(URL_FOR_REST.url + "api/users/recovery?email=" + $scope.user.Email, {
+        $http.post(Constants.REST_URL + "api/users/recovery?email=" + $scope.user.Email, {
             headers: {
                 'Content-type': 'application/json'
             }
+        }).then(function() {
+            $scope.loading = false;
+            alert("Ваш пароль було змінено, перевірте свій email!");
+            $window.location.href = "#/signIn";
+
+        }, function() {
+            $scope.loading = false;
+            $scope.failed = true;
+            //  alert("Incorrect email or you don`t register!");
+            $window.location.href = "#/recoveryPassword";
+
         })
-            .success(function(data, status, headers, config) {
-                $scope.loading = false;
-                alert("Your password has beed changed!");
-
-                $window.location.href = "#/signIn";
-
-            })
-            .error(function(data, status, headers, config) {
-                $scope.loading = false;
-                $scope.failed = true;
-                //  alert("Incorrect email or you don`t register!");
-                $window.location.href = "#/recoveryPassword";
-
-            })
-
-
     }
 });

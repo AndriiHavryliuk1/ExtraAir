@@ -26,7 +26,7 @@
             <button class="btn btn-default" ng-click="selectView('airportsView')">Аеропорти</button>
             <button class="btn btn-default" ng-click="selectView('tourStatusView')">Статус рейсу</button>
             <button class="btn btn-default" ng-click="selectView('toursAdminView')">Рейси</button>
-            <button class="btn btn-default" ng-click="selectView('userAdminView')">Користувачі</button>
+            <button class="btn btn-default" ng-click="selectView('usersView')">Користувачі</button>
             <button class="btn btn-default" data-toggle="modal" data-target="#settingsModalView">Налаштування</button>
         </div>
 
@@ -39,10 +39,8 @@
     <div ng-switch on="selectedView">
         <div ng-switch-when="airportsView" table-view="airportsView"></div>
         <div ng-switch-when="tourStatusView" table-view="tourStatusView"></div>
-        <div ng-switch-when="registerEmployeeView" table-view="registerEmployeeView"></div>
-        <div ng-switch-when="employeeView" table-view="employeeView"></div>
-        <div ng-switch-when="medicationsView" table-view="medicationsView"></div>
-        <div ng-switch-when="newDepartment" table-view="newDepartment">
+        <div ng-switch-when="usersView" table-view="usersView"></div>
+        <div ng-switch-when="toursAdminView" table-view="toursAdminView"></div>
         </div>
     </div>
 </div>

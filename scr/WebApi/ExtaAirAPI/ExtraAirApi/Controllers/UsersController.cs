@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -6,11 +7,13 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ExtraAirApi.Utils.Ninject;
 using ExtraAirCore.API_DTOs;
+using ExtraAirCore.API_DTOs.Helper_DTOs;
 using ExtraAirCore.Command.User;
 using ExtraAirCore.Constants;
 using ExtraAirCore.Models.EFContex;
 using ExtraAirCore.Models.EFModels;
 using ExtraAirCore.Models.Enumeration;
+using Rest.Helpers;
 
 namespace ExtraAirApi.Controllers
 {
@@ -48,7 +51,13 @@ namespace ExtraAirApi.Controllers
 			currentUser.LastName = currentUser.LastName != user.LastName ? user.LastName : currentUser.LastName;
 			currentUser.FirstName = currentUser.FirstName != user.FirstName ? user.FirstName : currentUser.FirstName;
 			currentUser.Phone = currentUser.Phone != user.Phone ? user.Phone : currentUser.Phone;
-			if (currentUser.Address != null)
+			if (user.Address != null && user.Address.AddressId == 0)
+			{
+				db.Addresses.Add(user.Address);
+				db.SaveChanges();
+				currentUser.Address = user.Address;
+			}
+			else if (currentUser.Address != null)
 			{
 				currentUser.Address.City = currentUser.Address.City != user.Address.City ? user.Address.City : currentUser.Address.City;
 				currentUser.Address.Country = currentUser.Address.Country != user.Address.Country ? user.Address.Country : currentUser.Address.Country;
@@ -126,6 +135,45 @@ namespace ExtraAirApi.Controllers
 				}
 			}
 		}
+
+
+		[HttpPost]
+		[Route("recovery")]
+		[ResponseType(typeof(void))]
+		public IHttpActionResult PostRecoveryPassword([FromUri]string email)
+		{
+			var user = db.Users.FirstOrDefault(x => x.Email == email);
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			var newpass = System.Web.Security.Membership.GeneratePassword(6, 0);
+			
+
+			var emailInput = new EmailInputDto();
+			//var pat = db.Patients.Find(emailPostDto.appointment.PatientId);
+			emailInput.UserName = user.FirstName + " " + user.LastName;
+			emailInput.Email = user.Email;
+			emailInput.Subject = "Відновлення пароля!";
+
+			emailInput.Body =
+				"Ваш парольно змінено\nНовий пароль:\n" + newpass +
+				"\nБудь ласка змініть свій пароль при входженні в систему";
+			try
+			{
+				EMailHelper.SendNotification(emailInput);
+				user.Password = HashHelper.sha256_hash(newpass);
+				db.Entry(user).State = EntityState.Modified;
+				db.SaveChanges();
+				return Ok();
+			}
+			catch (Exception)
+			{
+				return BadRequest();
+			}
+		}
+
 
 
 		// POST: api/Users

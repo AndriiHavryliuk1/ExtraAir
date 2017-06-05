@@ -25,6 +25,7 @@ namespace ExtraAirCore.Models.EFModels
 		[Required]
 		public decimal Price { get; set; }
 		public string StringDays { get; set; }
+		public bool? Deleted { get; set; }
 		[ForeignKey("Plane")]
 		public int PlaneId { get; set; }
 

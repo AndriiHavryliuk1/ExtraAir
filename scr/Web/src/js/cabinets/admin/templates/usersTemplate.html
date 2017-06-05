@@ -1,0 +1,37 @@
+
+<div class="row">
+        <h2>Список користувачів</h2>
+</div>
+<hr class="colorgraph">
+
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ПІБ</th>
+                        <th>Email</th>
+                        <th>Номер телефону</th>
+                        <th>Дата народження</th>
+                        <th>Адреса</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="airport in  clients">
+                        <td>{{airport.UserId}}</td>
+                        <td>{{airport.FirstName}} {{airport.LastName}}</td>
+                        <td>{{airport.Email}}</td>
+                        <td>{{airport.Phone}}</td>
+                        <td>{{airport.Birthday}}</td>
+                        <td>{{airport.Address.Country}} {{airport.Address.City}} {{airport.Address.Street}} {{airport.Address.StreetNumber}}</td>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>

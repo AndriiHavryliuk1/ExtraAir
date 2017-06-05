@@ -10,11 +10,11 @@ app.directive("tableView", function() {
                 case "tourStatusView":
                     return "js/cabinets/admin/templates/tourStatusAdminTemplate.html";
                     break;
-                case "registerEmployeeView":
-                    return "src/views/templates/RegisterEmployeeTemplate.html";
+                case "usersView":
+                    return "js/cabinets/admin/templates/usersTemplate.html";
                     break;
-                case "employeeView":
-                    return "src/views/templates/ViewEmployeeTemplate.html";
+                case "toursAdminView":
+                    return "js/cabinets/admin/templates/toursAdminTemplate.html";
                     break;
                 case "medicationsView":
                     return "src/views/templates/ViewMedicationsTemplate.html";

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -105,10 +106,20 @@ namespace ExtraAirApi.Controllers
 
 		// POST: api/Orders
 		[ResponseType(typeof(Order))]
-		public IHttpActionResult PostOrder(Order order)
+		public IHttpActionResult PostOrder(Order order, [FromUri]int tourDetailsId)
 		{
 			var list = db.Tours.ToList();
 			order.Tours = list.Where(l => order.Tours.Any(x => x.TourId == l.TourId)).ToList();
+
+			var tourDetail = db.TourDetailses.Find(tourDetailsId);
+			tourDetail.Temporary = false;
+			if (DateTime.Now.Subtract(Convert.ToDateTime(tourDetail.DatePushed)).Minutes > 5)
+			{
+				return NotFound();
+			}
+
+			db.Entry(tourDetail).State = EntityState.Modified;
+			db.SaveChanges();
 
 			db.Orders.Add(order);
 			db.SaveChanges();

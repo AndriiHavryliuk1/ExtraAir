@@ -93,6 +93,7 @@ namespace ExtraAirApi.Controllers
 			}
 
 			tourDetails.BookedPlaces = null;
+			tourDetails.DatePushed = DateTime.Now;
 
 			db.TourDetailses.Add(tourDetails);
 			db.SaveChanges();

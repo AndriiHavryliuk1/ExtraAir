@@ -12,6 +12,11 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
         airportToId: null
     };
 
+    newAirportInit();
+    loadToursList();
+
+    $scope.addNewAirport = false;
+
     $scope.constantTourStatuses = Constants.TOUR_STATUSES;
 
     var URL_forAdmin = "api/Users/" + currentUser.id;
@@ -30,6 +35,12 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
         $scope.airports = forEditing($scope.airports);
     });
 
+
+    getService.GetObjects("api/clients").then(function (data) {
+        $scope.clients = data.data;
+    }, function (error) { }).finally(function(){
+
+    });
 
 
     $scope.selectView = function(view){
@@ -122,9 +133,43 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
                 console.log("error")
             });
         }
-
-
     };
+
+    $scope.postAirport = function(airport) {
+        if (!airport) {
+            $scope.addNewAirport = !$scope.addNewAirport;
+            return;
+        }
+        airportsService.postAirport({
+            Name: $scope.newAirport.Name,
+            Address: {
+                Country: $scope.newAirport.Country,
+                City: $scope.newAirport.City,
+                Street: $scope.newAirport.Street,
+                StreetNumber: $scope.newAirport.StreetNumber
+            }
+        }).then(function() {
+            $scope.addNewAirport = false;
+            newAirportInit();
+
+        }, function() {
+            alert("Сталась помилка!");
+            newAirportInit();
+        })
+    };
+
+    function newAirportInit() {
+        $scope.newAirport = {
+            Name: null,
+            Address: {
+                Country: null,
+                City: null,
+                Street: null,
+                StreetNumber: null
+            }
+        };
+    }
+
 
     function updateTourStatuses(tourStatus){
         for (var i=0; i < $scope.tourStatuses.length; i++){
@@ -163,11 +208,22 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
             }
             status.dateStartView = $filter('date')(status.DateStart, 'dd-MM-yyyy HH:mm');
             status.dateFinishView = $filter('date')(status.DateFinish, 'dd-MM-yyyy HH:mm');
+            status.DateStart = new Date(status.DateStart);
+            status.DateFinish = new Date(status.DateFinish);
         });
         return data;
     }
 
 
 
+
+    function loadToursList(){
+        var URL = "api/tours?itemsPerPage=" + 10000;
+
+        getService.GetObjects(URL).then(function (data) {
+            $scope.tours = data.data.list;
+        });
+
+    };
 
 });

@@ -86,6 +86,10 @@ app.config(function($routeProvider, $locationProvider) {
         reloadOnSearch: false
     });
 
+    $routeProvider.when('/recoveryPassword', {
+        templateUrl: 'js/login/recoveryPassword.html',
+        controller: 'loginController'
+    });
 
     //  "medicalhistory/" + $routeParams["id"] + "/page/" + $scope.searchInfo.page
 

@@ -51,6 +51,10 @@ app.controller('mainController', function ($rootScope, $scope, $window, getServi
             day: Constants.DAYS[$scope.tourDetails.date.getDay()],
             allDate: $scope.tourDetails.date
         };
+        if ($scope.tourDetails.date.allDate < new Date()) {
+            alert("Невірно вибрана дата");
+            return;
+        }
         crossingService.setTour($scope.tourDetails);
         console.log($scope.tourDetails);
         $window.location.href = "#/tours";

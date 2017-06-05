@@ -23,6 +23,10 @@ angular.module('extraAir').factory("tourDetailsResource", function ($resource) {
                 put: {
                     method: 'PUT',
                     timeout: 30000
+                },
+                delete: {
+                    method: 'DELETE',
+                    timeout: 30000
                 }
             }
         ),

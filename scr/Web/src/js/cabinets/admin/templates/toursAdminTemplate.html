@@ -1,0 +1,83 @@
+
+<div class="row">
+        <h2>Список аеропортів</h2>
+</div>
+<hr class="colorgraph">
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Час відправлення</th>
+                        <th>Час прибуття</th>
+                        <th>Пункт відправлення</th>
+                        <th>Пункт прибуття</th>
+                        <th>Можливі дні</th>
+                        <th>Ціна</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="tour in  tours">
+                        <td>{{tour.TourId}}</td>
+                        <td>
+                            <div ng-if="tour.isEditing"><input type="text" placeholder="Назва"
+                                                                  ng-model="tour.DateStart" class="form-control"></div>
+                            <span ng-if="!tour.isEditing">{{tour.DateStart}}</span>
+                        </td>
+                        <td>
+                            <div ng-if="tour.isEditing">
+                                <input type="text" placeholder="Країна"
+                                       ng-model="tour.DateFinish" class="form-control"></div>
+                            <span ng-if="!tour.isEditing">{{tour.DateFinish}}</span>
+                        </td>
+                        <td>
+                            <div ng-if="tour.isEditing"><input type="text" placeholder=""
+                                                                  ng-model="tour.AirportFrom.Name" class="form-control"></div>
+                            <span ng-if="!tour.isEditing">{{tour.AirportFrom.Name}}</span>
+                        </td>
+                        <td>
+                            <div ng-if="tour.isEditing"><input type="text" placeholder=""
+                                                                  ng-model="tour.AirportTo.Name" class="form-control"></div>
+                            <span ng-if="!tour.isEditing">{{tour.AirportTo.Name}}</span>
+                        </td>
+                        <td>
+                            <div ng-if="tour.isEditing"><input type="text" placeholder="Можливі дні"
+                                                                  ng-model="tour.StringDays" class="form-control">
+                            </div>
+                            <span ng-if="!tour.isEditing">
+                                <ul>
+                                    <li ng-repeat="day in tour.PossibleDays">{{day}}</li>
+                                </ul>
+                            </span>
+                        </td>
+                        <td>
+                            <div ng-if="tour.isEditing"><input type="text" placeholder="Ціна"
+                                                               ng-model="tour.Price" class="form-control"></div>
+                            <span ng-if="!tour.isEditing">{{tour.Price}}</span>
+                        </td>
+                        <td>
+                            <div ng-if="!tour.isEditing">
+                                <input type="button" value="Редагувати" class="btn btn-primary btn-block btn-md"
+                                       ng-click="editTour(tour)">
+                            </div>
+                            <div ng-if="tour.isEditing">
+                                <input type="button" value="Змінити" class="btn btn-primary btn-block btn-md"
+                                       ng-click="editTour(tour)">
+
+                                <input type="button" value="Скасувати" class="btn btn-primary btn-block btn-md"
+                                       ng-click="cancel(tour)">
+
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>

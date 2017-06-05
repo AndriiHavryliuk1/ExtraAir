@@ -79,7 +79,8 @@ namespace ExtraAirApi.Controllers
 		}
 
 		// POST: api/Airports
-		[ResponseType(typeof(Airport))]
+		[Route("")]
+		[HttpPost]
 		public IHttpActionResult PostAirport(Airport airport)
 		{
 			if (!ModelState.IsValid)
@@ -90,7 +91,7 @@ namespace ExtraAirApi.Controllers
 			db.Airports.Add(airport);
 			db.SaveChanges();
 
-			return CreatedAtRoute("DefaultApi", new { id = airport.AirportId }, airport);
+			return Ok();
 		}
 
 		// DELETE: api/Airports/5

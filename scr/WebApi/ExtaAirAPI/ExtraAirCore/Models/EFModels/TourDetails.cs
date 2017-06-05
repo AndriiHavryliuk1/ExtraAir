@@ -17,6 +17,7 @@ namespace ExtraAirCore.Models.EFModels
 		public int TourDetailsId { get; set; }
 		public DateTime DateStart { get; set; }
 		public DateTime DateFinish { get; set; }
+		public DateTime? DatePushed { get; set; }
 		public int CurrentCountOfBusinessPassenger { get; set; }
 		public int CurrentCountOfEconomyPassenger { get; set; }
 		public bool Temporary { get; set; }

@@ -2,19 +2,6 @@
     <h2>Статус рейсу</h2>
     <hr class="colorgraph">
     <div class="container-fluid">
-        <div class="col-md-3 col-sm-4">
-            <label>Пошук:</label>
-            <div class="input-group col-md-12 col-sm-12">
-                <input type="text" class="form-control" placeholder="Search" ng-change="search(loadList)"
-                       ng-model="pagingInfo.search"
-                       ng-model-options="{updateOn: 'default blur', debounce: {default: 200, blur: 0} }" name="q">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" ng-click="">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
         <div class="col-md-3 col-sm-4" id="departmentDiv">
             <label for="airportSelectFrom">Виберіть пункт відправлення:</label>
 
@@ -29,7 +16,7 @@
             <input type="date" class="form-control" ng-model="tourStatusParams.dateStart" required>
         </div>
         <div class="col-md-2 col-sm-2">
-            <button type="button" class="btn btn-primary"
+            <button type="button" class="btn btn-primary" style="margin-top: 24px;"
                     ng-click="search()">Пошук
             </button>
         </div>

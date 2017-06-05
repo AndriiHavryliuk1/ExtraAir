@@ -125,7 +125,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             DateFinish: getGeneralDateFormat($scope.tourSearchInfo.dateFinishR, $scope.tourSearchInfo.timeFinish),
             CurrentCountOfBusinessPassenger: $scope.tourSearchInfo.tourClass !== 'Economy' ? $scope.allPassengers.length : 0,
             CurrentCountOfEconomyPassenger: $scope.tourSearchInfo.tourClass === 'Economy' ? $scope.allPassengers.length : 0,
-            Temporary: false,
+            Temporary: true,
             TourId: $routeParams.id
         };
 
@@ -133,7 +133,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             BookedPlaces.forEach(function (b) {
                 b.TourDetailsId = data.TourDetailsId;
             });
-
+            $scope.tourDetailId = data.TourDetailsId;
             $http.post(Constants.REST_URL + "api/BookedPlaces", BookedPlaces, {
                 headers: {
                     'Content-type': 'application/json'
@@ -152,18 +152,19 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
 
     $scope.orderTickets = function () {
         var data = prepareDataForOrder();
-        $http.post(Constants.REST_URL + "api/Orders", data, {
+        $http.post(Constants.REST_URL + "api/Orders?tourDetailsId=" + $scope.tourDetailId, data, {
             headers: {
                 'Content-type': 'application/json'
             }
         }).then(function () {
             alert("Квиток замовлено успішно! Перевірте свою пошту для детальної інформації");
-            var html = 'Ви успішно здійснили замовлення, та купили такі квитки: <br>';
+            var html = 'Ви успішно здійснили замовлення на рейс № ' + $scope.tour.TourId + '(' + tour.AirportFrom.Name
+            + ' - ' + tour.AirportTo.Name +'), та купили такі квитки: <br>';
             $scope.allPassengers.forEach(function(pas) {
                 html +=  "<div>";
                 html +=  "<h3>" + (pas.id + 1) + " Квиток</h3>";
                 html +=  "<h4>Ініціали пасажира: " + pas.name + " " + pas.surname + "</h4>";
-                html +=  "<h4>Стать: " +  pas.gender === 0 ? 'Чоловік' : 'Жінка' + "</h4>";
+                html +=  "<h4>Стать: " + (pas.gender === 0 ? 'Чоловік' : 'Жінка') + "</h4>";
                 html +=  "<h5>Місце: " + pas.coordinateValue + "</h5>";
             });
             html += "<h4>Метод реєстрації - " + $scope.methodRegisterValue + "</h4>";
@@ -172,6 +173,25 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             $location.path('ordersList');
         }, function () {
             alert("Сталася помилка під час замовлення квитка!");
+        });
+    };
+
+    $scope.cancel = function() {
+        if ($scope.tourDetailId === undefined) {
+            return;
+        }
+
+        $http.delete(Constants.REST_URL + "api/TourDetails/" + $scope.tourDetailId, {
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function () {
+            $scope.openOrderingForm();
+            $scope.showCheckStep = false;
+            $scope.showCreditCard = false;
+            console.log("fine");
+        }, function () {
+            console.log("error")
         });
     };
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExtraAirCore.API_DTOs;
 using ExtraAirCore.API_DTOs.Helper_DTOs;
@@ -19,8 +20,22 @@ namespace Data.Api.TourDetails
 		{
 			using (var dbContext = new ExtraAirContext())
 			{
-				var list = dbContext.TourDetailses.Where(x => x.TourId == helper.TourId && x.DateStart == helper.DateStart
-											&& x.DateFinish == helper.DateFinish).ToList().Select(x => MapHelper(x, helper.ComfortType));
+				var list1 = dbContext.TourDetailses.Where(x => x.TourId == helper.TourId && x.DateStart == helper.DateStart
+											&& x.DateFinish == helper.DateFinish).ToList();
+
+				foreach (var td in list1)
+				{
+					if (td.DatePushed != null && td.Temporary 
+						&& DateTime.Now.Subtract(Convert.ToDateTime(td.DatePushed)).Minutes > 5)
+					{
+						dbContext.TourDetailses.Remove(td);
+						dbContext.SaveChanges();
+					}
+				}
+
+				var list = list1.ToList().Select(x => MapHelper(x, helper.ComfortType));
+
+
 				var b = new List<BookedPoint>();
 				var economyPass = 0;
 				var businessPass = 0;

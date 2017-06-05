@@ -140,12 +140,23 @@
             <h4><label>Ціна: {{finishTourResult.Price}}$</label></h4>
         </div>
 
-        <div ng-if="showCreditCard">
-            <credit-card></credit-card>
+        <div ng-if="showCreditCard && showCheckStep">
+            <div>
+                <br>
+                <button type="button" class="btn btn-default col-md-2" ng-click="cancel()">Відмінити</button>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div>
+                <credit-card></credit-card>
+            </div>
         </div>
         <div ng-if="!showCreditCard && showCheckStep">
             <button type="button" class="btn btn-default col-md-2" ng-click="orderTickets()">Забронювати</button>
+            <button type="button" class="btn btn-default col-md-2" ng-click="cancel()">Відмінити</button>
         </div>
+
 
 
     </div>
