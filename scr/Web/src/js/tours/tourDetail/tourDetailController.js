@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('extraAir');
-app.controller('tourDetailController', function ($rootScope, $scope, $location, $filter, $http, $routeParams, getService, airportsService, jwtHelper,
+app.controller('tourDetailController', function ($rootScope, $scope, $location, $filter, $http, $routeParams, $timeout, getService, airportsService, jwtHelper,
                                                  tourDetailsService, toursService, crossingService, sendMailService) {
     $scope.tourSearchInfo = crossingService.getTour() !== undefined ? crossingService.getTour() : getSearchInfoURL();
     setupURL();
@@ -147,6 +147,7 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             console.log("fail");
         });
         $scope.showCheckStep = true;
+        timerStart();
     };
 
 
@@ -158,13 +159,12 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
             }
         }).then(function () {
             alert("Квиток замовлено успішно! Перевірте свою пошту для детальної інформації");
-            var html = 'Ви успішно здійснили замовлення на рейс № ' + $scope.tour.TourId + '(' + tour.AirportFrom.Name
-            + ' - ' + tour.AirportTo.Name +'), та купили такі квитки: <br>';
+            var html = 'Ви успішно здійснили замовлення на рейс № ' + $routeParams.id + '(' + $scope.tour.AirportFrom.Name
+            + ' - ' + $scope.tour.AirportTo.Name +'), та купили такі квитки: <br>';
             $scope.allPassengers.forEach(function(pas) {
                 html +=  "<div>";
                 html +=  "<h3>" + (pas.id + 1) + " Квиток</h3>";
                 html +=  "<h4>Ініціали пасажира: " + pas.name + " " + pas.surname + "</h4>";
-                html +=  "<h4>Стать: " + (pas.gender === 0 ? 'Чоловік' : 'Жінка') + "</h4>";
                 html +=  "<h5>Місце: " + pas.coordinateValue + "</h5>";
             });
             html += "<h4>Метод реєстрації - " + $scope.methodRegisterValue + "</h4>";
@@ -357,5 +357,15 @@ app.controller('tourDetailController', function ($rootScope, $scope, $location, 
         $scope.tour.Price = ($scope.tour.Price * coef).toFixed(0);
         $scope.tour.dayStart = utils.translateDays($scope.tourSearchInfo.dayStartO);
         $scope.tour.dayFinish = utils.translateDays($scope.tourSearchInfo.dayFinishO);
+    }
+
+    function timerStart() {
+        $scope.name = 'Superhero';
+        $scope.counter = 300;
+        $scope.onTimeout = function () {
+            if ($scope.counter > 0) $scope.counter--;
+            mytimeout = $timeout($scope.onTimeout, 1000);
+        };
+        var mytimeout = $timeout($scope.onTimeout, 1000);
     }
 });

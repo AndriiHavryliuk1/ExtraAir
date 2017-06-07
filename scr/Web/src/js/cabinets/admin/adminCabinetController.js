@@ -110,6 +110,10 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
         });
     };
 
+    $scope.editTour = function(tour) {
+
+    };
+
 
     $scope.editTourStatus = function(tourStatus) {
         tourStatus.isEditing = !tourStatus.isEditing;
@@ -140,7 +144,7 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
             $scope.addNewAirport = !$scope.addNewAirport;
             return;
         }
-        airportsService.postAirport({
+        var newAir = {
             Name: $scope.newAirport.Name,
             Address: {
                 Country: $scope.newAirport.Country,
@@ -148,9 +152,12 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
                 Street: $scope.newAirport.Street,
                 StreetNumber: $scope.newAirport.StreetNumber
             }
-        }).then(function() {
+        };
+        airportsService.postAirport(newAir).then(function(data) {
             $scope.addNewAirport = false;
             newAirportInit();
+            $scope.airports.push(newAir);
+            $scope.airports = forEditing($scope.airports);
 
         }, function() {
             alert("Сталась помилка!");
@@ -214,16 +221,16 @@ app.controller('adminCabinetController', function($scope, $rootScope, $location,
         return data;
     }
 
-
-
-
-    function loadToursList(){
+    function loadToursList() {
         var URL = "api/tours?itemsPerPage=" + 10000;
 
         getService.GetObjects(URL).then(function (data) {
             $scope.tours = data.data.list;
+            $scope.tours.forEach(function(status) {
+                status.dateStartView = $filter('date')(status.DateStart, 'dd-MM-yyyy HH:mm');
+                status.dateFinishView = $filter('date')(status.DateFinish, 'dd-MM-yyyy HH:mm');
+
+            });
         });
-
-    };
-
+    }
 });

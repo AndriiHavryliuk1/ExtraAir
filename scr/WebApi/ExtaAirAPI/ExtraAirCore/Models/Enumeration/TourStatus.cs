@@ -7,6 +7,7 @@
 		DepartedEarly = 2,
 		DepartedLate = 3,
 		Delayed = 4,
-		InTime = 5
+		InTime = 5,
+		ArrivedWithDelay = 6
 	}
 }

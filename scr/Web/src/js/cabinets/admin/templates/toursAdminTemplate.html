@@ -15,24 +15,25 @@
                         <th>Час прибуття</th>
                         <th>Пункт відправлення</th>
                         <th>Пункт прибуття</th>
+                        <th>Літак</th>
                         <th>Можливі дні</th>
                         <th>Ціна</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="tour in  tours">
+                    <tr ng-repeat="tour in tours">
                         <td>{{tour.TourId}}</td>
                         <td>
                             <div ng-if="tour.isEditing"><input type="text" placeholder="Назва"
                                                                   ng-model="tour.DateStart" class="form-control"></div>
-                            <span ng-if="!tour.isEditing">{{tour.DateStart}}</span>
+                            <span ng-if="!tour.isEditing">{{tour.dateStartView}}</span>
                         </td>
                         <td>
                             <div ng-if="tour.isEditing">
                                 <input type="text" placeholder="Країна"
                                        ng-model="tour.DateFinish" class="form-control"></div>
-                            <span ng-if="!tour.isEditing">{{tour.DateFinish}}</span>
+                            <span ng-if="!tour.isEditing">{{tour.dateFinishView}}</span>
                         </td>
                         <td>
                             <div ng-if="tour.isEditing"><input type="text" placeholder=""
@@ -43,6 +44,11 @@
                             <div ng-if="tour.isEditing"><input type="text" placeholder=""
                                                                   ng-model="tour.AirportTo.Name" class="form-control"></div>
                             <span ng-if="!tour.isEditing">{{tour.AirportTo.Name}}</span>
+                        </td>
+                        <td>
+                            <div ng-if="tour.isEditing"><input type="text" placeholder="Літак"
+                                                               ng-model="tour.Plane.Name" class="form-control"></div>
+                            <span ng-if="!tour.isEditing">{{tour.Plane.Name}}</span>
                         </td>
                         <td>
                             <div ng-if="tour.isEditing"><input type="text" placeholder="Можливі дні"
